@@ -21,11 +21,10 @@ namespace Village {
                 Gizmos.DrawSphere(transform.position,0.1f);
                 for(int i = 0;i < tfs.Length;i++) {
                     Gizmos.DrawLine(transform.position,tfs[i].position);
-                    Gizmos.DrawSphere(tfs[i].position,0.1f);
+                    Gizmos.DrawSphere(tfs[i].position,0.5f);
                 }
             }
         }
-
     }
 
 }

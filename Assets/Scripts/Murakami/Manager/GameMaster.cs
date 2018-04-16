@@ -12,13 +12,29 @@ using UnityEngine;
 namespace Village {
 
     public class GameMaster : Inheritor {
+
+        #region enum
+        public enum GameMode {
+            Start,          //ゲーム開始時
+            Edit,           //ステージ作成画面
+            Confirmation,   //確認
+            AutoMove,       //2Dキャラの自動移動
+            GameClear,      //ゲームクリア時
+            GameOver,       //ゲームオーバー時
+        }
+        #endregion
+
         #region private
         private static GameMaster instance;
+        private bool isCountDown = false;
+        private int deadCount = 0;
         #endregion
 
         #region Serialize
         [SerializeField] private PlayerController2D player2d;
-        [SerializeField] private WorldChenge world;
+        [SerializeField] private float time = 300;
+        [SerializeField] private GameMode mode = GameMode.Start;
+        [SerializeField] private int deadCountMax = 3;
         #endregion
 
         #region Propaty
@@ -27,9 +43,14 @@ namespace Village {
                 return instance;
             }
         }
-        public WorldChenge World {
+        public float GetTime {
             get {
-                return world;
+                return time;
+            }
+        }
+        public GameMode GetGameMode {
+            get {
+                return mode;
             }
         }
         #endregion
@@ -38,6 +59,71 @@ namespace Village {
             instance = this;
         }
 
+        public override void Run() {
+            switch(mode) {
+                case GameMode.Start:
+                    mode = GameMode.Edit;
+                    break;
+                case GameMode.Edit:
+                    CountDown();
+                    break;
+                case GameMode.Confirmation:
+                    CountDown();
+                    break;
+                case GameMode.AutoMove:
+                    CountDown();
+                    break;
+                case GameMode.GameClear:
+                    break;
+                case GameMode.GameOver:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 時間の計測
+        /// </summary>
+        private void CountDown() {
+            if(isCountDown) {
+                time -= Time.deltaTime;
+                if(time <= 0) {
+                    mode = GameMode.GameOver;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 時間の計測の開始、再開
+        /// </summary>
+        private void StartCountDown() {
+            isCountDown = true;
+        }
+
+        /// <summary>
+        /// 時間の計測の停止
+        /// </summary>
+        private void StopCountDown() {
+            isCountDown = false;
+        }
+
+        /// <summary>
+        /// 外部からのゲームモードの設定
+        /// </summary>
+        public void SetGameMode(GameMode nextMode) {
+            mode = nextMode;
+        }
+
+        /// <summary>
+        /// 死んだ回数をカウント
+        /// </summary>
+        public void DeadCountUp() {
+            deadCount++;
+            if(deadCount >= deadCountMax) {
+                mode = GameMode.GameOver;
+            }
+        }
     }
 
 }

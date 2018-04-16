@@ -18,7 +18,7 @@ namespace Village {
         [SerializeField] private float jumpSpeed = 1000;
 
         public override void Run() {
-            if(GameMaster.getInstance.World.IsType(WorldChenge.WorldType.world_2D)) {
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.AutoMove) {
                 Move();
                 Jump();
             }

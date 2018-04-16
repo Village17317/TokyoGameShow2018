@@ -19,8 +19,8 @@ namespace Village {
 
         #region private
         private static ObjectManager instance;
-        private GameObject[,] objects = new GameObject[5,5];
-        private Vector3[,] positions = new Vector3[5,5];
+        private GameObject[,] objects = new GameObject[7,7];
+        private Vector3[,] positions = new Vector3[7,7];
         #endregion
 
         #region Propaty

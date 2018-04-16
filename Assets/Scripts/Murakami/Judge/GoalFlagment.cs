@@ -2,7 +2,7 @@
  *	作成者     :村上和樹
  *	機能説明   :ゴール判定
  * 	初回作成日 :2018/04/15
- *	最終更新日 :2018/04/15
+ *	最終更新日 :2018/04/16
  */
 
 using System.Collections;
@@ -16,6 +16,7 @@ namespace Village {
         private void OnTriggerEnter2D(Collider2D collision) {
             if(collision.tag == "Player") {
                 Debug.Log("GOAL");
+                GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameClear); //MainManagerでGameModeをEndに切り替える
             }
         }
 

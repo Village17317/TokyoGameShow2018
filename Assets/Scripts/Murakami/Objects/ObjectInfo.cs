@@ -13,10 +13,10 @@ namespace Village {
 
     public class ObjectInfo : MonoBehaviour {
         [SerializeField] private GameObject stage2D;
-        [SerializeField] private GameObject object2D;
+        [SerializeField] private GameObject object2D;//ここを配列化
 
-        [Range(0,4), SerializeField] private int pos_Y = 0;
-        [Range(0,4), SerializeField] private int pos_X = 0;
+        [Range(0,6), SerializeField] private int pos_Y = 0;
+        [Range(0,6), SerializeField] private int pos_X = 0;
 
         private Vector3 object2D_Scale;
         private GameObject shadow;
@@ -27,14 +27,6 @@ namespace Village {
             shadow.transform.parent = stage2D.transform;
 		}
 
-        private void Start(){
-            
-        }
-
-        private void Update() {
-            
-        }
-
         public void SetPos(int y,int x) {
             pos_Y = y;
             pos_X = x;
@@ -42,20 +34,30 @@ namespace Village {
             shadow.transform.localPosition = new Vector3(transform.localPosition.x,shadow.transform.localPosition.y,0);
 
             if(pos_Y == 0) {
-                shadow.transform.localScale = object2D_Scale * 0.3f;
+                shadow.transform.localScale = object2D_Scale * 0.25f;
             }
             else if(pos_Y == 1) {
-                shadow.transform.localScale = object2D_Scale * 0.6f;
+                shadow.transform.localScale = object2D_Scale * 0.5f;
             }
             else if(pos_Y == 2) {
-                shadow.transform.localScale = object2D_Scale;
+                shadow.transform.localScale = object2D_Scale * 0.75f;
             }
             else if(pos_Y == 3) {
-                shadow.transform.localScale = object2D_Scale * 1.6f;
+                shadow.transform.localScale = object2D_Scale;
             }
             else if(pos_Y == 4) {
-                shadow.transform.localScale = object2D_Scale * 1.9f;
+                shadow.transform.localScale = object2D_Scale * 1.25f;
             }
+            else if(pos_Y == 5) {
+                shadow.transform.localScale = object2D_Scale * 1.5f;
+            }
+            else if(pos_Y == 6) {
+                shadow.transform.localScale = object2D_Scale * 1.75f;
+            }
+        }
+
+        public void SetRotate(float rotate_Y) {
+
         }
     }
 

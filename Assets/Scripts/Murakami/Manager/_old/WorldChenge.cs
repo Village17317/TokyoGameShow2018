@@ -45,8 +45,9 @@ namespace Village {
         }
 
         public override void Run() {
-            if(Input.GetButtonDown("Button_LB") || Input.GetButtonDown("Button_RB")) {
-                type++;
+           // if(Input.GetButtonDown("Button_LB") || Input.GetButtonDown("Button_RB")) {
+         if(Input.GetKeyDown(KeyCode.P)) {//debug
+                    type++;
                 if(type >= WorldType.MAX) {
                     type = 0;
                 }

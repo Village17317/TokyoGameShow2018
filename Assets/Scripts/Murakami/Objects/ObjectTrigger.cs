@@ -12,8 +12,8 @@ using UnityEngine;
 namespace Village {
 
     public class ObjectTrigger : MonoBehaviour {
-        [Range(0,4), SerializeField] private int pos_Y = 0;
-        [Range(0,4), SerializeField] private int pos_X = 0;
+        [Range(0,6), SerializeField] private int pos_Y = 0;
+        [Range(0,6), SerializeField] private int pos_X = 0;
 
         private void Awake(){
 

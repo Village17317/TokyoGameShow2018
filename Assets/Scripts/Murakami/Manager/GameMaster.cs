@@ -8,10 +8,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Village {
 
     public class GameMaster : Inheritor {
+
+        [System.Serializable]
+        private class StageUI {
+            public Text timeText;
+            public Text startCountText;
+            public Text deadCountText;
+        }
 
         #region enum
         public enum GameMode {
@@ -30,7 +39,7 @@ namespace Village {
         #endregion
 
         #region Serialize
-        [SerializeField] private PlayerController2D player2d;
+        [SerializeField] private StageUI stageUI;
         [SerializeField] private float time = 300;
         [SerializeField] private GameMode mode = GameMode.Start;
         [SerializeField] private int deadCountMax = 3;
@@ -77,8 +86,14 @@ namespace Village {
             }
         }
 
-        IEnumerator WaitTime(float second) {
-            yield return new WaitForSeconds(second);
+        /// <summary>
+        /// 指定した時間後にGameModeをGameにする。
+        /// </summary>
+        private IEnumerator WaitTime(float second) {
+            for(int i = 0;i < second;i++) {
+                stageUI.startCountText.text = "TIME" + (second - i);
+                yield return new WaitForSeconds(1);
+            }
             mode = GameMode.Game;   
         }
 
@@ -91,6 +106,7 @@ namespace Village {
                 if(time <= 0) {
                     mode = GameMode.GameOver;
                 }
+                stageUI.timeText.text = time.ToString();
             }
         }
 
@@ -119,6 +135,7 @@ namespace Village {
         /// 死んだ回数をカウント
         /// </summary>
         public void DeadCountUp() {
+            stageUI.deadCountText.text = deadCount + " / " + deadCountMax;
             deadCount++;
             if(deadCount >= deadCountMax) {
                 mode = GameMode.GameOver;

@@ -14,7 +14,7 @@ namespace INI {
 	public class MyCharController : Village.Inheritor {
 
         [SerializeField]
-        private bool jmp = false, clm = false, stp = false, isWalk = true;
+        private bool jmp = false, clm = false, stp = false, isWalk = true, isClimb = false;
 
         [SerializeField]
         private StepDecision jumpCol, climbCol, stopCol;
@@ -23,7 +23,7 @@ namespace INI {
         private Rigidbody2D myCharRb;
 
         [SerializeField]
-        private float mvSpd = 1.0f, jmpSpd = 1.0f;
+        private float mvSpd = 1.0f, jmpSpd = 1.0f, clmSpd = 1.0f;
 
 		private void Awake()
 		{
@@ -45,15 +45,25 @@ namespace INI {
 
                 if (jmp && !clm && !stp)
                 {
-                    Jump();
+                    if (!isClimb)
+                    {
+                        Jump();
+                    }
                 }
                 else if (jmp && clm && !stp)
                 {
+                    isWalk = false;
+                    isClimb = true;
                     Climb();
                 }
                 else if (jmp && clm && stp)
                 {
                     Stop();
+                }
+                else if (!jmp && !clm && !stp)
+                {
+                    isWalk = true;
+                    isClimb = false;
                 }
 
                 if (Input.GetButtonDown("Button_LB"))
@@ -85,6 +95,7 @@ namespace INI {
 
         private void Climb()
         {
+            myCharRb.AddForce(Vector2.up * clmSpd);
         }
 
         private void Stop()

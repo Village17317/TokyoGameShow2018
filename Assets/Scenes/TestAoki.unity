@@ -1594,7 +1594,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage2D: {fileID: 661854622}
-  object2D: {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  object2D:
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
   pos_Y: 0
   pos_X: 0
 --- !u!1 &438368813
@@ -7597,7 +7601,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage2D: {fileID: 661854622}
-  object2D: {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  object2D:
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
+  - {fileID: 1487668214196524, guid: e0e9ce8981d9dc641b7c81e8e67a8d2a, type: 2}
   pos_Y: 0
   pos_X: 0
 --- !u!1 &1491253544

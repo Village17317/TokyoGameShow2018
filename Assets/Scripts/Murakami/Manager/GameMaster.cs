@@ -56,12 +56,12 @@ namespace Village {
 
         private void Awake() {
             instance = this;
+            StartCoroutine(WaitTime(3));
         }
 
         public override void Run() {
             switch(mode) {
                 case GameMode.Start:
-                    mode = GameMode.Game;
                     break;
                 case GameMode.Game:
                     CountDown();
@@ -75,6 +75,11 @@ namespace Village {
                 default:
                     break;
             }
+        }
+
+        IEnumerator WaitTime(float second) {
+            yield return new WaitForSeconds(second);
+            mode = GameMode.Game;   
         }
 
         /// <summary>

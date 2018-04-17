@@ -35,7 +35,8 @@ namespace Village {
         }
 
         public override void Run() {
-            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game) {
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Start
+            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game) {
                 if(!cursor.activeInHierarchy) {
                     cursor.SetActive(true);
                 }

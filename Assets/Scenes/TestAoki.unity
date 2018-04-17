@@ -8530,7 +8530,7 @@ MonoBehaviour:
   stopCol: {fileID: 1066478010}
   myCharRb: {fileID: 1850383584}
   mvSpd: 0.1
-  jmpSpd: 1
+  jmpSpd: 30
 --- !u!1 &1939471044
 GameObject:
   m_ObjectHideFlags: 0

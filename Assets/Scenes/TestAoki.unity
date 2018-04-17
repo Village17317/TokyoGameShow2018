@@ -7152,8 +7152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c515ddc58de314bac2a3d0c0fd8b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player2d: {fileID: 1850383585}
-  world: {fileID: 1261324553}
+  player2d: {fileID: 0}
+  time: 300
+  mode: 0
+  deadCountMax: 3
 --- !u!4 &1276226489
 Transform:
   m_ObjectHideFlags: 0
@@ -8128,8 +8130,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1690473376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -33.51, y: -12.593, z: 0}
-  m_LocalScale: {x: 22.887596, y: 5.014164, z: 1}
+  m_LocalPosition: {x: -32.011, y: -12.593, z: 0}
+  m_LocalScale: {x: 25.88617, y: 5.014164, z: 1}
   m_Children: []
   m_Father: {fileID: 2140573973}
   m_RootOrder: 0
@@ -8423,7 +8425,6 @@ GameObject:
   - component: {fileID: 1850383583}
   - component: {fileID: 1850383582}
   - component: {fileID: 1850383584}
-  - component: {fileID: 1850383585}
   - component: {fileID: 1850383586}
   m_Layer: 5
   m_Name: Player_2D
@@ -8509,20 +8510,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1850383585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1850383580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5714f9af8c7ec6c4980e22470a2218f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myRigid: {fileID: 1850383584}
-  speed: 0.1
-  jumpSpeed: 750
 --- !u!114 &1850383586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8537,9 +8524,13 @@ MonoBehaviour:
   jmp: 0
   clm: 0
   stp: 0
+  isWalk: 1
   jumpCol: {fileID: 1179586305}
   climbCol: {fileID: 1961619706}
   stopCol: {fileID: 1066478010}
+  myCharRb: {fileID: 1850383584}
+  mvSpd: 0.1
+  jmpSpd: 1
 --- !u!1 &1939471044
 GameObject:
   m_ObjectHideFlags: 0
@@ -8568,11 +8559,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateList:
+  - {fileID: 349809233}
   - {fileID: 612695567}
   - {fileID: 1261324553}
   - {fileID: 1276226488}
-  - {fileID: 1850383585}
-  - {fileID: 349809233}
+  - {fileID: 1850383586}
 --- !u!4 &1939471046
 Transform:
   m_ObjectHideFlags: 0

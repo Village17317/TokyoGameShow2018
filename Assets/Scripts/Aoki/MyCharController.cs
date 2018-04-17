@@ -58,8 +58,15 @@ namespace INI {
             {
                 isWalk = !isWalk;
             }
-            if (isWalk) Walk();
-            else Stop();
+
+            if (isWalk)
+            {
+                Walk();
+            }
+            else if (!isWalk)
+            {
+                Stop();
+            }
         }
 
         private void Walk()
@@ -70,7 +77,7 @@ namespace INI {
 
         private void Jump()
         {
-            myCharRb.AddForce(Vector2.right * jmpSpd);
+            myCharRb.AddForce(Vector2.up * jmpSpd);
         }
 
         private void Climb()
@@ -79,7 +86,7 @@ namespace INI {
 
         private void Stop()
         {
-            this.transform.Translate(0, 0, 0);
+            this.transform.Translate(Vector3.zero);
         }
     }
 }

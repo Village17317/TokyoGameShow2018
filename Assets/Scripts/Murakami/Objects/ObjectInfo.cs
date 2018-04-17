@@ -27,7 +27,10 @@ namespace Village {
             shadow = Instantiate(object2D[0]) as GameObject;
             shadow.transform.parent = stage2D.transform;
             shadowRenderer = shadow.GetComponent<SpriteRenderer>();
-		}
+
+ 
+        }
+
 
         /// <summary>
         /// 位置とサイズの設定
@@ -80,6 +83,9 @@ namespace Village {
             SetPos(pos_Y,pos_X);
         }
 
+        /// <summary>
+        /// 影の濃さの設定 1.0f ~ 0f;
+        /// </summary>
         public void ShadowDarkness(float alpha) {
             if(alpha >= 1) {
                 alpha = 1;

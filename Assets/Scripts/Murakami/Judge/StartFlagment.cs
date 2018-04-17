@@ -18,6 +18,9 @@ namespace Village {
             player.transform.position = transform.position;
 		}
 
+        /// <summary>
+        /// プレイヤーの位置を再設定
+        /// </summary>
         public void ReSpawn() {
             player.transform.position = transform.position;
         }

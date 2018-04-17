@@ -37,35 +37,38 @@ namespace INI {
 
         public override void Run()
 		{
-            jmp = jumpCol.ovLap;
-            clm = climbCol.ovLap;
-            stp = stopCol.ovLap;
-            
-            if (jmp && !clm && !stp)
+            if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                Jump();
-            }
-            else if (jmp && clm && !stp)
-            {
-                Climb();
-            }
-            else if (jmp && clm && stp)
-            {
-                Stop();
-            }
+                jmp = jumpCol.ovLap;
+                clm = climbCol.ovLap;
+                stp = stopCol.ovLap;
 
-            if (Input.GetButtonDown("Button_LB"))
-            {
-                isWalk = !isWalk;
-            }
+                if (jmp && !clm && !stp)
+                {
+                    Jump();
+                }
+                else if (jmp && clm && !stp)
+                {
+                    Climb();
+                }
+                else if (jmp && clm && stp)
+                {
+                    Stop();
+                }
 
-            if (isWalk)
-            {
-                Walk();
-            }
-            else if (!isWalk)
-            {
-                Stop();
+                if (Input.GetButtonDown("Button_LB"))
+                {
+                    isWalk = !isWalk;
+                }
+
+                if (isWalk)
+                {
+                    Walk();
+                }
+                else if (!isWalk)
+                {
+                    Stop();
+                }
             }
         }
 

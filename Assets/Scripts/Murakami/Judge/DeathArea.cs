@@ -19,7 +19,6 @@ namespace Village {
             if(collision.tag == "Player") {
                 startFlagment.ReSpawn();
                 GameMaster.getInstance.DeadCountUp();//MainManagerで死んだ回数をカウントする
-                GameMaster.getInstance.SetGameMode(GameMaster.GameMode.Edit);//MainManagerでGameModeをEditに切り替える
             }
         }
 

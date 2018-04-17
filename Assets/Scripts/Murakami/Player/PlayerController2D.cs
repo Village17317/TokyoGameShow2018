@@ -18,10 +18,11 @@ namespace Village {
         [SerializeField] private float jumpSpeed = 1000;
 
         public override void Run() {
-            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.AutoMove) {
-                Move();
-                Jump();
-            }
+            //if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.AutoMove) {
+            //    Move();
+            //    Jump();
+            //}
+            transform.Translate(speed,0,0);
         }
 
         private void Move() {

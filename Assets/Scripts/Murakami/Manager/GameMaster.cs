@@ -16,11 +16,10 @@ namespace Village {
         #region enum
         public enum GameMode {
             Start,          //ゲーム開始時
-            Edit,           //ステージ作成画面
-            Confirmation,   //確認
-            AutoMove,       //2Dキャラの自動移動
+            Game,           //ゲーム中
             GameClear,      //ゲームクリア時
             GameOver,       //ゲームオーバー時
+            Pause,          //ポーズ中
         }
         #endregion
 
@@ -62,20 +61,16 @@ namespace Village {
         public override void Run() {
             switch(mode) {
                 case GameMode.Start:
-                    mode = GameMode.Edit;
+                    mode = GameMode.Game;
                     break;
-                case GameMode.Edit:
-                    CountDown();
-                    break;
-                case GameMode.Confirmation:
-                    CountDown();
-                    break;
-                case GameMode.AutoMove:
+                case GameMode.Game:
                     CountDown();
                     break;
                 case GameMode.GameClear:
                     break;
                 case GameMode.GameOver:
+                    break;
+                case GameMode.Pause:
                     break;
                 default:
                     break;
@@ -123,6 +118,13 @@ namespace Village {
             if(deadCount >= deadCountMax) {
                 mode = GameMode.GameOver;
             }
+        }
+
+
+        public void OnGUI() {
+            GUILayout.Label("Time      : " + GetTime);
+            GUILayout.Label("GameMode  : " + mode);
+            GUILayout.Label("deadCount : " + deadCount + " / " + deadCountMax);
         }
     }
 

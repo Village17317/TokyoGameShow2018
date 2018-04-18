@@ -142,7 +142,7 @@ namespace Village {
         /// </summary>
         private void ObjectSpin() {
             if(isChoice) {
-                if(Input.GetButtonDown("Button_X")) {
+                if(Input.GetButtonDown("Button_RB")) {
                     choiceObj.transform.Rotate(0,90,0);
                     objectRotate_Y++;
                     if(objectRotate_Y >= 4) {
@@ -151,16 +151,14 @@ namespace Village {
                     choiceObj.GetComponent<ObjectInfo>().SetRotate(objectRotate_Y);
                 }
 
-                #region debug
-                //if(Input.GetButtonDown("Button_LB")) {
-                //    choiceObj.transform.Rotate(0,-90,0);
-                //    objectRotate_Y--;
-                //    if(objectRotate_Y < 0) {
-                //        objectRotate_Y = 3;
-                //    }
-                //    choiceObj.GetComponent<ObjectInfo>().SetRotate(objectRotate_Y);
-                //}
-                #endregion
+                if(Input.GetButtonDown("Button_LB")) {
+                    choiceObj.transform.Rotate(0,-90,0);
+                    objectRotate_Y--;
+                    if(objectRotate_Y < 0) {
+                        objectRotate_Y = 3;
+                    }
+                    choiceObj.GetComponent<ObjectInfo>().SetRotate(objectRotate_Y);
+                }
 
             }
         }

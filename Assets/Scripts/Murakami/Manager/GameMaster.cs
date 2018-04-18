@@ -113,7 +113,7 @@ namespace Village {
                 if(time <= 0) {
                     mode = GameMode.GameOver;
                 }
-                stageUI.timeText.text = "Time : " + time.ToString();
+                stageUI.timeText.text = "Time : " + time.ToString("F0");
             }
         }
 

@@ -59,9 +59,16 @@ namespace Village {
                 if(!isChoice) {
                     if(ObjectManager.getInstance.GetObject(pos_Y,pos_X) != null) {
                         choiceObj = ObjectManager.getInstance.GetObject(pos_Y,pos_X);
-                        ObjectManager.getInstance.SetObject(pos_Y,pos_X,null);
-                        objectPos_Y = choiceObj.transform.position.y;
-                        isChoice = true;
+                        Debug.Log(choiceObj.isStatic);
+                        if(choiceObj.isStatic) {
+                            choiceObj = null;
+                            Debug.Log("動かせません");
+                        }
+                        else {
+                            ObjectManager.getInstance.SetObject(pos_Y,pos_X,null);
+                            objectPos_Y = choiceObj.transform.position.y;
+                            isChoice = true;
+                        }
                     }
                 }
                 else {

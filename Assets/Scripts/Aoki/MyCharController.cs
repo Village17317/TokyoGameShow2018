@@ -39,6 +39,8 @@ namespace INI {
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
+                myCharRb.simulated = true;
+
                 jmp = jumpCol.ovLap;
                 clm = climbCol.ovLap;
                 stp = stopCol.ovLap;
@@ -80,6 +82,11 @@ namespace INI {
                     Stop();
                 }
             }
+            else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
+            {
+                myCharRb.simulated = false;
+            }
+
         }
 
         private void Walk()

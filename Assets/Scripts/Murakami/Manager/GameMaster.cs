@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace Village {
 
@@ -17,9 +18,9 @@ namespace Village {
 
         [System.Serializable]
         private class StageUI {
-            public Text timeText;
-            public Text startCountText;
-            public Text deadCountText;
+            public Text startCountText; //最初のカウントダウンの表示用、演出次第で変更
+            public Text timeText;       //制限時間の表示
+            public Text deadCountText;  //死んだ回数の表示
         }
 
         #region enum
@@ -65,6 +66,7 @@ namespace Village {
 
         private void Awake() {
             instance = this;
+            InitializeUI();
             StartCoroutine(WaitTime(3));
         }
 
@@ -74,12 +76,15 @@ namespace Village {
                     break;
                 case GameMode.Game:
                     CountDown();
+                    OnPause();
                     break;
                 case GameMode.GameClear:
                     break;
                 case GameMode.GameOver:
                     break;
                 case GameMode.Pause:
+                    PauseMenu();
+                    OffPause();
                     break;
                 default:
                     break;
@@ -91,9 +96,11 @@ namespace Village {
         /// </summary>
         private IEnumerator WaitTime(float second) {
             for(int i = 0;i < second;i++) {
-                stageUI.startCountText.text = "TIME" + (second - i);
+                stageUI.startCountText.text = "CountDown : " + (second - i);
                 yield return new WaitForSeconds(1);
             }
+            stageUI.startCountText.text = "0";
+            StartCountDown();
             mode = GameMode.Game;   
         }
 
@@ -106,7 +113,7 @@ namespace Village {
                 if(time <= 0) {
                     mode = GameMode.GameOver;
                 }
-                stageUI.timeText.text = time.ToString();
+                stageUI.timeText.text = "Time : " + time.ToString();
             }
         }
 
@@ -135,18 +142,48 @@ namespace Village {
         /// 死んだ回数をカウント
         /// </summary>
         public void DeadCountUp() {
-            stageUI.deadCountText.text = deadCount + " / " + deadCountMax;
+            stageUI.deadCountText.text = "DeadCount : " +  deadCount + " / " + deadCountMax;
             deadCount++;
             if(deadCount >= deadCountMax) {
                 mode = GameMode.GameOver;
             }
         }
 
+        /// <summary>
+        /// pause画面に切り替える
+        /// </summary>
+        public void OnPause() {
+            if(Input.GetButtonDown("Button_Start")) {
+                mode = GameMode.Pause;
+            }
+        }
 
-        public void OnGUI() {
-            GUILayout.Label("Time      : " + GetTime);
-            GUILayout.Label("GameMode  : " + mode);
-            GUILayout.Label("deadCount : " + deadCount + " / " + deadCountMax);
+        /// <summary>
+        /// pause画面を終了する
+        /// </summary>
+        public void OffPause() {
+            if(Input.GetButtonDown("Button_Start")) {
+                mode = GameMode.Game;
+            }
+        }
+
+        /// <summary>
+        /// ポーズ画面中の処理
+        /// ステージをやりなおす
+        /// ステージ選択に戻る
+        /// ゲームに戻る
+        /// </summary>
+        public void PauseMenu() {
+
+        }
+
+        /// <summary>
+        /// UIの初期化処理
+        /// </summary>
+        private void InitializeUI() {
+            stageUI.startCountText.text = "CountDown : ";
+            stageUI.timeText.text = "Time : " + time.ToString();
+            stageUI.deadCountText.text = "DeadCount : " + deadCount + " / " + deadCountMax;
         }
     }
 

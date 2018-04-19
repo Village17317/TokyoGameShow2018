@@ -25,25 +25,15 @@ namespace INI {
         [SerializeField]
         private float mvSpd = 1.0f, jmpSpd = 1.0f, clmSpd = 1.0f;
 
-		private void Awake()
-		{
-
-		}
-	
-		private void Start ()
-		{
-			
-		}
-
         public override void Run()
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                myCharRb.simulated = true;
+                //myCharRb.simulated = true;
 
-                jmp = jumpCol.ovLap;
-                clm = climbCol.ovLap;
-                stp = stopCol.ovLap;
+                //jmp = jumpCol.ovLap;
+                //clm = climbCol.ovLap;
+                //stp = stopCol.ovLap;
 
                 if (jmp && !clm && !stp)
                 {
@@ -68,11 +58,6 @@ namespace INI {
                     isClimb = false;
                 }
 
-                if (Input.GetButtonDown("Button_LB"))
-                {
-                    isWalk = !isWalk;
-                }
-
                 if (isWalk)
                 {
                     Walk();
@@ -87,18 +72,6 @@ namespace INI {
                 myCharRb.simulated = false;
             }
 
-        }
-
-        public void IsGround(bool gnd)
-        {
-            if (gnd)
-            {
-                myCharRb.simulated = false;
-            }
-            else if (!gnd)
-            {
-                myCharRb.simulated = true;
-            }
         }
 
         private void Walk()
@@ -120,6 +93,49 @@ namespace INI {
         private void Stop()
         {
             this.transform.Translate(Vector3.zero);
+        }
+        
+        /// <summary>
+        /// 接地判定を受け取るメソッド。真は接地、偽は非接地に対応。
+        /// </summary>
+        /// <param name="gnd"></param>
+        public void IsGround(bool gnd)
+        {
+            if (gnd)
+            {
+                myCharRb.simulated = false;
+            }
+            else if (!gnd)
+            {
+                myCharRb.simulated = true;
+            }
+        }
+
+        /// <summary>
+        /// ジャンプの可否判定を引数で受け取り、変数にセットする。真は可、偽は不可に対応する。
+        /// </summary>
+        /// <param name="jumpJ"></param>
+        public void SetJumpFlag(bool jumpJ)
+        {
+            jmp = jumpJ;
+        }
+
+        /// <summary>
+        /// クライムの可否判定を引数で受け取り、変数にセットする。真は可、偽は不可に対応する。
+        /// </summary>
+        /// <param name="climbJ"></param>
+        public void SetClimbFlag(bool climbJ)
+        {
+            clm = climbJ;
+        }
+
+        /// <summary>
+        /// ストップする場合に引数で判定を受け取り、変数にセットする。
+        /// </summary>
+        /// <param name="stopJ"></param>
+        public void SetStopFlag(bool stopJ)
+        {
+            stp = stopJ;
         }
     }
 }

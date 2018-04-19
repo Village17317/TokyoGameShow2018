@@ -106,10 +106,12 @@ namespace INI {
             if (gnd)
             {
                 myCharRb.simulated = false;
+                isWalk = true;
             }
             else if (!gnd)
             {
                 myCharRb.simulated = true;
+                isWalk = false;
             }
         }
 

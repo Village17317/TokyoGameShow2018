@@ -89,6 +89,18 @@ namespace INI {
 
         }
 
+        public void IsGround(bool gnd)
+        {
+            if (gnd)
+            {
+                myCharRb.simulated = false;
+            }
+            else if (!gnd)
+            {
+                myCharRb.simulated = true;
+            }
+        }
+
         private void Walk()
         {
             this.transform.localEulerAngles = new Vector3(0, 0, 0);

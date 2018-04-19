@@ -46,9 +46,23 @@ namespace Village {
                     }
                     i++;
                 }
-
             }
 	    }
+
+        private void FixedUpdate() {
+            int i = 0;
+            while(i < updateList.Count) {
+                if(updateList[i] == null) {
+                    Delete(i);
+                }
+                else {
+                    if(updateList[i].gameObject.activeInHierarchy) {
+                        updateList[i].FixedRun();
+                    }
+                    i++;
+                }
+            }
+        }
 
         public void Delete(int deleteNumber) {
             updateList.RemoveAt(deleteNumber);

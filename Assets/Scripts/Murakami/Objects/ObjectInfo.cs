@@ -18,17 +18,13 @@ namespace Village {
         [Range(0,6), SerializeField] private int pos_Y = 0;
         [Range(0,6), SerializeField] private int pos_X = 0;
 
-        [SerializeField] private bool isStatic = false;
+        public bool isStatic = false;
 
         private Vector3 object2D_Scale;
         private GameObject shadow;
         private SpriteRenderer shadowRenderer;
 
-        public bool IsStatic {
-            get {
-                return true;
-            }
-        }
+
 
         private void Awake(){
             object2D_Scale = object2D[0].transform.localScale;

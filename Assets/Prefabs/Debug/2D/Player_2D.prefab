@@ -233,7 +233,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799186995179836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.5, y: -5.4, z: 0}
+  m_LocalPosition: {x: -38.5, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4130920912611104}
@@ -413,12 +413,14 @@ MonoBehaviour:
   clm: 0
   stp: 0
   isWalk: 1
+  isClimb: 0
   jumpCol: {fileID: 114640972451631006}
   climbCol: {fileID: 114881913703347238}
   stopCol: {fileID: 114914253907960354}
   myCharRb: {fileID: 50750568218224762}
   mvSpd: 0.1
   jmpSpd: 100
+  clmSpd: 80
 --- !u!114 &114881913703347238
 MonoBehaviour:
   m_ObjectHideFlags: 1

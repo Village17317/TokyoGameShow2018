@@ -27,6 +27,7 @@ namespace Village {
         public enum GameMode {
             Start,          //ゲーム開始時
             Game,           //ゲーム中
+            GameReStart,    //
             GameClear,      //ゲームクリア時
             GameOver,       //ゲームオーバー時
             Pause,          //ポーズ中
@@ -37,6 +38,7 @@ namespace Village {
         private static GameMaster instance;
         private bool isCountDown = false;
         private int deadCount = 0;
+        private bool isReStart = false;
         #endregion
 
         #region Serialize
@@ -75,9 +77,18 @@ namespace Village {
                 case GameMode.Start:
                     break;
                 case GameMode.Game:
+                    isReStart = false;
                     CountDown();
                     OnPause();
                     break;
+                case GameMode.GameReStart:
+                CountDown();
+                OnPause();
+                if(!isReStart) {
+                    isReStart = true;
+                    StartCoroutine(ReStartWaitTime(2));
+                }
+                break;
                 case GameMode.GameClear:
                     break;
                 case GameMode.GameOver:
@@ -89,6 +100,11 @@ namespace Village {
                 default:
                     break;
             }
+        }
+
+        private IEnumerator ReStartWaitTime(float second) {
+            yield return new WaitForSeconds(second);
+            mode = GameMode.Game;
         }
 
         /// <summary>

@@ -35,9 +35,9 @@ namespace Village {
 
         private void Update() {
             StartCoroutine(Judge_Ground());
-            //StartCoroutine(Judge_Jump());
-            //StartCoroutine(Judge_Climb());
-            //StartCoroutine(Judge_Stop());
+            StartCoroutine(Judge_Jump());
+            StartCoroutine(Judge_Climb());
+            StartCoroutine(Judge_Stop());
         }
 
         private IEnumerator Judge_Ground() {
@@ -64,10 +64,10 @@ namespace Village {
             if(judge_Jump.judgePosColor.r <= grayScale
             && judge_Jump.judgePosColor.g <= grayScale
             && judge_Jump.judgePosColor.b <= grayScale) {
-                //player2d.IsGround(true);
+                player2d.SetJumpFlag(true);
             }
             else {
-               // player2d.IsGround(false);
+                player2d.SetJumpFlag(false);
             }
         }
 
@@ -79,10 +79,10 @@ namespace Village {
             if(judge_Climb.judgePosColor.r <= grayScale
             && judge_Climb.judgePosColor.g <= grayScale
             && judge_Climb.judgePosColor.b <= grayScale) {
-                //player2d.IsGround(true);
+                player2d.SetClimbFlag(true);
             }
             else {
-                // player2d.IsGround(false);
+                player2d.SetClimbFlag(false);
             }
         }
 
@@ -94,10 +94,10 @@ namespace Village {
             if(judge_Stop.judgePosColor.r <= grayScale
             && judge_Stop.judgePosColor.g <= grayScale
             && judge_Stop.judgePosColor.b <= grayScale) {
-                //player2d.IsGround(true);
+                player2d.SetStopFlag(true);
             }
             else {
-                // player2d.IsGround(false);
+                player2d.SetStopFlag(false);
             }
         }
     }

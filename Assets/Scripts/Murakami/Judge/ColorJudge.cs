@@ -13,9 +13,18 @@ using UnityEngine.UI;
 namespace Village {
 
     public class ColorJudge : MonoBehaviour {
-        [SerializeField]  private Transform judgeTf;
-        [SerializeField]  private TestGravity tg;
-        [SerializeField]  private Color judgePosColor;
+        [System.Serializable]
+        private class JudgePosClass {
+            public Transform judgeTf;//判定する場所
+            public Color judgePosColor;//判定された色
+        }
+
+        [SerializeField,Space(8)]  private JudgePosClass judge_Ground;
+        [SerializeField,Space(8)]  private JudgePosClass judge_Jump;
+        [SerializeField,Space(8)]  private JudgePosClass judge_Climb;
+        [SerializeField,Space(8)]  private JudgePosClass judge_Stop;
+        [Space(8)]
+        [SerializeField]  private INI.MyCharController player2d;
         [SerializeField]  private Camera cam;
         [Range(0.0f,1.0f),SerializeField]  private float grayScale = 0.8f;
         private Texture2D tex = null;
@@ -25,35 +34,71 @@ namespace Village {
         }
 
         private void Update() {
-            StartCoroutine(Judge());
+            StartCoroutine(Judge_Ground());
+            //StartCoroutine(Judge_Jump());
+            //StartCoroutine(Judge_Climb());
+            //StartCoroutine(Judge_Stop());
         }
 
-        public bool IsGroundShadow() {
-            if(judgePosColor.r <= grayScale
-            || judgePosColor.g <= grayScale
-            || judgePosColor.b <= grayScale) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        private IEnumerator Judge() {
-            Vector3 pos = cam.WorldToScreenPoint(judgeTf.position);
+        private IEnumerator Judge_Ground() {
+            Vector3 pos = cam.WorldToScreenPoint(judge_Ground.judgeTf.position);
             yield return new WaitForEndOfFrame();
             tex.ReadPixels(new Rect(pos.x,pos.y,1,1),0,0);
-            judgePosColor = tex.GetPixel(0,0);
-            if(judgePosColor.r <= grayScale
-            && judgePosColor.g <= grayScale
-            && judgePosColor.b <= grayScale) {
-                tg.SetGravity(true);
+            judge_Ground.judgePosColor = tex.GetPixel(0,0);
+            if(judge_Ground.judgePosColor.r <= grayScale
+            && judge_Ground.judgePosColor.g <= grayScale
+            && judge_Ground.judgePosColor.b <= grayScale) {
+                player2d.IsGround(true);
             }
             else {
-                tg.SetGravity(false);
+                player2d.IsGround(false);
             }
+           // Debug.Log(judgePosColor.r + " : " + IsGroundShadow());
+        }
 
-            Debug.Log(judgePosColor.r + " : " + IsGroundShadow());
+        private IEnumerator Judge_Jump() {
+            Vector3 pos = cam.WorldToScreenPoint(judge_Jump.judgeTf.position);
+            yield return new WaitForEndOfFrame();
+            tex.ReadPixels(new Rect(pos.x,pos.y,1,1),0,0);
+            judge_Jump.judgePosColor = tex.GetPixel(0,0);
+            if(judge_Jump.judgePosColor.r <= grayScale
+            && judge_Jump.judgePosColor.g <= grayScale
+            && judge_Jump.judgePosColor.b <= grayScale) {
+                //player2d.IsGround(true);
+            }
+            else {
+               // player2d.IsGround(false);
+            }
+        }
+
+        private IEnumerator Judge_Climb() {
+            Vector3 pos = cam.WorldToScreenPoint(judge_Climb.judgeTf.position);
+            yield return new WaitForEndOfFrame();
+            tex.ReadPixels(new Rect(pos.x,pos.y,1,1),0,0);
+            judge_Climb.judgePosColor = tex.GetPixel(0,0);
+            if(judge_Climb.judgePosColor.r <= grayScale
+            && judge_Climb.judgePosColor.g <= grayScale
+            && judge_Climb.judgePosColor.b <= grayScale) {
+                //player2d.IsGround(true);
+            }
+            else {
+                // player2d.IsGround(false);
+            }
+        }
+
+        private IEnumerator Judge_Stop() {
+            Vector3 pos = cam.WorldToScreenPoint(judge_Stop.judgeTf.position);
+            yield return new WaitForEndOfFrame();
+            tex.ReadPixels(new Rect(pos.x,pos.y,1,1),0,0);
+            judge_Stop.judgePosColor = tex.GetPixel(0,0);
+            if(judge_Stop.judgePosColor.r <= grayScale
+            && judge_Stop.judgePosColor.g <= grayScale
+            && judge_Stop.judgePosColor.b <= grayScale) {
+                //player2d.IsGround(true);
+            }
+            else {
+                // player2d.IsGround(false);
+            }
         }
     }
 

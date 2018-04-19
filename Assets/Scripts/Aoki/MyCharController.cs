@@ -25,7 +25,7 @@ namespace INI {
         [SerializeField]
         private float mvSpd = 1.0f, jmpSpd = 1.0f, clmSpd = 1.0f;
 
-        public override void Run()
+        public override void FixedRun()
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
@@ -82,11 +82,13 @@ namespace INI {
 
         private void Jump()
         {
+            //if (!myCharRb.simulated) myCharRb.simulated = true;
             myCharRb.AddForce(Vector2.up * jmpSpd);
         }
 
         private void Climb()
         {
+            //if (!myCharRb.simulated) myCharRb.simulated = true;
             myCharRb.AddForce(Vector2.up * clmSpd);
         }
 

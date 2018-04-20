@@ -64,7 +64,7 @@ namespace INI {
                 }
                 else if (!isWalk)
                 {
-                    Stop();
+                    //Stop();
                 }
             }
             else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
@@ -105,12 +105,14 @@ namespace INI {
         {
             if (gnd)
             {
-                myCharRb.simulated = false;
+                //myCharRb.simulated = false;
+                myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 isWalk = true;
             }
             else if (!gnd)
             {
-                myCharRb.simulated = true;
+                //myCharRb.simulated = true;
+                myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 isWalk = false;
             }
         }

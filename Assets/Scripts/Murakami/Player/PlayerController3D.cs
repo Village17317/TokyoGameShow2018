@@ -14,9 +14,140 @@ namespace Village {
 
     public class PlayerController3D : Inheritor {
 
-        [SerializeField] private GameObject cursor;
-        [Range(0,6),SerializeField] private int pos_Y = 0;
-        [Range(0,6),SerializeField] private int pos_X = 0;
+        [SerializeField] private Cursor cursor;
+        [SerializeField] private float cursorSpeed = 0.1f;
+
+        private bool isChoice = false;
+        private GameObject choiceObj;
+
+        private void Awake(){
+            
+		}
+
+        private void Start(){
+
+        }
+
+        public override void Run() {
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Start
+            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game
+            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
+                if(!cursor.gameObject.activeInHierarchy) {
+                    cursor.gameObject.SetActive(true);
+                }
+                CursorMove();
+                Choice();
+                ObjectSpin();
+            }
+            else {
+                if(cursor.gameObject.activeInHierarchy) {
+                    cursor.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 3Dオブジェクトの選択
+        /// </summary>
+        private void Choice() {
+            if(Input.GetButtonDown("Button_A")) {
+                if(!isChoice) {//掴むとき
+                    if(cursor.GetObject != null) {
+                        choiceObj = cursor.GetObject;
+                        if(choiceObj.GetComponent<ObjectInfo>().isStatic) {
+                            choiceObj = null;
+                            isChoice = false;
+                        }
+                        else {
+                            isChoice = true;
+                            cursor.SetIsChoice(true);
+                        }
+                    }
+                }
+                else {//離すとき
+                    choiceObj = null;
+                    isChoice = false;
+                    cursor.SetIsChoice(false);
+                }
+            }
+        }
+
+        /// <summary>
+        /// カーソルの移動
+        /// </summary>
+        private void CursorMove() {
+            if(Input.GetAxis("Horizontal") > 0) {
+                cursor.transform.position += new Vector3(cursorSpeed,0,0);
+                if(cursor.transform.position.x > 45) {
+                    cursor.transform.position = new Vector3(45,cursor.transform.position.y,cursor.transform.position.z);
+                }
+                ObjectMove();
+            }
+            else if(Input.GetAxis("Horizontal") < 0) {
+                cursor.transform.position -= new Vector3(cursorSpeed,0,0);
+                if(cursor.transform.position.x < -50) {
+                    cursor.transform.position = new Vector3(-50,cursor.transform.position.y,cursor.transform.position.z);
+                }
+                ObjectMove();
+            }
+    
+            if(Input.GetAxis("Vertical") > 0) {
+                cursor.transform.position += new Vector3(0,0,cursorSpeed);
+                if(cursor.transform.position.z > 25) {
+                    cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,25);
+                }
+                ObjectMove();
+            }
+            else if(Input.GetAxis("Vertical") < 0) {
+                cursor.transform.position -= new Vector3(0,0,cursorSpeed);
+                if(cursor.transform.position.z < -40) {
+                    cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,-40);
+                }
+                ObjectMove();
+            }
+        }
+
+        /// <summary>
+        /// 3Dオブジェクトの移動
+        /// </summary>
+        private void ObjectMove() {
+            if(isChoice) {
+                float y = choiceObj.transform.position.y;
+                Vector3 newPos = new Vector3(cursor.transform.position.x,y,cursor.transform.position.z);
+                choiceObj.transform.position = newPos;
+            }
+        }
+
+        /// <summary>
+        /// 3Dオブジェクトの回転
+        /// </summary>
+        private void ObjectSpin() {
+            if(isChoice) {
+                if(Input.GetButtonDown("Button_RB")) {
+                    choiceObj.transform.Rotate(0,90,0);
+                }
+
+                if(Input.GetButtonDown("Button_LB")) {
+                    choiceObj.transform.Rotate(0,-90,0);
+                }
+
+            }
+        }
+    }
+}
+
+#region prev
+/*
+namespace Village {
+
+    public class PlayerController3D: Inheritor {
+
+        [SerializeField]
+        private GameObject cursor;
+        [Range(0,6), SerializeField]
+        private int pos_Y = 0;
+        [Range(0,6), SerializeField]
+        private int pos_X = 0;
 
         private bool isStickMove_Y = false;
         private bool isStickMove_X = false;
@@ -26,11 +157,11 @@ namespace Village {
         private float objectPos_Y = 0;
         private int objectRotate_Y = 0;//0,1,2,3
 
-        private void Awake(){
-            
-		}
+        private void Awake() {
 
-        private void Start(){
+        }
+
+        private void Start() {
             cursor.transform.position = ObjectManager.getInstance.GetPos(pos_Y,pos_X);
         }
 
@@ -104,10 +235,10 @@ namespace Village {
                 ObjectMove();
                 isStickMove_X = true;
             }
-            else if(Input.GetAxis("Horizontal") == 0){
+            else if(Input.GetAxis("Horizontal") == 0) {
                 isStickMove_X = false;
             }
-    
+
             if(Input.GetAxis("Vertical") > 0 && !isStickMove_Y) {
                 pos_Y--;
                 if(pos_Y < 0) {
@@ -126,7 +257,7 @@ namespace Village {
                 ObjectMove();
                 isStickMove_Y = true;
             }
-            else if(Input.GetAxis("Vertical") == 0){
+            else if(Input.GetAxis("Vertical") == 0) {
                 isStickMove_Y = false;
             }
         }
@@ -155,7 +286,6 @@ namespace Village {
                     if(objectRotate_Y >= 4) {
                         objectRotate_Y = 0;
                     }
-                    choiceObj.GetComponent<ObjectInfo>().SetRotate(objectRotate_Y);
                 }
 
                 if(Input.GetButtonDown("Button_LB")) {
@@ -164,11 +294,11 @@ namespace Village {
                     if(objectRotate_Y < 0) {
                         objectRotate_Y = 3;
                     }
-                    choiceObj.GetComponent<ObjectInfo>().SetRotate(objectRotate_Y);
                 }
 
             }
         }
     }
 }
-
+*/
+#endregion

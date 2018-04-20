@@ -19,6 +19,7 @@ namespace Village {
             if(f) {
                 //rigid.gravityScale = 0;
                 rigid.simulated = false;
+
             }
             else {
                 rigid.simulated = true;

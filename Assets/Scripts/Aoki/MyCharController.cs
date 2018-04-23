@@ -190,7 +190,7 @@ namespace INI {
         /// <param name="stopJ"></param>
         public void SetStopFlag(bool stopJ)
         {
-            stp = stopJ;
+            wall = stopJ;
         }
     }
 }

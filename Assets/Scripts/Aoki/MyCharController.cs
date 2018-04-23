@@ -68,7 +68,7 @@ namespace INI {
         private void Up()
         {
             this.transform.localEulerAngles = new Vector3(0, 0, 0);
-            this.transform.Translate(mvSpd, mvSpd, 0);
+            this.transform.Translate(0, mvSpd, 0);
         }
 
         private void Stop()

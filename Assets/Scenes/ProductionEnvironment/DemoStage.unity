@@ -1133,7 +1133,7 @@ GameObject:
   - component: {fileID: 448903473}
   - component: {fileID: 448903472}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1150,7 +1150,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.78676474, g: 0.49184763, b: 0.3008218, a: 1}
   m_Intensity: 1
-  m_Range: 1169.9402
+  m_Range: 1200
   m_SpotAngle: 92
   m_CookieSize: 10
   m_Shadows:
@@ -5518,7 +5518,7 @@ RectTransform:
   m_GameObject: {fileID: 709342073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.02221564, y: 0.02221564, z: 0.02221564}
   m_Children:
   - {fileID: 2022636068}
   m_Father: {fileID: 1183366612}
@@ -9696,22 +9696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29ac3979389c7f4b8e709d42548d633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jmp: 0
-  clm: 0
-  stp: 0
-  isWalk: 1
-  isClimb: 0
   cliff: 0
   slope: 0
   inShadow: 0
   wall: 0
-  jumpCol: {fileID: 114640972451631006, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
-  climbCol: {fileID: 114881913703347238, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
-  stopCol: {fileID: 114914253907960354, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
   myCharRb: {fileID: 922522262}
   mvSpd: 0.05
-  jmpSpd: 100
-  clmSpd: 80
 --- !u!4 &944833483
 Transform:
   m_ObjectHideFlags: 0
@@ -9961,7 +9951,7 @@ RectTransform:
   m_GameObject: {fileID: 1020102937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.02221564, y: 0.02221564, z: 0.02221564}
   m_Children:
   - {fileID: 777036925}
   m_Father: {fileID: 716671631}
@@ -10446,7 +10436,7 @@ MonoBehaviour:
     deadCountText: {fileID: 463620046}
   mode: 0
   time: 300
-  spotLight: {fileID: 448903472}
+  light: {fileID: 448903472}
   deadCountMax: 500
 --- !u!4 &1276226489
 Transform:

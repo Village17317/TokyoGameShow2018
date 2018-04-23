@@ -19,7 +19,7 @@ namespace Village {
 
         private bool isChoice = false;
         private GameObject choiceObj;
-
+        private float choicePosY = 0;
         private void Awake(){
             
 		}
@@ -60,11 +60,16 @@ namespace Village {
                         }
                         else {
                             isChoice = true;
+                            choicePosY = choiceObj.transform.position.y;
                             cursor.SetIsChoice(true);
                         }
                     }
                 }
                 else {//離すとき
+                    choiceObj.transform.position = new Vector3(choiceObj.transform.position.x,
+                                                               choicePosY,
+                                                               choiceObj.transform.position.z);
+                    choicePosY = 0;
                     choiceObj = null;
                     isChoice = false;
                     cursor.SetIsChoice(false);
@@ -112,7 +117,7 @@ namespace Village {
         /// </summary>
         private void ObjectMove() {
             if(isChoice) {
-                float y = choiceObj.transform.position.y;
+                float y = choicePosY + 1;
                 Vector3 newPos = new Vector3(cursor.transform.position.x,y,cursor.transform.position.z);
                 choiceObj.transform.position = newPos;
             }

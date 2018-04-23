@@ -14,7 +14,7 @@ namespace INI {
 	public class MyCharController : Village.Inheritor {
 
         [SerializeField]
-        private bool jmp = false, clm = false, stp = false, isWalk = true, isClimb = false;
+        private bool jmp = false, clm = false, stp = false, isWalk = true, isClimb = false, cliff = false, slope = false, inShadow = false, wall = false;
 
         [SerializeField]
         private StepDecision jumpCol, climbCol, stopCol;
@@ -29,48 +29,70 @@ namespace INI {
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                //myCharRb.simulated = true;
-
-                //jmp = jumpCol.ovLap;
-                //clm = climbCol.ovLap;
-                //stp = stopCol.ovLap;
-
-                if (jmp && !clm && !stp)
+                if (cliff)
                 {
-                    if (!isClimb)
+                    if (inShadow)
                     {
-                        Jump();
+                        Up();
+                    }
+                    else if (wall)
+                    {
+                        Stop();
+                    }
+                    else
+                    {
+                        Walk();
                     }
                 }
-                else if (jmp && clm && !stp)
+                else if (slope)
                 {
-                    isWalk = false;
-                    isClimb = true;
-                    Climb();
-                }
-                else if (jmp && clm && stp)
-                {
-                    Stop();
-                }
-                else if (!jmp && !clm && !stp)
-                {
-                    isWalk = true;
-                    isClimb = false;
+                    Down();
                 }
 
-                if (isWalk)
-                {
-                    Walk();
-                }
-                else if (!isWalk)
-                {
-                    //Stop();
-                }
+
+
+            //    //myCharRb.simulated = true;
+
+            //    //jmp = jumpCol.ovLap;
+            //    //clm = climbCol.ovLap;
+            //    //stp = stopCol.ovLap;
+
+            //    if (jmp && !clm && !stp)
+            //    {
+            //        if (!isClimb)
+            //        {
+            //            Jump();
+            //        }
+            //    }
+            //    else if (jmp && clm && !stp)
+            //    {
+            //        isWalk = false;
+            //        isClimb = true;
+            //        Climb();
+            //    }
+            //    else if (jmp && clm && stp)
+            //    {
+            //        Stop();
+            //    }
+            //    else if (!jmp && !clm && !stp)
+            //    {
+            //        isWalk = true;
+            //        isClimb = false;
+            //    }
+
+            //    if (isWalk)
+            //    {
+            //        Walk();
+            //    }
+            //    else if (!isWalk)
+            //    {
+            //        //Stop();
+            //    }
             }
-            else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
-            {
-                myCharRb.simulated = false;
-            }
+            //else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
+            //{
+            //    myCharRb.simulated = false;
+            //}
 
         }
 
@@ -80,17 +102,29 @@ namespace INI {
             this.transform.Translate(mvSpd, 0, 0);
         }
 
-        private void Jump()
+        private void Down()
         {
-            //if (!myCharRb.simulated) myCharRb.simulated = true;
-            myCharRb.AddForce(Vector2.up * jmpSpd);
+            this.transform.localEulerAngles = new Vector3(0, 0, 0);
+            this.transform.Translate(mvSpd, -mvSpd, 0);
         }
 
-        private void Climb()
+        private void Up()
         {
-            //if (!myCharRb.simulated) myCharRb.simulated = true;
-            myCharRb.AddForce(Vector2.up * clmSpd);
+            this.transform.localEulerAngles = new Vector3(0, 0, 0);
+            this.transform.Translate(mvSpd, mvSpd, 0);
         }
+
+        //private void Jump()
+        //{
+        //    //if (!myCharRb.simulated) myCharRb.simulated = true;
+        //    myCharRb.AddForce(Vector2.up * jmpSpd);
+        //}
+
+        //private void Climb()
+        //{
+        //    //if (!myCharRb.simulated) myCharRb.simulated = true;
+        //    myCharRb.AddForce(Vector2.up * clmSpd);
+        //}
 
         private void Stop()
         {
@@ -117,23 +151,38 @@ namespace INI {
             }
         }
 
-        /// <summary>
-        /// ジャンプの可否判定を引数で受け取り、変数にセットする。真は可、偽は不可に対応する。
-        /// </summary>
-        /// <param name="jumpJ"></param>
-        public void SetJumpFlag(bool jumpJ)
+        public void SetInshadowFlag(bool inS)
         {
-            jmp = jumpJ;
+            inShadow = inS;
         }
 
-        /// <summary>
-        /// クライムの可否判定を引数で受け取り、変数にセットする。真は可、偽は不可に対応する。
-        /// </summary>
-        /// <param name="climbJ"></param>
-        public void SetClimbFlag(bool climbJ)
+        public void SetCliffFlag(bool clf)
         {
-            clm = climbJ;
+            inShadow = clf;
         }
+
+        public void SetSlopeFlag(bool slp)
+        {
+            inShadow = slp;
+        }
+
+        ///// <summary>
+        ///// ジャンプの可否判定を引数で受け取り、変数にセットする。真は可、偽は不可に対応する。
+        ///// </summary>
+        ///// <param name="jumpJ"></param>
+        //public void SetJumpFlag(bool jumpJ)
+        //{
+        //    jmp = jumpJ;
+        //}
+
+        ///// <summary>
+        ///// クライムの可否判定を引数で受け取り、変数にセットする。真は可、偽は不可に対応する。
+        ///// </summary>
+        ///// <param name="climbJ"></param>
+        //public void SetClimbFlag(bool climbJ)
+        //{
+        //    clm = climbJ;
+        //}
 
         /// <summary>
         /// ストップする場合に引数で判定を受け取り、変数にセットする。

@@ -123,12 +123,12 @@ namespace Village {
         /// </summary>
         private void ObjectSpin() {
             if(isChoice) {
-                if(Input.GetButtonDown("Button_RB")) {
-                    choiceObj.transform.Rotate(0,90,0);
+                if(Input.GetButton("Button_RB")) {
+                    choiceObj.transform.Rotate(0,1,0);
                 }
 
-                if(Input.GetButtonDown("Button_LB")) {
-                    choiceObj.transform.Rotate(0,-90,0);
+                if(Input.GetButton("Button_LB")) {
+                    choiceObj.transform.Rotate(0,-1,0);
                 }
 
             }

@@ -28,7 +28,7 @@ namespace Village {
         private void OnTriggerEnter(Collider other) {
             if(other.tag == "Object3D") {
                 ObjectManager.getInstance.SetObject(pos_Y,pos_X,other.gameObject);
-                other.GetComponent<ObjectInfo>().SetPos(pos_Y,pos_X);
+               // other.GetComponent<ObjectInfo>().SetPos(pos_Y,pos_X);
             }
         }
     }

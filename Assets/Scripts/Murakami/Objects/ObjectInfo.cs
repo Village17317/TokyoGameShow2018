@@ -12,20 +12,7 @@ using UnityEngine;
 namespace Village {
 
     public class ObjectInfo : MonoBehaviour {
-        [Range(0,6), SerializeField] private int pos_Y = 0;
-        [Range(0,6), SerializeField] private int pos_X = 0;
-
         public bool isStatic = false;
-
-        private Vector3 object2D_Scale;
-
-        /// <summary>
-        /// 位置とサイズの設定
-        /// </summary>
-        public void SetPos(int y,int x) {
-            pos_Y = y;
-            pos_X = x;
-        }
     }
 
 

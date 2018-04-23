@@ -12,9 +12,10 @@ using UnityEngine;
 namespace Village {
 
     public class StartFlagment : MonoBehaviour {
-        [SerializeField] private GameObject player;
+        private GameObject player;
 
         private void Awake(){
+            player = GameObject.FindWithTag("Player");
             player.transform.position = transform.position;
 		}
 

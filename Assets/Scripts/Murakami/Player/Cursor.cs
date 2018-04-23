@@ -18,7 +18,7 @@ namespace Village {
         
 
         private GameObject obj;
-        
+        private bool isChoice = false;
         public GameObject GetObject {
             get {
                 return obj;
@@ -36,16 +36,23 @@ namespace Village {
             else {
                 myMat.color = normalColor;
             }
+            isChoice = flag;
         }
 
         private void OnTriggerEnter(Collider other) {
-            if(other.tag == "Object3D") {
+            if(other.tag == "Object3D" && !isChoice) {
+                obj = other.gameObject;
+            }
+        }
+
+        private void OnTriggerStay(Collider other) {
+            if(other.tag == "Object3D" && !isChoice) {
                 obj = other.gameObject;
             }
         }
 
         private void OnTriggerExit(Collider other) {
-            if(other.tag == "Object3D") {
+            if(other.tag == "Object3D" && !isChoice) {
                 obj = null;
             }
         }

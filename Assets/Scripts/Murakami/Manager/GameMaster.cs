@@ -39,12 +39,14 @@ namespace Village {
         private bool isCountDown = false;
         private int deadCount = 0;
         private bool isReStart = false;
+        private float spotAngle = 0;
         #endregion
 
         #region Serialize
         [SerializeField] private StageUI stageUI;
-        [SerializeField] private float time = 300;
         [SerializeField] private GameMode mode = GameMode.Start;
+        [SerializeField] private float time = 300;
+        [SerializeField] private Light spotLight;
         [SerializeField] private int deadCountMax = 3;
         #endregion
 
@@ -70,11 +72,17 @@ namespace Village {
             instance = this;
             InitializeUI();
             StartCoroutine(WaitTime(3));
+            spotAngle = spotLight.spotAngle;
+            spotLight.spotAngle = 0;
         }
 
         public override void Run() {
             switch(mode) {
                 case GameMode.Start:
+                    spotLight.spotAngle += spotAngle * Time.deltaTime * 0.5f;
+                    if(spotLight.spotAngle >= spotAngle) {
+                        spotLight.spotAngle = spotAngle;
+                    }
                     break;
                 case GameMode.Game:
                     isReStart = false;

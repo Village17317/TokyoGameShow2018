@@ -94,7 +94,7 @@ namespace Village {
         private void Step_2() {
             SpotLightAnimation();
             if(Input.GetButtonDown("Button_Start")) {
-                StartCoroutine(LoadScene("Test_Shadow"));
+                StartCoroutine(LoadScene("DemoStage"));
             }
         }
 

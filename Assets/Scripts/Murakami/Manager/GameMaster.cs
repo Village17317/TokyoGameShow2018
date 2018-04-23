@@ -40,14 +40,20 @@ namespace Village {
         private int deadCount = 0;
         private bool isReStart = false;
         private float range = 0;
+        private bool isStick = false;
+        private int pauseCursorNumber = 0;
         #endregion
 
         #region Serialize
         [SerializeField] private StageUI stageUI;
         [SerializeField] private GameMode mode = GameMode.Start;
         [SerializeField] private float time = 300;
-        [SerializeField] private Light light;
+        [SerializeField] private Light roomLight;
         [SerializeField] private int deadCountMax = 3;
+        [SerializeField] private Canvas pauseMenu_U;
+        [SerializeField] private Canvas pauseMenu_D;
+        [SerializeField] private Transform pauseCursor;
+        [SerializeField] private Transform[] pauseCursors = new Transform[3];
         #endregion
 
         #region Propaty
@@ -72,38 +78,46 @@ namespace Village {
             instance = this;
             InitializeUI();
             StartCoroutine(WaitTime(3));
-            range = light.range;
-            light.range = 0;
+            range = roomLight.range;
+            roomLight.range = 0;
+            pauseMenu_U.gameObject.SetActive(false);
+            pauseMenu_D.gameObject.SetActive(false);
         }
 
         public override void Run() {
             switch(mode) {
                 case GameMode.Start:
-                    light.range += range * Time.deltaTime * 0.5f;
-                    if(light.range >= range) {
-                        light.range = range;
+                    roomLight.range += range * Time.deltaTime * 0.5f;
+                    if(roomLight.range >= range) {
+                        roomLight.range = range;
                     }
                     break;
                 case GameMode.Game:
                     isReStart = false;
                     CountDown();
-                    OnPause();
+                    if(Input.GetButtonDown("Button_Start")) {
+                        OnPause();
+                    }
                     break;
                 case GameMode.GameReStart:
-                CountDown();
-                OnPause();
-                if(!isReStart) {
-                    isReStart = true;
-                    StartCoroutine(ReStartWaitTime(2));
-                }
-                break;
+                    CountDown();
+                    if(Input.GetButtonDown("Button_Start")) {
+                        OnPause();
+                    }
+                    if(!isReStart) {
+                        isReStart = true;
+                        StartCoroutine(ReStartWaitTime(2));
+                    }
+                    break;
                 case GameMode.GameClear:
                     break;
                 case GameMode.GameOver:
                     break;
                 case GameMode.Pause:
                     PauseMenu();
-                    OffPause();
+                    if(Input.GetButtonDown("Button_Start")) {
+                        OffPause();
+                    }
                     break;
                 default:
                     break;
@@ -177,18 +191,18 @@ namespace Village {
         /// pause画面に切り替える
         /// </summary>
         public void OnPause() {
-            if(Input.GetButtonDown("Button_Start")) {
-                mode = GameMode.Pause;
-            }
+            mode = GameMode.Pause;
+            pauseMenu_U.gameObject.SetActive(true);
+            pauseMenu_D.gameObject.SetActive(true);
         }
 
         /// <summary>
         /// pause画面を終了する
         /// </summary>
         public void OffPause() {
-            if(Input.GetButtonDown("Button_Start")) {
-                mode = GameMode.Game;
-            }
+            mode = GameMode.Game;
+            pauseMenu_U.gameObject.SetActive(false);
+            pauseMenu_D.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -198,7 +212,44 @@ namespace Village {
         /// ゲームに戻る
         /// </summary>
         public void PauseMenu() {
+            if(Input.GetAxis("Vertical") > 0 && !isStick) {
+                isStick = true;
+                pauseCursorNumber--;
+                if(pauseCursorNumber < 0) {
+                    pauseCursorNumber = 0;
+                }
+                pauseCursor.position = pauseCursors[pauseCursorNumber].position;
+            }
+            else if(Input.GetAxis("Vertical") < 0 && !isStick) {
+                isStick = true;
+                pauseCursorNumber++;
+                if(pauseCursorNumber >= pauseCursors.Length) {
+                    pauseCursorNumber = pauseCursors.Length -1;
+                }
+                pauseCursor.position = pauseCursors[pauseCursorNumber].position;
+            }
+            else if(Input.GetAxis("Vertical") == 0) {
+                isStick = false;
+            }
 
+            if(Input.GetButtonDown("Button_A")) {
+                if(pauseCursorNumber == 0) {
+                    OffPause();
+                }
+                else if(pauseCursorNumber == 1) {
+                    SceneChenge(SceneManager.GetActiveScene().name);
+                }
+                else if(pauseCursorNumber == 2) {
+                    SceneChenge("Title");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 渡したシーンの名前でシーンを切り替える
+        /// </summary>
+        private void SceneChenge(string sceneName) {
+            SceneManager.LoadScene(sceneName);
         }
 
         /// <summary>

@@ -158,12 +158,12 @@ namespace INI {
 
         public void SetCliffFlag(bool clf)
         {
-            inShadow = clf;
+            cliff = clf;
         }
 
         public void SetSlopeFlag(bool slp)
         {
-            inShadow = slp;
+            slope = slp;
         }
 
         ///// <summary>

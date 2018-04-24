@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - GameMaster
   - Object3D
+  - SoundManager
   layers:
   - Default
   - TransparentFX

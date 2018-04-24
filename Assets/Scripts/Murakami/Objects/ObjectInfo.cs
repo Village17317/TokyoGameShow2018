@@ -14,9 +14,17 @@ namespace Village {
     public class ObjectInfo : MonoBehaviour {
         public bool isStatic = false;
         public bool isChoice = false;
+
+        private void FixedUpdate() {
+            if(GetComponent<Rigidbody>() != null) {
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+
         private void OnCollisionEnter(Collision collision) {
+
             if(collision.gameObject.tag == "Object3D" && isChoice) {
-                Destroy(collision.gameObject);
+
             }
         }
     }

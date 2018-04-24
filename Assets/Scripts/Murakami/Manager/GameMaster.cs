@@ -83,6 +83,7 @@ namespace Village {
             roomLight.range = 0;
             pauseMenu_U.gameObject.SetActive(false);
             pauseMenu_D.gameObject.SetActive(false);
+            SoundManager.Instance.PlayBGM("TestSound");
         }
 
         public override void Run() {

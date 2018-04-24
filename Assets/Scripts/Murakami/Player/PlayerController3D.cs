@@ -60,6 +60,7 @@ namespace Village {
                         }
                         else {
                             isChoice = true;
+                            choiceObj.GetComponent<ObjectInfo>().isChoice = true;
                             choicePosY = choiceObj.transform.position.y;
                             cursor.SetIsChoice(true);
                         }
@@ -70,6 +71,7 @@ namespace Village {
                                                                choicePosY,
                                                                choiceObj.transform.position.z);
                     choicePosY = 0;
+                    choiceObj.GetComponent<ObjectInfo>().isChoice = false;
                     choiceObj = null;
                     isChoice = false;
                     cursor.SetIsChoice(false);

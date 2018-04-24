@@ -18,7 +18,8 @@ namespace Village {
 
         [System.Serializable]
         private class StageUI {
-            public Text startCountText; //最初のカウントダウンの表示用、演出次第で変更
+            public Image startCountDownImage; //最初のカウントダウンの表示用
+            public Sprite[] startCountDownSprites; //最初のカウントダウンの数字のスプライト
             public Text timeText;       //制限時間の表示
             public Text deadCountText;  //死んだ回数の表示
         }
@@ -134,10 +135,11 @@ namespace Village {
         /// </summary>
         private IEnumerator WaitTime(float second) {
             for(int i = 0;i < second;i++) {
-                stageUI.startCountText.text = "CountDown : " + (second - i);
+                stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[(int) (second - i)];
                 yield return new WaitForSeconds(1);
             }
-            stageUI.startCountText.text = "0";
+            stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[0];
+            Destroy(stageUI.startCountDownImage.gameObject,1);
             StartCountDown();
             mode = GameMode.Game;   
         }
@@ -256,7 +258,7 @@ namespace Village {
         /// UIの初期化処理
         /// </summary>
         private void InitializeUI() {
-            stageUI.startCountText.text = "CountDown : ";
+            //stageUI.startCountText.text = "CountDown : ";
             stageUI.timeText.text = "Time : " + time.ToString();
             stageUI.deadCountText.text = "DeadCount : " + deadCount + " / " + deadCountMax;
         }

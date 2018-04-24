@@ -13,6 +13,12 @@ namespace Village {
 
     public class ObjectInfo : MonoBehaviour {
         public bool isStatic = false;
+        public bool isChoice = false;
+        private void OnCollisionEnter(Collision collision) {
+            if(collision.gameObject.tag == "Object3D" && isChoice) {
+                Destroy(collision.gameObject);
+            }
+        }
     }
 
 

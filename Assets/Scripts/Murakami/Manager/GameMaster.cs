@@ -140,6 +140,7 @@ namespace Village {
                 yield return new WaitForSeconds(1);
             }
             stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[0];
+
             Destroy(stageUI.startCountDownImage.gameObject,1);
             StartCountDown();
             mode = GameMode.Game;   

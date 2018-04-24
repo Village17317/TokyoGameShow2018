@@ -2,7 +2,7 @@
  *	作成者     :村上和樹
  *	機能説明   :オブジェクトの情報
  * 	初回作成日 :2018/04/15
- *	最終更新日 :2018/04/15
+ *	最終更新日 :2018/04/24
  */
 
 using System.Collections;
@@ -12,19 +12,27 @@ using UnityEngine;
 namespace Village {
 
     public class ObjectInfo : MonoBehaviour {
+
         public bool isStatic = false;
         public bool isChoice = false;
 
+        [SerializeField] private cakeslice.Outline[] outline;
+
+        private void Start() {
+            for(int i = 0;i < outline.Length;i++) {
+                outline[i].ObjectEnable();
+                if(isStatic) {
+                    outline[i].color = 0;
+                }
+                else {
+                    outline[i].color = 1;
+                }
+            }
+
+        }
         private void FixedUpdate() {
             if(GetComponent<Rigidbody>() != null) {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
-        }
-
-        private void OnCollisionEnter(Collision collision) {
-
-            if(collision.gameObject.tag == "Object3D" && isChoice) {
-
             }
         }
     }

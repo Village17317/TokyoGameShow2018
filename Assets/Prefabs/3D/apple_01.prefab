@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4027738740876058}
   - component: {fileID: 33022907066380986}
   - component: {fileID: 23103903402855690}
+  - component: {fileID: 114119264495712658}
   m_Layer: 0
   m_Name: nurbsToPoly1
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4654066042331978}
   - component: {fileID: 33298690398069350}
   - component: {fileID: 23793041747850798}
+  - component: {fileID: 114419291943653258}
   m_Layer: 0
   m_Name: pCylinder1
   m_TagString: Untagged
@@ -95,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726112602645924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.6, y: 3, z: -23.8}
+  m_LocalPosition: {x: -25.1, y: 3, z: 22.9}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
   - {fileID: 4027738740876058}
@@ -185,6 +187,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614099437929108}
   m_Mesh: {fileID: 4300002, guid: b9bb0a00abbd19a4297425fa2618d2c8, type: 3}
+--- !u!114 &114119264495712658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1248189674088462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!114 &114288951015449918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,6 +212,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 0
+  isChoice: 0
+  outline:
+  - {fileID: 114119264495712658}
+  - {fileID: 114419291943653258}
+--- !u!114 &114419291943653258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614099437929108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!135 &135291512238683706
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -240,7 +240,7 @@ namespace Village {
                     SceneChenge(SceneManager.GetActiveScene().name);
                 }
                 else if(pauseCursorNumber == 2) {
-                    SceneChenge("Title");
+                    SceneChenge("Title");//ステージ選択画面に移行_debug
                 }
             }
         }

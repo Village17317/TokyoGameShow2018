@@ -22,14 +22,14 @@ namespace Village {
 
         [SerializeField] private ParticleSystem fireEffect;
         [SerializeField] private Light pointLight;
-        [SerializeField] private Light spotLight;
+        [SerializeField] private Light roomLight;
         [SerializeField] private TitleStep step = TitleStep.STEP_1;
-        private float spotAngle = 0;
+        private float spotRange = 0;
         public bool flag = false;
 
         private void Awake(){
-            spotAngle = spotLight.spotAngle;
-            spotLight.spotAngle = 0;
+            spotRange = roomLight.range;
+            roomLight.range = 0;
             pointLight.enabled = false;
 		}
 
@@ -63,16 +63,16 @@ namespace Village {
 
         private void SpotLightAnimation() {
             if(flag) {
-                spotLight.spotAngle -= Time.deltaTime * spotAngle;
-                if(spotLight.spotAngle <= spotAngle * 0.98f) {
-                    spotLight.spotAngle = spotAngle * 0.98f;
+                roomLight.range -= Time.deltaTime * spotRange;
+                if(roomLight.range <= spotRange * 0.98f) {
+                    roomLight.range = spotRange * 0.98f;
                     flag = false;
                 }
             }
             else {
-                spotLight.spotAngle += Time.deltaTime * spotAngle;
-                if(spotLight.spotAngle >= spotAngle) {
-                    spotLight.spotAngle = spotAngle;
+                roomLight.range += Time.deltaTime * spotRange;
+                if(roomLight.range >= spotRange) {
+                    roomLight.range = spotRange;
                     flag = true;
                 }
             }

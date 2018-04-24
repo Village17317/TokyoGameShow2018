@@ -105,8 +105,8 @@ namespace Village {
             }
             else if(Input.GetAxis("Vertical") < 0) {
                 cursor.transform.position -= new Vector3(0,0,cursorSpeed);
-                if(cursor.transform.position.z < -40) {
-                    cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,-40);
+                if(cursor.transform.position.z < -25) {
+                    cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,-25);
                 }
                 ObjectMove();
             }

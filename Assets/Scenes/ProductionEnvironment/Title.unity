@@ -376,7 +376,7 @@ Light:
   m_GameObject: {fileID: 448903471}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 0
+  m_Type: 2
   m_Color: {r: 0.78676474, g: 0.49184763, b: 0.3008218, a: 1}
   m_Intensity: 1
   m_Range: 1169.9402
@@ -3880,7 +3880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireEffect: {fileID: 555654155}
   pointLight: {fileID: 2113671284}
-  spotLight: {fileID: 448903472}
+  roomLight: {fileID: 448903472}
   step: 0
   flag: 0
 --- !u!4 &634540989

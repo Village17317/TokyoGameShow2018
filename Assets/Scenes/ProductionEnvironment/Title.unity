@@ -383,8 +383,8 @@ Light:
   m_SpotAngle: 68
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
-    m_Resolution: -1
+    m_Type: 2
+    m_Resolution: 3
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -3881,8 +3881,8 @@ MonoBehaviour:
   fireEffect: {fileID: 555654155}
   pointLight: {fileID: 2113671284}
   roomLight: {fileID: 448903472}
+  nextSceneName: DemoStage_Ver2
   step: 0
-  flag: 0
 --- !u!4 &634540989
 Transform:
   m_ObjectHideFlags: 0
@@ -4156,12 +4156,12 @@ GameObject:
   - component: {fileID: 885184903}
   - component: {fileID: 885184902}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: TitleLogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &885184902
 SpriteRenderer:
   m_ObjectHideFlags: 0

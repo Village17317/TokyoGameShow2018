@@ -112,6 +112,8 @@ namespace Village {
                     }
                     break;
                 case GameMode.GameClear:
+                    stageUI.startCountDownImage.gameObject.SetActive(true);
+                    stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[4]; // CLEAR
                     break;
                 case GameMode.GameOver:
                     break;
@@ -136,12 +138,15 @@ namespace Village {
         /// </summary>
         private IEnumerator WaitTime(float second) {
             for(int i = 0;i < second;i++) {
-                stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[(int) (second - i)];
+                stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[(int) (second - i)];// 3 2 1 
                 yield return new WaitForSeconds(1);
             }
-            stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[0];
+            stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[0]; // START
+            StartCoroutine(Delay.DelayMethod(30,() => {
+                stageUI.startCountDownImage.gameObject.SetActive(false);
+            }));
 
-            Destroy(stageUI.startCountDownImage.gameObject,1);
+            //Destroy(stageUI.startCountDownImage.gameObject,1);
             StartCountDown();
             mode = GameMode.Game;   
         }

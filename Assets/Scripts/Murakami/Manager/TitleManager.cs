@@ -23,9 +23,10 @@ namespace Village {
         [SerializeField] private ParticleSystem fireEffect;
         [SerializeField] private Light pointLight;
         [SerializeField] private Light roomLight;
+        [SerializeField] private string nextSceneName = "";
         [SerializeField] private TitleStep step = TitleStep.STEP_1;
         private float spotRange = 0;
-        public bool flag = false;
+        private bool flag = false;
 
         private void Awake(){
             spotRange = roomLight.range;
@@ -94,7 +95,7 @@ namespace Village {
         private void Step_2() {
             SpotLightAnimation();
             if(Input.GetButtonDown("Button_Start")) {
-                StartCoroutine(LoadScene("DemoStage"));
+                StartCoroutine(LoadScene(nextSceneName));
             }
         }
 

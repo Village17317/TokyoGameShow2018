@@ -14,7 +14,7 @@ namespace INI {
 	public class MyCharController : Village.Inheritor {
 
         [SerializeField]
-        private bool cliff = false, slope = false, inShadow = false, wall = false;
+        private bool cliff = false, slope = false, inShadow = false, isStop = false;
 
         [SerializeField]
         private Rigidbody2D myCharRb;
@@ -26,24 +26,28 @@ namespace INI {
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                if (cliff)
+                if (Input.GetButtonDown("Button_B"))
                 {
-                    if (inShadow)
-                    {
-                        Up();
-                    }
-                    else if (wall)
-                    {
-                        Stop();
-                    }
-                    else
-                    {
-                        Walk();
-                    }
+                    isStop = !isStop;
                 }
-                else if (slope)
+
+                if (!isStop)
                 {
-                    Down();
+                    if (cliff)
+                    {
+                        if (inShadow)
+                        {
+                            Up();
+                        }
+                        else
+                        {
+                            Walk();
+                        }
+                    }
+                    else if (slope)
+                    {
+                        Down();
+                    }
                 }
             }
             else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
@@ -125,9 +129,9 @@ namespace INI {
         /// 目の前が壁だった場合にこのメソッドに真を渡す。
         /// </summary>
         /// <param name="stopJ"></param>
-        public void SetStopFlag(bool stopJ)
-        {
-            wall = stopJ;
-        }
+        //public void SetStopFlag(bool stopJ)
+        //{
+        //    wall = stopJ;
+        //}
     }
 }

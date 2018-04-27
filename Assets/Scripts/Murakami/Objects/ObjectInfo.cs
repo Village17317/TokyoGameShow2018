@@ -12,7 +12,7 @@ using UnityEngine;
 namespace Village {
 
     public class ObjectInfo : MonoBehaviour {
-
+        private bool isOutLine = false;
         public bool isStatic = false;
         public bool isChoice = false;
 
@@ -21,6 +21,7 @@ namespace Village {
         private void Start() {
             for(int i = 0;i < outline.Length;i++) {
                 outline[i].ObjectEnable();
+                isOutLine = true;
                 if(isStatic) {
                     outline[i].color = 0;
                 }
@@ -34,6 +35,28 @@ namespace Village {
             if(GetComponent<Rigidbody>() != null) {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Pause) {
+                if(isOutLine) {
+                    for(int i = 0;i < outline.Length;i++) {
+                        outline[i].ObjectDisable();
+                    }
+                    isOutLine = false;
+                }
+            }
+            else {
+                if(!isOutLine) {
+                    for(int i = 0;i < outline.Length;i++) {
+                        outline[i].ObjectEnable();
+                        if(isStatic) {
+                            outline[i].color = 0;
+                        }
+                        else {
+                            outline[i].color = 1;
+                        }
+                    }
+                    isOutLine = true;
+                }
+            } 
         }
     }
 

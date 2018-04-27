@@ -20,8 +20,7 @@ namespace Village {
         private class StageUI {
             public Image startCountDownImage; //最初のカウントダウンの表示用
             public Sprite[] startCountDownSprites; //最初のカウントダウンの数字のスプライト
-            public Text timeText;       //制限時間の表示
-            public Text deadCountText;  //死んだ回数の表示
+            public Image timeImage;     //制限時間の表示
         }
 
         #region enum
@@ -43,15 +42,15 @@ namespace Village {
         private float range = 0;
         private bool isStick = false;
         private int pauseCursorNumber = 0;
+        private float time = 0;
         #endregion
 
         #region Serialize
         [SerializeField] private StageUI stageUI;
         [SerializeField] private GameMode mode = GameMode.Start;
-        [SerializeField] private float time = 300;
+        [SerializeField] private float maxTime = 300;//最大時間
         [SerializeField] private Light roomLight;
         [SerializeField] private int deadCountMax = 3;
-        [SerializeField] private Canvas pauseMenu_U;
         [SerializeField] private Canvas pauseMenu_D;
         [SerializeField] private Transform pauseCursor;
         [SerializeField] private Transform[] pauseCursors = new Transform[3];
@@ -77,11 +76,12 @@ namespace Village {
 
         private void Awake() {
             instance = this;
+
+            time = maxTime;
             InitializeUI();
             StartCoroutine(WaitTime(3));
             range = roomLight.range;
             roomLight.range = 0;
-            pauseMenu_U.gameObject.SetActive(false);
             pauseMenu_D.gameObject.SetActive(false);
             SoundManager.Instance.PlayBGM("TestSound");
         }
@@ -145,8 +145,6 @@ namespace Village {
             StartCoroutine(Delay.DelayMethod(30,() => {
                 stageUI.startCountDownImage.gameObject.SetActive(false);
             }));
-
-            //Destroy(stageUI.startCountDownImage.gameObject,1);
             StartCountDown();
             mode = GameMode.Game;   
         }
@@ -160,7 +158,7 @@ namespace Village {
                 if(time <= 0) {
                     mode = GameMode.GameOver;
                 }
-                stageUI.timeText.text = "Time : " + time.ToString("F0");
+                stageUI.timeImage.fillAmount = time / maxTime;
             }
         }
 
@@ -186,10 +184,9 @@ namespace Village {
         }
 
         /// <summary>
-        /// 死んだ回数をカウント
+        /// 死んだ回数をカウント 使わないかも
         /// </summary>
         public void DeadCountUp() {
-            stageUI.deadCountText.text = "DeadCount : " +  deadCount + " / " + deadCountMax;
             deadCount++;
             if(deadCount >= deadCountMax) {
                 mode = GameMode.GameOver;
@@ -201,7 +198,6 @@ namespace Village {
         /// </summary>
         public void OnPause() {
             mode = GameMode.Pause;
-            pauseMenu_U.gameObject.SetActive(true);
             pauseMenu_D.gameObject.SetActive(true);
         }
 
@@ -210,7 +206,6 @@ namespace Village {
         /// </summary>
         public void OffPause() {
             mode = GameMode.Game;
-            pauseMenu_U.gameObject.SetActive(false);
             pauseMenu_D.gameObject.SetActive(false);
         }
 
@@ -249,7 +244,7 @@ namespace Village {
                     SceneChenge(SceneManager.GetActiveScene().name);
                 }
                 else if(pauseCursorNumber == 2) {
-                    SceneChenge("Title");//ステージ選択画面に移行_debug
+                    SceneChenge("StageSelect");//ステージ選択画面に移行_debug
                 }
             }
         }
@@ -265,9 +260,8 @@ namespace Village {
         /// UIの初期化処理
         /// </summary>
         private void InitializeUI() {
-            //stageUI.startCountText.text = "CountDown : ";
-            stageUI.timeText.text = "Time : " + time.ToString();
-            stageUI.deadCountText.text = "DeadCount : " + deadCount + " / " + deadCountMax;
+
+            stageUI.timeImage.fillAmount = time / maxTime;
         }
     }
 

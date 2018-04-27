@@ -119,7 +119,7 @@ namespace Village {
         /// </summary>
         private void ObjectMove() {
             if(isChoice) {
-                float y = choicePosY + 1;
+                float y = choicePosY;// + 1;
                 Vector3 newPos = new Vector3(cursor.transform.position.x,y,cursor.transform.position.z);
                 choiceObj.transform.position = newPos;
             }

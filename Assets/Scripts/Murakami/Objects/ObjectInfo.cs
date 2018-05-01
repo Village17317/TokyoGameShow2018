@@ -35,7 +35,9 @@ namespace Village {
             if(GetComponent<Rigidbody>() != null) {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
-            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Pause) {
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Pause
+            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameClear
+            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameOver) {
                 if(isOutLine) {
                     for(int i = 0;i < outline.Length;i++) {
                         outline[i].ObjectDisable();

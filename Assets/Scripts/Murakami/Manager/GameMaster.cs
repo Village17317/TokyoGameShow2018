@@ -2,7 +2,7 @@
  *	作成者     :村上和樹
  *	機能説明   :メインシーンをまとめるクラス
  * 	初回作成日 :2018/04/14
- *	最終更新日 :2018/04/14
+ *	最終更新日 :2018/05/01
  */
 
 using System.Collections;
@@ -23,6 +23,14 @@ namespace Village {
             public Image timeImage;     //制限時間の表示
         }
 
+        [System.Serializable]
+        private class OtherCanvas {
+            [System.NonSerialized] public int cursorNumber = 0;
+            public Canvas canvas;
+            public Transform cursorTf;
+            public Transform[] cursorPositions;
+        }
+
         #region enum
         public enum GameMode {
             Start,          //ゲーム開始時
@@ -41,7 +49,6 @@ namespace Village {
         private bool isReStart = false;
         private float range = 0;
         private bool isStick = false;
-        private int pauseCursorNumber = 0;
         private float time = 0;
         #endregion
 
@@ -51,9 +58,16 @@ namespace Village {
         [SerializeField] private float maxTime = 300;//最大時間
         [SerializeField] private Light roomLight;
         [SerializeField] private int deadCountMax = 3;
-        [SerializeField] private Canvas pauseMenu_D;
-        [SerializeField] private Transform pauseCursor;
-        [SerializeField] private Transform[] pauseCursors = new Transform[3];
+
+        [Space(16)]
+        [SerializeField] private OtherCanvas pauseMenuCanvas;
+        [Space(16)]
+        [SerializeField] private OtherCanvas gameClearCanvas;
+        [Space(16)]
+        [SerializeField] private OtherCanvas gameOverCanvas;
+        [Space(16)]
+
+        [SerializeField] private string nextScene = "";
         #endregion
 
         #region Propaty
@@ -82,8 +96,12 @@ namespace Village {
             StartCoroutine(WaitTime(3));
             range = roomLight.range;
             roomLight.range = 0;
-            pauseMenu_D.gameObject.SetActive(false);
-            SoundManager.Instance.PlayBGM("TestSound");
+
+            pauseMenuCanvas.canvas.gameObject.SetActive(false);
+            gameClearCanvas.canvas.gameObject.SetActive(false);
+            gameOverCanvas.canvas.gameObject.SetActive(false);
+
+            //SoundManager.Instance.PlayBGM("TestSound");
         }
 
         public override void Run() {
@@ -112,10 +130,10 @@ namespace Village {
                     }
                     break;
                 case GameMode.GameClear:
-                    stageUI.startCountDownImage.gameObject.SetActive(true);
-                    stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[4]; // CLEAR
+                    OnGameClear();
                     break;
                 case GameMode.GameOver:
+                    OnGameOver();
                     break;
                 case GameMode.Pause:
                     PauseMenu();
@@ -198,7 +216,7 @@ namespace Village {
         /// </summary>
         public void OnPause() {
             mode = GameMode.Pause;
-            pauseMenu_D.gameObject.SetActive(true);
+            pauseMenuCanvas.canvas.gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -206,7 +224,7 @@ namespace Village {
         /// </summary>
         public void OffPause() {
             mode = GameMode.Game;
-            pauseMenu_D.gameObject.SetActive(false);
+            pauseMenuCanvas.canvas.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -218,33 +236,105 @@ namespace Village {
         public void PauseMenu() {
             if(Input.GetAxis("Vertical") > 0 && !isStick) {
                 isStick = true;
-                pauseCursorNumber--;
-                if(pauseCursorNumber < 0) {
-                    pauseCursorNumber = 0;
+                pauseMenuCanvas.cursorNumber--;
+                if(pauseMenuCanvas.cursorNumber < 0) {
+                    pauseMenuCanvas.cursorNumber = 0;
                 }
-                pauseCursor.position = pauseCursors[pauseCursorNumber].position;
+                pauseMenuCanvas.cursorTf.position = pauseMenuCanvas.cursorPositions[pauseMenuCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") < 0 && !isStick) {
                 isStick = true;
-                pauseCursorNumber++;
-                if(pauseCursorNumber >= pauseCursors.Length) {
-                    pauseCursorNumber = pauseCursors.Length -1;
+                pauseMenuCanvas.cursorNumber++;
+                if(pauseMenuCanvas.cursorNumber >= pauseMenuCanvas.cursorPositions.Length) {
+                    pauseMenuCanvas.cursorNumber = pauseMenuCanvas.cursorPositions.Length - 1;
                 }
-                pauseCursor.position = pauseCursors[pauseCursorNumber].position;
+                pauseMenuCanvas.cursorTf.position = pauseMenuCanvas.cursorPositions[pauseMenuCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") == 0) {
                 isStick = false;
             }
 
             if(Input.GetButtonDown("Button_A")) {
-                if(pauseCursorNumber == 0) {
+                if(pauseMenuCanvas.cursorNumber == 0) {
                     OffPause();
                 }
-                else if(pauseCursorNumber == 1) {
+                else if(pauseMenuCanvas.cursorNumber == 1) {
                     SceneChenge(SceneManager.GetActiveScene().name);
                 }
-                else if(pauseCursorNumber == 2) {
+                else if(pauseMenuCanvas.cursorNumber == 2) {
                     SceneChenge("StageSelect");//ステージ選択画面に移行_debug
+                }
+            }
+        }
+
+        /// <summary>
+        /// ゲームクリア時
+        /// </summary>
+        public void OnGameClear() {
+            gameClearCanvas.canvas.gameObject.SetActive(true);
+
+            if(Input.GetAxis("Vertical") > 0 && !isStick) {
+                isStick = true;
+                gameClearCanvas.cursorNumber--;
+                if(gameClearCanvas.cursorNumber < 0) {
+                    gameClearCanvas.cursorNumber = 0;
+                }
+                gameClearCanvas.cursorTf.position = gameClearCanvas.cursorPositions[gameClearCanvas.cursorNumber].position;
+            }
+            else if(Input.GetAxis("Vertical") < 0 && !isStick) {
+                isStick = true;
+                gameClearCanvas.cursorNumber++;
+                if(gameClearCanvas.cursorNumber >= gameClearCanvas.cursorPositions.Length) {
+                    gameClearCanvas.cursorNumber = gameClearCanvas.cursorPositions.Length - 1;
+                }
+                gameClearCanvas.cursorTf.position = gameClearCanvas.cursorPositions[gameClearCanvas.cursorNumber].position;
+            }
+            else if(Input.GetAxis("Vertical") == 0) {
+                isStick = false;
+            }
+
+            if(Input.GetButtonDown("Button_A")) {
+                if(gameClearCanvas.cursorNumber == 0) {//次のステージシーンへ
+                    SceneChenge(nextScene);
+                }
+                else if(gameClearCanvas.cursorNumber == 1) {//もう一度やりましょう
+                    SceneChenge(SceneManager.GetActiveScene().name);
+                }
+                else if(gameClearCanvas.cursorNumber == 2) {
+                    SceneChenge("StageSelect");//ステージ選択画面に移行
+                }
+            }
+        }
+
+        private void OnGameOver() {
+            gameOverCanvas.canvas.gameObject.SetActive(true);
+
+            if(Input.GetAxis("Vertical") > 0 && !isStick) {
+                isStick = true;
+                gameOverCanvas.cursorNumber--;
+                if(gameOverCanvas.cursorNumber < 0) {
+                    gameOverCanvas.cursorNumber = 0;
+                }
+                gameOverCanvas.cursorTf.position = gameOverCanvas.cursorPositions[gameOverCanvas.cursorNumber].position;
+            }
+            else if(Input.GetAxis("Vertical") < 0 && !isStick) {
+                isStick = true;
+                gameOverCanvas.cursorNumber++;
+                if(gameOverCanvas.cursorNumber >= gameOverCanvas.cursorPositions.Length) {
+                    gameOverCanvas.cursorNumber = gameOverCanvas.cursorPositions.Length - 1;
+                }
+                gameOverCanvas.cursorTf.position = gameOverCanvas.cursorPositions[gameOverCanvas.cursorNumber].position;
+            }
+            else if(Input.GetAxis("Vertical") == 0) {
+                isStick = false;
+            }
+
+            if(Input.GetButtonDown("Button_A")) {
+                if(gameOverCanvas.cursorNumber == 0) {//次のステージシーンへ
+                    SceneChenge(SceneManager.GetActiveScene().name);
+                }
+                else if(gameOverCanvas.cursorNumber == 1) {//もう一度やりましょう
+                    SceneChenge("StageSelect");//ステージ選択画面に移行
                 }
             }
         }

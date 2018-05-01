@@ -14,3 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProductionEnvironment/DemoStage_1.unity
     guid: d114ad98dbee5744bb5bec782b058421
+  - enabled: 1
+    path: Assets/Scenes/ProductionEnvironment/DemoStage_2.unity
+    guid: 10a422c09d1854244861d75f88b916f5
+  - enabled: 1
+    path: Assets/Scenes/ProductionEnvironment/DemoStage_3.unity
+    guid: 9aef2622c445a7041ada64afc33078ef

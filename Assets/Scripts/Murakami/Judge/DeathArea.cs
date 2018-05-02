@@ -11,16 +11,49 @@ using UnityEngine;
 
 namespace Village {
 
-    public class DeathArea : MonoBehaviour {
+    public class DeathArea : Inheritor {
 
         [SerializeField] private StartFlagment startFlagment;
-        [SerializeField] private Rigidbody2D player2DRigid;
+        [SerializeField] private Transform player2dTf;
+        [SerializeField] private Rigidbody2D playerRigid;
+
+        public override void Run() {
+            if(CheckScreenOut(player2dTf.position)) {
+                BackToStartPoint();
+            }
+        }
+
+        /// <summary>
+        /// カメラ外かどうかの判定
+        /// </summary>
+        private bool CheckScreenOut(Vector3 _pos) {
+            Vector3 view_pos = Camera.main.WorldToViewportPoint(_pos);
+            if(view_pos.x < -0.0f ||
+               view_pos.x > 1.0f ||
+               view_pos.y < -0.0f ||
+               view_pos.y > 1.0f) {
+                // 範囲外 
+                return true;
+            }
+            else {
+                // 範囲内 
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Start地点に戻す
+        /// </summary>
+        private void BackToStartPoint() {
+            playerRigid.velocity = Vector3.zero;
+            startFlagment.ReSpawn();
+            GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameReStart);
+            GameMaster.getInstance.DeadCountUp();//MainManagerで死んだ回数をカウントする
+        }
+
         private void OnTriggerEnter2D(Collider2D collision) {
             if(collision.tag == "Player") {
-                player2DRigid.velocity = Vector3.zero;
-                startFlagment.ReSpawn();
-                GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameReStart);
-                GameMaster.getInstance.DeadCountUp();//MainManagerで死んだ回数をカウントする
+                BackToStartPoint();
             }
         }
 

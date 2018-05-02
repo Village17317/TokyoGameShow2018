@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4169173689100972}
   - component: {fileID: 95040406651809646}
+  - component: {fileID: 65036904269806400}
   m_Layer: 0
   m_Name: Candle_0420
   m_TagString: Untagged
@@ -389,6 +390,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1857206944441770}
   m_Mesh: {fileID: 4300006, guid: 8e536adf97fdb2041be3f8d22c2cf71e, type: 3}
+--- !u!65 &65036904269806400
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364867045229138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.404182, y: 1, z: 1.853238}
+  m_Center: {x: -0.15767841, y: 0, z: 0.2967789}
 --- !u!95 &95040406651809646
 Animator:
   serializedVersion: 3
@@ -421,7 +434,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

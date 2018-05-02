@@ -14,6 +14,7 @@ namespace Village {
     public class Cursor : MonoBehaviour {
         [SerializeField] private Material myMat;
         [SerializeField] private Color normalColor;
+        [SerializeField] private Color insideColor;
         [SerializeField] private Color choicedColor;
         
 
@@ -34,25 +35,28 @@ namespace Village {
                 myMat.color = choicedColor;
             }
             else {
-                myMat.color = normalColor;
+                //myMat.color = normalColor;
             }
             isChoice = flag;
         }
 
         private void OnTriggerEnter(Collider other) {
             if(other.tag == "Object3D" && !isChoice) {
+                myMat.color = insideColor;
                 obj = other.gameObject;
             }
         }
 
         private void OnTriggerStay(Collider other) {
             if(other.tag == "Object3D" && !isChoice) {
+                myMat.color = insideColor;
                 obj = other.gameObject;
             }
         }
 
         private void OnTriggerExit(Collider other) {
             if(other.tag == "Object3D" && !isChoice) {
+                myMat.color = normalColor;
                 obj = null;
             }
         }

@@ -16,7 +16,7 @@ namespace Village {
         [SerializeField] private Color normalColor;
         [SerializeField] private Color insideColor;
         [SerializeField] private Color choicedColor;
-        
+        [SerializeField] private ParticleSystem choiceEffect;
 
         private GameObject obj;
         private bool isChoice = false;
@@ -33,8 +33,10 @@ namespace Village {
         public void  SetIsChoice(bool flag) {
             if(flag) {
                 myMat.color = choicedColor;
+                if(!choiceEffect.isPlaying) choiceEffect.Play();
             }
             else {
+                if(choiceEffect.isPlaying) choiceEffect.Stop();
                 //myMat.color = normalColor;
             }
             isChoice = flag;

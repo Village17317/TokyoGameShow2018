@@ -49,7 +49,14 @@ namespace INI {
                         if ((!nearJudge && farJudge) || jump)
                         {
                             myCharRb.constraints = RigidbodyConstraints2D.None;
-                            myCharRb.AddForce(jmpSpd);
+                            if (dir == direction.RIGHT)
+                            {
+                                myCharRb.AddForce(jmpSpd);
+                            }
+                            else if (dir == direction.LEFT)
+                            {
+                                jmpSpd = new Vector2(jmpSpd.x * -1, jmpSpd.y);
+                            }
                         }
                     }
                 }

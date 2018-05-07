@@ -36,10 +36,6 @@ namespace INI {
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                if (isGround)
-                {
-                    myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-
                     if (inShadow)
                     {
                         Up();
@@ -61,11 +57,6 @@ namespace INI {
                             }
                         }
                     }
-                }
-                else if (!isGround)
-                {
-
-                }
             }
             else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
             {
@@ -76,13 +67,13 @@ namespace INI {
 
         private void Walk()
         {
-            this.transform.localEulerAngles = new Vector3(0, 0, 0);
+            //this.transform.localEulerAngles = new Vector3(0, 0, 0);
             this.transform.Translate(mvSpd, 0, 0);
         }
 
         private void Up()
         {
-            this.transform.localEulerAngles = new Vector3(0, 0, 0);
+            //this.transform.localEulerAngles = new Vector3(0, 0, 0);
             this.transform.Translate(0, mvSpd, 0);
         }
         
@@ -94,17 +85,20 @@ namespace INI {
         {
             isGround = gnd;
 
-            //if (gnd)
-            //{
-            //    myCharRb.velocity = Vector2.zero;
-            //    myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                
-            //}
-            //else if (!gnd)
-            //{
-            //    //myCharRb.simulated = true;
-            //    myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            //}
+            if (Village.GameMaster.getInstance.GetGameMode != Village.GameMaster.GameMode.Game)
+            {
+                if (gnd)
+                {
+                    myCharRb.velocity = Vector2.zero;
+                    myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+
+                }
+                else if (!gnd)
+                {
+                    //myCharRb.simulated = true;
+                    myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                }
+            }
         }
 
         /// <summary>

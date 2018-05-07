@@ -125,8 +125,6 @@ namespace INI {
                         dir = direction.RIGHT;
                         this.transform.localEulerAngles = new Vector3(0, 0, 0);
                     }
-
-                    mvSpd *= -1;
                 }
             }
         }

@@ -76,7 +76,7 @@ namespace INI {
 
             if (gnd)
             {
-                //myCharRb.simulated = false;
+                myCharRb.velocity = Vector2.zero;
                 myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 
             }
@@ -93,15 +93,20 @@ namespace INI {
         /// <param name="rvs"></param>
         public void Reverse(bool rvs)
         {
-            reverse = rvs;
-
-            if (rvs)
+            if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                this.transform.localEulerAngles += new Vector3(0, 180, 0);
+                reverse = rvs;
 
-                if (this.transform.localEulerAngles.y >= 360)
+                if (rvs)
                 {
-                    this.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    mvSpd *= -1;
+
+                    this.transform.localEulerAngles += new Vector3(0, 180, 0);
+
+                    if (this.transform.localEulerAngles.y >= 360)
+                    {
+                        this.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    }
                 }
             }
         }

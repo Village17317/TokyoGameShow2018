@@ -14,7 +14,7 @@ namespace INI {
 	public class MyCharController : Village.Inheritor {
 
         [SerializeField]
-        private bool cliff = false, slope = false, inShadow = false, isStop = false;
+        private bool reverse = false, inShadow = false, isStop = false, isGround = false;
 
         [SerializeField]
         private Rigidbody2D myCharRb;
@@ -26,28 +26,23 @@ namespace INI {
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
-                if (Input.GetButtonDown("Button_B"))
-                {
-                    isStop = !isStop;
-                }
+                //if (Input.GetButtonDown("Button_B"))
+                //{
+                //    isStop = !isStop;
+                //}
 
                 if (!isStop)
                 {
-                    if (cliff)
+
+                    if (inShadow)
                     {
-                        if (inShadow)
-                        {
-                            Up();
-                        }
-                        else
-                        {
-                            Walk();
-                        }
+                        Up();
                     }
-                    else if (slope)
+                    else
                     {
-                        Down();
+                        Walk();
                     }
+                    
                 }
             }
             else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
@@ -84,12 +79,25 @@ namespace INI {
         /// 接地判定を受け取るメソッド。真は接地、偽は非接地に対応。
         /// </summary>
         /// <param name="gnd"></param>
-        public void IsGround(bool gnd)
+        public void IsGround(bool gnd, bool rvs)
         {
+            isGround = gnd;
+            reverse = rvs;
+
             if (gnd)
             {
                 //myCharRb.simulated = false;
                 myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+
+                if (rvs)
+                {
+                    this.transform.localEulerAngles += new Vector3(0, 180, 0);
+
+                    if (this.transform.localEulerAngles.y >= 360)
+                    {
+                        this.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    }
+                }
             }
             else if (!gnd)
             {
@@ -106,32 +114,5 @@ namespace INI {
         {
             inShadow = inS;
         }
-
-        /// <summary>
-        /// 目の前が崖だった場合にこのメソッドに真を渡す。
-        /// </summary>
-        /// <param name="clf"></param>
-        public void SetCliffFlag(bool clf)
-        {
-            cliff = clf;
-        }
-
-        /// <summary>
-        /// 目の前が下り坂だった場合にこのメソッドに真を渡す。
-        /// </summary>
-        /// <param name="slp"></param>
-        public void SetSlopeFlag(bool slp)
-        {
-            slope = slp;
-        }
-
-        /// <summary>
-        /// 目の前が壁だった場合にこのメソッドに真を渡す。
-        /// </summary>
-        /// <param name="stopJ"></param>
-        //public void SetStopFlag(bool stopJ)
-        //{
-        //    wall = stopJ;
-        //}
     }
 }

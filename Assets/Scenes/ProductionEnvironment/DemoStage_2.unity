@@ -112,33 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &6085474
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 366
-  m_Height: 206
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &12225521
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,12 +634,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   judge:
-  - judgeTf: {fileID: 532356373}
+  - judgeTf: {fileID: 0}
     judgePosColor: {r: 0, g: 0, b: 0, a: 0}
     ev:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 944833479}
+        - m_Target: {fileID: 0}
           m_MethodName: IsGround
           m_Mode: 0
           m_Arguments:
@@ -679,12 +652,12 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: Village.ColorJudge+BoolCallBack, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - judgeTf: {fileID: 2004474402}
+  - judgeTf: {fileID: 0}
     judgePosColor: {r: 0, g: 0, b: 0, a: 0}
     ev:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 944833479}
+        - m_Target: {fileID: 0}
           m_MethodName: SetInshadowFlag
           m_Mode: 0
           m_Arguments:
@@ -697,12 +670,12 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: Village.ColorJudge+BoolCallBack, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - judgeTf: {fileID: 1903963478}
+  - judgeTf: {fileID: 0}
     judgePosColor: {r: 0, g: 0, b: 0, a: 0}
     ev:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 944833479}
+        - m_Target: {fileID: 0}
           m_MethodName: SetSlopeFlag
           m_Mode: 0
           m_Arguments:
@@ -715,12 +688,12 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: Village.ColorJudge+BoolCallBack, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - judgeTf: {fileID: 668386333}
+  - judgeTf: {fileID: 0}
     judgePosColor: {r: 0, g: 0, b: 0, a: 0}
     ev:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 944833479}
+        - m_Target: {fileID: 0}
           m_MethodName: SetStopFlag
           m_Mode: 0
           m_Arguments:
@@ -2247,8 +2220,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 728428693}
   outlineCamera: {fileID: 1789906072}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1510806254}
-  extraRenderTexture: {fileID: 6085474}
+  renderTexture: {fileID: 1591561391}
+  extraRenderTexture: {fileID: 1395589437}
 --- !u!1 &809951544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2698,10 +2671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29ac3979389c7f4b8e709d42548d633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cliff: 1
-  slope: 0
+  reverse: 0
   inShadow: 0
   isStop: 0
+  isGround: 0
   myCharRb: {fileID: 922522262}
   mvSpd: 0.05
 --- !u!4 &944833483
@@ -3336,6 +3309,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2fdbbad4a0d6ff46be180eca249fbda, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1395589437
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 366
+  m_Height: 206
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &1398529464
 Prefab:
   m_ObjectHideFlags: 0
@@ -3795,7 +3795,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4169173689100972, guid: 96f2e74b143546e49a6f5b2f637a9c1a,
     type: 2}
   m_PrefabInternal: {fileID: 1499799198}
---- !u!84 &1510806254
+--- !u!84 &1591561391
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -4452,7 +4452,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1510806254}
+  m_TargetTexture: {fileID: 1591561391}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -4518,7 +4518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateList:
   - {fileID: 349809233}
-  - {fileID: 944833479}
+  - {fileID: 0}
   - {fileID: 1276226488}
 --- !u!4 &1939471046
 Transform:
@@ -5335,7 +5335,6 @@ GameObject:
   m_Component:
   - component: {fileID: 944833483}
   - component: {fileID: 2110722591}
-  - component: {fileID: 2110722590}
   - component: {fileID: 922522262}
   - component: {fileID: 944833479}
   m_Layer: 5
@@ -5345,22 +5344,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &2110722590
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 58544359616137390, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2110722589}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.25}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!61 &2110722591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5374,7 +5357,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1843338, y: 0.49811125}
+  m_Offset: {x: -0.05426216, y: 3.2777443}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5385,7 +5368,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3686676, y: 2.5109167}
+  m_Size: {x: 4.0886574, y: 7.497551}
   m_EdgeRadius: 0
 --- !u!1 &2134780702
 GameObject:

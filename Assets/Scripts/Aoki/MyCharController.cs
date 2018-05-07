@@ -85,19 +85,16 @@ namespace INI {
         {
             isGround = gnd;
 
-            if (Village.GameMaster.getInstance.GetGameMode != Village.GameMaster.GameMode.Game)
+            if (gnd)
             {
-                if (gnd)
-                {
-                    myCharRb.velocity = Vector2.zero;
-                    myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                myCharRb.velocity = Vector2.zero;
+                myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 
-                }
-                else if (!gnd)
-                {
-                    //myCharRb.simulated = true;
-                    myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                }
+            }
+            else if (!gnd)
+            {
+                //myCharRb.simulated = true;
+                myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
         }
 

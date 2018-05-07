@@ -25,6 +25,13 @@ namespace INI {
         [SerializeField]
         private Vector2 jmpSpd = Vector2.zero;
 
+        private enum direction
+        {
+            RIGHT,
+            LEFT
+        }
+        private direction dir = direction.RIGHT;
+
         public override void FixedRun()
 		{
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
@@ -95,18 +102,24 @@ namespace INI {
         {
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
             {
+                if (inShadow) return;
+                
                 reverse = rvs;
 
                 if (rvs)
                 {
-                    mvSpd *= -1;
-
-                    this.transform.localEulerAngles += new Vector3(0, 180, 0);
-
-                    if (this.transform.localEulerAngles.y >= 360)
+                    if (dir == direction.RIGHT)
                     {
+                        dir = direction.LEFT;
+                        this.transform.localEulerAngles = new Vector3(0, 180, 0);
+                    }
+                    else if (dir == direction.LEFT)
+                    {
+                        dir = direction.RIGHT;
                         this.transform.localEulerAngles = new Vector3(0, 0, 0);
                     }
+
+                    mvSpd *= -1;
                 }
             }
         }

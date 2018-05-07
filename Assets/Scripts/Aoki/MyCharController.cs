@@ -38,6 +38,8 @@ namespace INI {
             {
                 if (isGround)
                 {
+                    myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+
                     if (inShadow)
                     {
                         Up();
@@ -48,7 +50,7 @@ namespace INI {
 
                         if ((!nearJudge && farJudge) || jump)
                         {
-                            myCharRb.constraints = RigidbodyConstraints2D.None;
+                            myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
                             if (dir == direction.RIGHT)
                             {
                                 myCharRb.AddForce(jmpSpd);
@@ -59,6 +61,10 @@ namespace INI {
                             }
                         }
                     }
+                }
+                else if (!isGround)
+                {
+
                 }
             }
             else if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Pause)
@@ -88,17 +94,17 @@ namespace INI {
         {
             isGround = gnd;
 
-            if (gnd)
-            {
-                myCharRb.velocity = Vector2.zero;
-                myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            //if (gnd)
+            //{
+            //    myCharRb.velocity = Vector2.zero;
+            //    myCharRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 
-            }
-            else if (!gnd)
-            {
-                //myCharRb.simulated = true;
-                myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            }
+            //}
+            //else if (!gnd)
+            //{
+            //    //myCharRb.simulated = true;
+            //    myCharRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            //}
         }
 
         /// <summary>

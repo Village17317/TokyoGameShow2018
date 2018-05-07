@@ -13,6 +13,7 @@ namespace Village {
 
     public class Cursor : MonoBehaviour {
         [SerializeField] private ParticleSystem choiceEffect;
+        [SerializeField] private ParticleSystem movingEffect;
 
         private GameObject obj;
         private bool isChoice = false;
@@ -23,12 +24,19 @@ namespace Village {
             }
         }
 
+        private void Awake() {
+            choiceEffect.gameObject.SetActive(true);
+            movingEffect.gameObject.SetActive(false);
+        }
+
         public void  SetIsChoice(bool flag) {
             if(flag) {
-                if(!choiceEffect.isPlaying) choiceEffect.Play();
-            }
+                if(choiceEffect.gameObject.activeInHierarchy)  choiceEffect.gameObject.SetActive(false);
+                if(!movingEffect.gameObject.activeInHierarchy) movingEffect.gameObject.SetActive(true);                                                      
+            }                               
             else {
-                if(choiceEffect.isPlaying) choiceEffect.Stop();
+                if(!choiceEffect.gameObject.activeInHierarchy)  choiceEffect.gameObject.SetActive(true);
+                if(movingEffect.gameObject.activeInHierarchy) movingEffect.gameObject.SetActive(false);
             }
             isChoice = flag;
         }

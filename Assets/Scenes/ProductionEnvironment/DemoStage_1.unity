@@ -620,24 +620,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: Village.ColorJudge+BoolCallBack, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - judgeTf: {fileID: 1715873677}
-    judgePosColor: {r: 0, g: 0, b: 0, a: 0}
-    ev:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 944833479}
-          m_MethodName: SetJump
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: Village.ColorJudge+BoolCallBack, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
   - judgeTf: {fileID: 1845643893}
     judgePosColor: {r: 0, g: 0, b: 0, a: 0}
     ev:
@@ -2046,8 +2028,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 728428693}
   outlineCamera: {fileID: 1789906072}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1440489241}
-  extraRenderTexture: {fileID: 1871337375}
+  renderTexture: {fileID: 1648249457}
+  extraRenderTexture: {fileID: 1191066406}
 --- !u!1 &809951544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,6 +2758,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58ee4747d7cf04f47869099d0eab20c0, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1191066406
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 366
+  m_Height: 206
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!224 &1240362982 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224755830991370694, guid: b9b4071573bc3ad4fa9d473d8dd2c0ac,
@@ -3270,33 +3279,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4483243465582166, guid: 725ed917204ae944c9a08e3fb1ccf017,
     type: 2}
   m_PrefabInternal: {fileID: 1398529464}
---- !u!84 &1440489241
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 366
-  m_Height: 206
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1449090785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3986,6 +3968,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!84 &1648249457
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 366
+  m_Height: 206
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!224 &1673587397 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224902250025581876, guid: 77e3b4f08470d774aae07bcbdfb41b0b,
@@ -4146,11 +4155,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1715873677 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4093902377282134, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1845643892}
 --- !u!1001 &1718802883
 Prefab:
   m_ObjectHideFlags: 0
@@ -4437,7 +4441,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1440489241}
+  m_TargetTexture: {fileID: 1648249457}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -4467,15 +4471,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4667756617708650, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4667756617708650, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4667756617708650, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4667756617708650, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
       propertyPath: m_LocalRotation.w
@@ -4564,6 +4568,10 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 5.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4667756617708650, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
   m_IsPrefabParent: 0
@@ -4572,33 +4580,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4314775214431704, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
     type: 2}
   m_PrefabInternal: {fileID: 1845643892}
---- !u!84 &1871337375
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 366
-  m_Height: 206
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1903963478 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4272763929908618, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
@@ -4909,6 +4890,51 @@ Prefab:
     - target: {fileID: 4711963048289228, guid: cd421385f5b196f42af3e36580914ba3, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198854800831441110, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: randomSeed
+      value: 491286709
+      objectReference: {fileID: 0}
+    - target: {fileID: 198854800831441110, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198854800831441110, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5182034
+      objectReference: {fileID: 0}
+    - target: {fileID: 198854800831441110, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 198854800831441110, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.5184905
+      objectReference: {fileID: 0}
+    - target: {fileID: 198276536623086390, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: randomSeed
+      value: 1692622711
+      objectReference: {fileID: 0}
+    - target: {fileID: 198276536623086390, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5182034
+      objectReference: {fileID: 0}
+    - target: {fileID: 198276536623086390, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.5184905
+      objectReference: {fileID: 0}
+    - target: {fileID: 198276536623086390, guid: cd421385f5b196f42af3e36580914ba3,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.5176471
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd421385f5b196f42af3e36580914ba3, type: 2}

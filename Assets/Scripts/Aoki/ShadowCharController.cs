@@ -13,7 +13,7 @@ namespace INI
 {
     public class ShadowCharController : Village.Inheritor
     {
-        public float walkSpeed = 10f, fwRayDistance = 1f, dwRayDistance = 1f;
+        public float walkSpeed = 0.1f, fwRayDistance = 10f, dwRayDistance = 10.8f;
 
         public Vector3 jumpForce;
 
@@ -29,6 +29,7 @@ namespace INI
             WALK,
             JUMP
         }
+        [SerializeField]
         private State state = State.STOP;
 
         public override void FixedRun()
@@ -37,6 +38,11 @@ namespace INI
             {
                 GroundRayCast();
                 ForwardRayCast();
+
+                if (state == State.WALK)
+                {
+                    Walk();
+                }
             }
         }
 
@@ -53,11 +59,10 @@ namespace INI
 
             if (Physics.Raycast(gndRay, out hit, dwRayDistance))
             {
-                if (hit.collider.tag == "ShadowObj" && state != State.JUMP)
+                if (hit.collider.tag == "ShadowObj")
                 {
                     grounded = true;
                     state = State.WALK;
-                    Walk();
                 }
                 else
                 {
@@ -81,7 +86,7 @@ namespace INI
             {
                 if (hit.collider.tag == "ShadowObj")
                 {
-                    if (grounded　&& state == State.WALK)
+                    if (grounded　&& state != State.JUMP)
                     {
                         state = State.JUMP;
                         Jump();
@@ -104,6 +109,7 @@ namespace INI
         private void Jump()
         {
             shadowCharRb.AddForce(jumpForce);
+            Debug.Log("Jump called");
         }
 
     }

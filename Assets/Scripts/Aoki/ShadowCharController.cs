@@ -46,6 +46,16 @@ namespace INI
             }
         }
 
+        public override void Run()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Button_X"))
+            {
+                Debug.Log("Switch state (state:" + state + ")");
+                if (state == State.WALK) state = State.STOP;
+                else if (state == State.STOP) state = State.WALK;
+            }
+        }
+
         /// <summary>
         /// 接地判定
         /// </summary>
@@ -59,7 +69,7 @@ namespace INI
 
             if (Physics.Raycast(gndRay, out hit, dwRayDistance))
             {
-                if (hit.collider.tag == "ShadowObj")
+                if (hit.collider.tag == "ShadowObj" && state != State.STOP)
                 {
                     grounded = true;
                     state = State.WALK;

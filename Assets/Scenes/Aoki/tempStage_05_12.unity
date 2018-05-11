@@ -2524,7 +2524,7 @@ MonoBehaviour:
   jumpForce: {x: 250, y: 1000, z: 0}
   shadowCharRb: {fileID: 1166131404}
   grounded: 0
-  state: 0
+  state: 1
 --- !u!1 &1214568097
 GameObject:
   m_ObjectHideFlags: 0

@@ -138,7 +138,7 @@ RectTransform:
   m_GameObject: {fileID: 12225521}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 14.75}
-  m_LocalScale: {x: 0.04283116, y: 0.04283116, z: 0.04283116}
+  m_LocalScale: {x: 0.042798612, y: 0.042798612, z: 0.042798612}
   m_Children:
   - {fileID: 646302105}
   - {fileID: 48339999}
@@ -1503,6 +1503,33 @@ RectTransform:
   m_AnchoredPosition: {x: 296.6, y: 167.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &659630201 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1799186995179836, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1166131402}
+--- !u!54 &659630203 stripped
+Rigidbody:
+  m_PrefabParentObject: {fileID: 54095140924267582, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1166131402}
+--- !u!114 &659630205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659630201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8d1d928fa8df641a0aab072c530959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 0.1
+  fwRayDistance: 9
+  dwRayDistance: 14
+  jumpForce: {x: 0, y: 0, z: 0}
+  shadowCharRb: {fileID: 659630203}
+  grounded: 0
 --- !u!1 &661854622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,12 +1943,6 @@ Transform:
   m_Father: {fileID: 1029179933}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &860124169 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114977604049649320, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1166131402}
-  m_Script: {fileID: 11500000, guid: e29ac3979389c7f4b8e709d42548d633, type: 3}
 --- !u!1 &876695423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,7 +2485,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114977604049649320, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1214568097
@@ -7618,9 +7640,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateList:
-  - {fileID: 728428695}
+  - {fileID: 659630205}
   - {fileID: 349809233}
-  - {fileID: 860124169}
+  - {fileID: 728428695}
   - {fileID: 1276226488}
 --- !u!4 &1939471046
 Transform:
@@ -7928,7 +7950,7 @@ GameObject:
   - component: {fileID: 2014925801}
   m_Layer: 9
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: ShadowObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

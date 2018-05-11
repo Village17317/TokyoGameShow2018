@@ -42,18 +42,26 @@ namespace Village {
         /// </summary>
         private void Move() {
             transform.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
-            if(catchingTf != null) catchingTf.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
+
+            if(catchingTf != null && Input.GetButton("Button_B")) {
+                catchingTf.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
+            }
+
+        }
+
+        private void ObjectMove() {
+
         }
 
         private void OnCollisionStay(Collision collision) {
 
             if(collision.gameObject.tag != "Object3D") return;
-            if(Input.GetButton("Button_B")) {//Bボタンでつかむ
-                if(catchingTf == null) catchingTf = collision.transform;
-            }
-            else {
-                if(catchingTf != null)catchingTf = null;
-            }
+            if(catchingTf == null) catchingTf = collision.transform;   
+        }
+
+        private void OnCollisionExit(Collision collision) {
+            if(collision.gameObject.tag != "Object3D") return;
+            if(catchingTf != null) catchingTf = null;
         }
     }
 }

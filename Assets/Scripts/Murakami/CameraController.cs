@@ -13,13 +13,12 @@ namespace Village {
 
     public class CameraController : Inheritor {
         [SerializeField] private Transform playerTf;
-        [SerializeField] private Vector3 offset;
 
         public override void Run() {
             float x = playerTf.position.x;
             float y = transform.position.y;
-            float z = playerTf.position.z;
-            transform.position = new Vector3(x,y,z) + offset;
+            float z = transform.position.z;
+            transform.position = new Vector3(x,y,z);
         }
 
 

@@ -15,7 +15,7 @@ namespace Village {
 
         [SerializeField] private StartFlagment startFlagment;
         [SerializeField] private Transform player2dTf;
-        [SerializeField] private Rigidbody2D playerRigid;
+        [SerializeField] private Rigidbody playerRigid;
 
         public override void Run() {
             if(CheckScreenOut(player2dTf.position)) {
@@ -28,10 +28,8 @@ namespace Village {
         /// </summary>
         private bool CheckScreenOut(Vector3 _pos) {
             Vector3 view_pos = Camera.main.WorldToViewportPoint(_pos);
-            if(view_pos.x < -0.0f ||
-               view_pos.x > 1.0f ||
-               view_pos.y < -0.0f ||
-               view_pos.y > 1.0f) {
+            Debug.Log(view_pos.y);
+            if(view_pos.y < -0.0f) {
                 // 範囲外 
                 return true;
             }
@@ -50,13 +48,6 @@ namespace Village {
             GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameReStart);
             GameMaster.getInstance.DeadCountUp();//MainManagerで死んだ回数をカウントする
         }
-
-        private void OnTriggerEnter2D(Collider2D collision) {
-            if(collision.tag == "Player") {
-                BackToStartPoint();
-            }
-        }
-
     }
 
 }

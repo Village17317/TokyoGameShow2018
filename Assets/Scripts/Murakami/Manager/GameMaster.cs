@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
 
 namespace Village {
 
@@ -53,7 +52,9 @@ namespace Village {
         #endregion
 
         #region Serialize
+        [Space(8)]
         [SerializeField] private StageUI stageUI;
+        [Space(8)]
         [SerializeField] private GameMode mode = GameMode.Start;
         [SerializeField] private float maxTime = 300;//最大時間
         [SerializeField] private Light roomLight;
@@ -105,44 +106,15 @@ namespace Village {
         }
 
         public override void Run() {
+            roomLight.intensity = Random.Range(1,1.08f);
             switch(mode) {
-                case GameMode.Start:
-                    roomLight.range += range * Time.deltaTime * 0.5f;
-                    if(roomLight.range >= range) {
-                        roomLight.range = range;
-                    }
-                    break;
-                case GameMode.Game:
-                    isReStart = false;
-                    CountDown();
-                    if(Input.GetButtonDown("Button_Start")) {
-                        OnPause();
-                    }
-                    break;
-                case GameMode.GameReStart:
-                    CountDown();
-                    if(Input.GetButtonDown("Button_Start")) {
-                        OnPause();
-                    }
-                    if(!isReStart) {
-                        isReStart = true;
-                        StartCoroutine(ReStartWaitTime(2));
-                    }
-                    break;
-                case GameMode.GameClear:
-                    OnGameClear();
-                    break;
-                case GameMode.GameOver:
-                    OnGameOver();
-                    break;
-                case GameMode.Pause:
-                    PauseMenu();
-                    if(Input.GetButtonDown("Button_Start")) {
-                        OffPause();
-                    }
-                    break;
-                default:
-                    break;
+                case GameMode.Start:        OnStart();      break;
+                case GameMode.Game:         OnGame();       break;
+                case GameMode.GameReStart:  OnReStart();    break;
+                case GameMode.GameClear:    OnGameClear();  break;
+                case GameMode.GameOver:     OnGameOver();   break;
+                case GameMode.Pause:        PauseMenu();    break;
+                default:                                    break;
             }
         }
 
@@ -212,6 +184,41 @@ namespace Village {
         }
 
         /// <summary>
+        /// スタート時の処理
+        /// </summary>
+        private void OnStart() {
+            roomLight.range += range * Time.deltaTime * 0.5f;
+            if(roomLight.range >= range) {
+                roomLight.range = range;
+            }
+        }
+
+        /// <summary>
+        /// ゲーム中の処理
+        /// </summary>
+        private void OnGame() {
+            isReStart = false;
+            CountDown();
+            if(Input.GetButtonDown("Button_Start")) {
+                OnPause();
+            }
+        }
+
+        /// <summary>
+        /// リスタート時
+        /// </summary>
+        private void OnReStart() {
+            CountDown();
+            if(Input.GetButtonDown("Button_Start")) {
+                OnPause();
+            }
+            if(!isReStart) {
+                isReStart = true;
+                StartCoroutine(ReStartWaitTime(2));
+            }
+        }
+
+        /// <summary>
         /// pause画面に切り替える
         /// </summary>
         public void OnPause() {
@@ -265,6 +272,10 @@ namespace Village {
                     SceneChenge("StageSelect");//ステージ選択画面に移行_debug
                 }
             }
+            if(Input.GetButtonDown("Button_Start")) {
+                OffPause();
+            }
+
         }
 
         /// <summary>

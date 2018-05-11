@@ -12,13 +12,12 @@ using UnityEngine;
 
 namespace Village {
 
-    public class PlayerController3D : Inheritor {
+    public class PlayerController3D: Inheritor {
 
         [SerializeField] private float speed = 0.1f;
+        [SerializeField] private Transform catchingTf = null;
 
-        [SerializeField]
-        private Transform catchingTf = null;
-
+        private bool isRotateWait = false;
 
         private void Awake() {
 
@@ -34,6 +33,8 @@ namespace Village {
             || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
                 //メイン処理
                 Move();
+                ObjectMove();
+                ObjectRotate();
             }
         }
 
@@ -42,16 +43,37 @@ namespace Village {
         /// </summary>
         private void Move() {
             transform.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
-
-            if(catchingTf != null && Input.GetButton("Button_B")) {
-                catchingTf.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
-            }
-
         }
 
+        /// <summary>
+        /// 掴みながらオブジェクトを動かす
+        /// </summary>
         private void ObjectMove() {
-
+            if(catchingTf == null) return;
+            if(Input.GetButton("Button_B"))
+                catchingTf.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
         }
+
+        /// <summary>
+        /// 掴みながら回転させる
+        /// </summary>
+        private void ObjectRotate() {
+            if(catchingTf == null || !Input.GetButton("Button_B")) return;
+            if(Input.GetButtonDown("Button_LB") && !isRotateWait)
+                StartCoroutine(AsyncRotate(1));
+            else if(Input.GetButtonDown("Button_RB") && !isRotateWait)
+                StartCoroutine(AsyncRotate(-1));
+        }
+
+        private IEnumerator AsyncRotate(float r) {
+            for(float i = 0;i < 90;i++) {
+                isRotateWait = true;
+                catchingTf.Rotate(0,r,0);
+                yield return new WaitForEndOfFrame();
+            }
+            isRotateWait = false;
+        }
+
 
         private void OnCollisionStay(Collision collision) {
 

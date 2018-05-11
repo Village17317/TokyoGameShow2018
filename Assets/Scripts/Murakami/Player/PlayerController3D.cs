@@ -14,17 +14,17 @@ namespace Village {
 
     public class PlayerController3D : Inheritor {
 
-        [SerializeField] private Cursor cursor;
-        [SerializeField] private float cursorSpeed = 0.1f;
+        [SerializeField] private float speed = 0.1f;
 
-        private bool isChoice = false;
-        private GameObject choiceObj;
-        private float choicePosY = 0;
-        private void Awake(){
-            
-		}
+        [SerializeField]
+        private Transform catchingTf = null;
 
-        private void Start(){
+
+        private void Awake() {
+
+        }
+
+        private void Start() {
 
         }
 
@@ -32,112 +32,27 @@ namespace Village {
             if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Start
             || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game
             || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
-                if(!cursor.gameObject.activeInHierarchy) {
-                    cursor.gameObject.SetActive(true);
-                }
-                CursorMove();
-                Choice();
-                ObjectSpin();
+                //メイン処理
+                Move();
+            }
+        }
+
+        /// <summary>
+        /// 移動
+        /// </summary>
+        private void Move() {
+            transform.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
+            if(catchingTf != null) catchingTf.position += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
+        }
+
+        private void OnCollisionStay(Collision collision) {
+
+            if(collision.gameObject.tag != "Object3D") return;
+            if(Input.GetButton("Button_B")) {//Bボタンでつかむ
+                if(catchingTf == null) catchingTf = collision.transform;
             }
             else {
-                if(cursor.gameObject.activeInHierarchy) {
-                    cursor.gameObject.SetActive(false);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 3Dオブジェクトの選択
-        /// </summary>
-        private void Choice() {
-            if(Input.GetButtonDown("Button_A")) {
-                if(!isChoice) {//掴むとき
-                    if(cursor.GetObject != null) {
-                        choiceObj = cursor.GetObject;
-                        if(choiceObj.GetComponent<ObjectInfo>().isStatic) {
-                            choiceObj = null;
-                            isChoice = false;
-                        }
-                        else {
-                            isChoice = true;
-                            choiceObj.GetComponent<ObjectInfo>().isChoice = true;
-                            choicePosY = choiceObj.transform.position.y;
-                            cursor.SetIsChoice(true);
-                        }
-                    }
-                }
-                else {//離すとき
-                    choiceObj.transform.position = new Vector3(choiceObj.transform.position.x,
-                                                               choicePosY,
-                                                               choiceObj.transform.position.z);
-                    choicePosY = 0;
-                    choiceObj.GetComponent<ObjectInfo>().isChoice = false;
-                    choiceObj = null;
-                    isChoice = false;
-                    cursor.SetIsChoice(false);
-                }
-            }
-        }
-
-        /// <summary>
-        /// カーソルの移動
-        /// </summary>
-        private void CursorMove() {
-            if(Input.GetAxis("Horizontal") > 0) {
-                cursor.transform.position += new Vector3(cursorSpeed,0,0);
-                if(cursor.transform.position.x > 45) {
-                    cursor.transform.position = new Vector3(45,cursor.transform.position.y,cursor.transform.position.z);
-                }
-                ObjectMove();
-            }
-            else if(Input.GetAxis("Horizontal") < 0) {
-                cursor.transform.position -= new Vector3(cursorSpeed,0,0);
-                if(cursor.transform.position.x < -50) {
-                    cursor.transform.position = new Vector3(-50,cursor.transform.position.y,cursor.transform.position.z);
-                }
-                ObjectMove();
-            }
-    
-            if(Input.GetAxis("Vertical") > 0) {
-                cursor.transform.position += new Vector3(0,0,cursorSpeed);
-                if(cursor.transform.position.z > 25) {
-                    cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,25);
-                }
-                ObjectMove();
-            }
-            else if(Input.GetAxis("Vertical") < 0) {
-                cursor.transform.position -= new Vector3(0,0,cursorSpeed);
-                if(cursor.transform.position.z < -25) {
-                    cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,-25);
-                }
-                ObjectMove();
-            }
-        }
-
-        /// <summary>
-        /// 3Dオブジェクトの移動
-        /// </summary>
-        private void ObjectMove() {
-            if(isChoice) {
-                float y = choicePosY;// + 1;
-                Vector3 newPos = new Vector3(cursor.transform.position.x,y,cursor.transform.position.z);
-                choiceObj.transform.position = newPos;
-            }
-        }
-
-        /// <summary>
-        /// 3Dオブジェクトの回転
-        /// </summary>
-        private void ObjectSpin() {
-            if(isChoice) {
-                if(Input.GetButton("Button_RB")) {
-                    choiceObj.transform.Rotate(0,1,0);
-                }
-
-                if(Input.GetButton("Button_LB")) {
-                    choiceObj.transform.Rotate(0,-1,0);
-                }
-
+                if(catchingTf != null)catchingTf = null;
             }
         }
     }
@@ -308,4 +223,135 @@ namespace Village {
     }
 }
 */
+#endregion
+
+#region prev
+//[SerializeField]
+//private Cursor cursor;
+//[SerializeField]
+//private float cursorSpeed = 0.1f;
+
+//private bool isChoice = false;
+//private GameObject choiceObj;
+//private float choicePosY = 0;
+//private void Awake() {
+
+//}
+
+//private void Start() {
+
+//}
+
+//public override void Run() {
+//    if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Start
+//    || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game
+//    || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
+//        if(!cursor.gameObject.activeInHierarchy) {
+//            cursor.gameObject.SetActive(true);
+//        }
+//        CursorMove();
+//        Choice();
+//        ObjectSpin();
+//    }
+//    else {
+//        if(cursor.gameObject.activeInHierarchy) {
+//            cursor.gameObject.SetActive(false);
+//        }
+//    }
+//}
+
+///// <summary>
+///// 3Dオブジェクトの選択
+///// </summary>
+//private void Choice() {
+//    if(Input.GetButtonDown("Button_A")) {
+//        if(!isChoice) {//掴むとき
+//            if(cursor.GetObject != null) {
+//                choiceObj = cursor.GetObject;
+//                if(choiceObj.GetComponent<ObjectInfo>().isStatic) {
+//                    choiceObj = null;
+//                    isChoice = false;
+//                }
+//                else {
+//                    isChoice = true;
+//                    choiceObj.GetComponent<ObjectInfo>().isChoice = true;
+//                    choicePosY = choiceObj.transform.position.y;
+//                    cursor.SetIsChoice(true);
+//                }
+//            }
+//        }
+//        else {//離すとき
+//            choiceObj.transform.position = new Vector3(choiceObj.transform.position.x,
+//                                                       choicePosY,
+//                                                       choiceObj.transform.position.z);
+//            choicePosY = 0;
+//            choiceObj.GetComponent<ObjectInfo>().isChoice = false;
+//            choiceObj = null;
+//            isChoice = false;
+//            cursor.SetIsChoice(false);
+//        }
+//    }
+//}
+
+///// <summary>
+///// カーソルの移動
+///// </summary>
+//private void CursorMove() {
+//    if(Input.GetAxis("Horizontal") > 0) {
+//        cursor.transform.position += new Vector3(cursorSpeed,0,0);
+//        if(cursor.transform.position.x > 45) {
+//            cursor.transform.position = new Vector3(45,cursor.transform.position.y,cursor.transform.position.z);
+//        }
+//        ObjectMove();
+//    }
+//    else if(Input.GetAxis("Horizontal") < 0) {
+//        cursor.transform.position -= new Vector3(cursorSpeed,0,0);
+//        if(cursor.transform.position.x < -50) {
+//            cursor.transform.position = new Vector3(-50,cursor.transform.position.y,cursor.transform.position.z);
+//        }
+//        ObjectMove();
+//    }
+
+//    if(Input.GetAxis("Vertical") > 0) {
+//        cursor.transform.position += new Vector3(0,0,cursorSpeed);
+//        if(cursor.transform.position.z > 25) {
+//            cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,25);
+//        }
+//        ObjectMove();
+//    }
+//    else if(Input.GetAxis("Vertical") < 0) {
+//        cursor.transform.position -= new Vector3(0,0,cursorSpeed);
+//        if(cursor.transform.position.z < -25) {
+//            cursor.transform.position = new Vector3(cursor.transform.position.x,cursor.transform.position.y,-25);
+//        }
+//        ObjectMove();
+//    }
+//}
+
+///// <summary>
+///// 3Dオブジェクトの移動
+///// </summary>
+//private void ObjectMove() {
+//    if(isChoice) {
+//        float y = choicePosY;// + 1;
+//        Vector3 newPos = new Vector3(cursor.transform.position.x,y,cursor.transform.position.z);
+//        choiceObj.transform.position = newPos;
+//    }
+//}
+
+///// <summary>
+///// 3Dオブジェクトの回転
+///// </summary>
+//private void ObjectSpin() {
+//    if(isChoice) {
+//        if(Input.GetButton("Button_RB")) {
+//            choiceObj.transform.Rotate(0,1,0);
+//        }
+
+//        if(Input.GetButton("Button_LB")) {
+//            choiceObj.transform.Rotate(0,-1,0);
+//        }
+
+//    }
+//}
 #endregion

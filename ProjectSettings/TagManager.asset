@@ -8,6 +8,8 @@ TagManager:
   - GameMaster
   - Object3D
   - SoundManager
+  - Wall
+  - Light
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Wall
+  - Shadow
+  - ShadowPlayer
   - 
   - 
   - 

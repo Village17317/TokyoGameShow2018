@@ -2,7 +2,7 @@
  *	作成者     :村上和樹
  *	機能説明   :オブジェクトの情報
  * 	初回作成日 :2018/04/15
- *	最終更新日 :2018/04/24
+ *	最終更新日 :2018/05/07
  */
 
 using System.Collections;
@@ -12,141 +12,116 @@ using UnityEngine;
 namespace Village {
 
     public class ObjectInfo : MonoBehaviour {
-        private bool isOutLine = false;
+        [SerializeField] private GameObject shadowObj;      //影にするオブジェクト
+        [SerializeField] private Material shadowMatOrigin;  //影のマテリアルの元
+
         public bool isStatic = false;
         public bool isChoice = false;
 
-        [SerializeField] private cakeslice.Outline[] outline;
+        private Transform candleTf;//ろうそくの位置
+        private Transform rayTf;//Rayを出す位置
+        private Transform shadowTf;//影の位置
 
-        private void Start() {
-            for(int i = 0;i < outline.Length;i++) {
-                outline[i].ObjectEnable();
-                isOutLine = true;
-                if(isStatic) {
-                    outline[i].color = 0;
-                }
-                else {
-                    outline[i].color = 1;
-                }
-            }
+        private Material shadowMat; //割り当てる影
+        private Vector3 constScale; //影の最初の大きさ
+        private Collider[] colliders;//
 
-        }
-        private void FixedUpdate() {
-            if(GetComponent<Rigidbody>() != null) {
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
-            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Pause
-            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameClear
-            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameOver) {
-                if(isOutLine) {
-                    for(int i = 0;i < outline.Length;i++) {
-                        outline[i].ObjectDisable();
-                    }
-                    isOutLine = false;
-                }
-            }
-            else {
-                if(!isOutLine) {
-                    for(int i = 0;i < outline.Length;i++) {
-                        outline[i].ObjectEnable();
-                        if(isStatic) {
-                            outline[i].color = 0;
-                        }
-                        else {
-                            outline[i].color = 1;
-                        }
-                    }
-                    isOutLine = true;
-                }
-            } 
-        }
-    }
-
-
-}
-
-#region prev_2018/04/19
-/*
-namespace Village {
-    public class ObjectInfo: MonoBehaviour {
-        // [SerializeField] private GameObject stage2D;
-        // [SerializeField] private GameObject[] object2D = new GameObject[4];//ここを配列化
-        [Range(0,6), SerializeField]
-        private int pos_Y = 0;
-        [Range(0,6), SerializeField]
-        private int pos_X = 0;
-        public bool isStatic = false;
-        private Vector3 object2D_Scale;
-        //private GameObject shadow;
-        //private SpriteRenderer shadowRenderer;
         private void Awake() {
-            //object2D_Scale = object2D[0].transform.localScale;
-            //shadow = Instantiate(object2D[0]) as GameObject;
-            //shadow.transform.parent = stage2D.transform;
-            //shadowRenderer = shadow.GetComponent<SpriteRenderer>();
-        }
-        /// <summary>
-        /// 位置とサイズの設定
-        /// </summary>
-        public void SetPos(int y,int x) {
-            pos_Y = y;
-            pos_X = x;
+            candleTf = GameObject.FindGameObjectWithTag("Light").transform;
 
-            //shadow.transform.localPosition = new Vector3(transform.localPosition.x,shadow.transform.localPosition.y,0);
+            GameObject shadow = Instantiate(shadowObj) as GameObject;
+            shadowTf = shadow.transform;
 
-            //if(pos_Y == 0) {
-            //    shadow.transform.localScale = object2D_Scale * 0.25f;
-            //    ShadowDarkness(0.4f);
-            //}
-            //else if(pos_Y == 1) {
-            //    shadow.transform.localScale = object2D_Scale * 0.5f;
-            //    ShadowDarkness(0.5f);
-            //}
-            //else if(pos_Y == 2) {
-            //    shadow.transform.localScale = object2D_Scale * 0.75f;
-            //    ShadowDarkness(0.6f);
-            //}
-            //else if(pos_Y == 3) {
-            //    shadow.transform.localScale = object2D_Scale;
-            //    ShadowDarkness(0.7f);
-            //}
-            //else if(pos_Y == 4) {
-            //    shadow.transform.localScale = object2D_Scale * 1.25f;
-            //    ShadowDarkness(0.8f);
-            //}
-            //else if(pos_Y == 5) {
-            //    shadow.transform.localScale = object2D_Scale * 1.5f;
-            //    ShadowDarkness(0.9f);
-            //}
-            //else if(pos_Y == 6) {
-            //    shadow.transform.localScale = object2D_Scale * 1.75f;
-            //    shadowRenderer.color = Color.black;
-            //}
+            constScale = shadowTf.localScale;
+
+            GameObject rayObj = new GameObject();
+            rayObj.transform.position = candleTf.position;
+            rayTf = rayObj.transform;
+            rayTf.parent = candleTf;
+
+            shadowMat = new Material(shadowMatOrigin);
+            MeshRenderer[] meshes =  shadow.GetComponentsInChildren<MeshRenderer>();
+            foreach(MeshRenderer m in meshes) {
+                m.material = shadowMat;
+            }
+
+            colliders = shadow.GetComponentsInChildren<Collider>();
         }
-        /// <summary>
-        /// 回転の設定
-        /// </summary>
-        public void SetRotate(int rotate_Y) {
-            //Destroy(shadow);
-            //object2D_Scale = object2D[rotate_Y].transform.localScale;
-            //shadow = Instantiate(object2D[rotate_Y]) as GameObject;
-            //shadow.transform.parent = stage2D.transform;
-            //shadowRenderer = shadow.GetComponent<SpriteRenderer>();
-            //SetPos(pos_Y,pos_X);
+
+        private void Update() {
+            float aim = GetAim(candleTf.position,transform.position);
+            rayTf.localEulerAngles = new Vector3(0,aim,0);
+            RayHit();
+            ShadowTransParent();
+            ShadowSizeChenge();
+            ActiveCollider();
         }
+
         /// <summary>
-        /// 影の濃さの設定 1.0f ~ 0f;
+        /// 距離に応じて色の薄さを変える
         /// </summary>
-        public void ShadowDarkness(float alpha) {
-            //if(alpha >= 1) {
-            //    alpha = 1;
-            //}
-            //else if(alpha <= 0){
-            //    alpha = 0;
-            //}
-            //shadowRenderer.color = Color.black - new Color(0,0,0,1 - alpha);
+        private void ShadowTransParent() {
+            float prop = GetLength(candleTf.position,shadowTf.position,transform.position);
+
+            shadowMat.color = new Color(0,0,0,1 - prop);
+        }
+
+        /// <summary>
+        /// 距離に応じて大きさを変える
+        /// </summary>
+        private void ShadowSizeChenge() {
+            float prop = GetLength(candleTf.position,shadowTf.position,transform.position);
+            shadowTf.localScale = constScale * (1 - prop) * 2;
+        }
+
+        /// <summary>
+        /// 距離に応じてコライダーの有無を切り替える
+        /// </summary>
+        private void ActiveCollider() {
+            float prop = GetLength(candleTf.position,shadowTf.position,transform.position);
+            bool active = prop < 0.6f;
+
+            foreach(Collider c in colliders) {
+                c.enabled = active;
+            }
+        }
+
+        /// <summary>
+        /// rayを出し、影を出す位置を取得
+        /// </summary>
+        private void RayHit() {
+            Ray ray = new Ray(rayTf.position,rayTf.forward * 100);
+            Debug.DrawRay(rayTf.position,rayTf.forward * 100);
+            RaycastHit hit;
+            if(Physics.Raycast(ray,out hit,Mathf.Infinity)) {
+                if(hit.collider.gameObject.tag == "Wall") {
+                    shadowTf.position = hit.point;
+                }
+            }
+        }
+
+        /// <summary>
+        /// rayを出す角度を取得
+        /// </summary>
+        private float GetAim(Vector3 p1,Vector3 p2) {
+            float dx = p2.x - p1.x;
+            float dz = p2.z - p1.z;
+            float rad = Mathf.Atan2(dx,Mathf.Abs(dz));
+            return rad * Mathf.Rad2Deg;
+        }
+
+        /// <summary>
+        /// （光源から自分）/（光源から影）
+        /// </summary>
+        private float GetLength(Vector3 p1,Vector3 p2,Vector3 p3) {
+            float maxLength = (p2 - p1).magnitude;//ろうそくから影までの長さ
+            float length = (p3 - p1).magnitude;   //ろうそくからオブジェクトまでの長さ
+            float prop = length / maxLength;      //割合
+            prop = prop >= 1 ? 1 : prop;
+
+            return prop;      
         }
     }
+
+
 }
-*/
-#endregion

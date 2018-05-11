@@ -20,7 +20,7 @@ namespace Village {
         public bool isStatic = false;
         public bool isChoice = false;
 
-        private Transform candleTf;//ろうそくの位置
+        private Transform lightTf;//光源（Player）の位置
         private Transform rayTf;//Rayを出す位置
         private Transform shadowTf;//影の位置
 
@@ -29,7 +29,7 @@ namespace Village {
         private Collider[] colliders;//
 
         private void Awake() {
-            candleTf = GameObject.FindGameObjectWithTag("Light").transform;
+            lightTf = GameObject.FindGameObjectWithTag("Light").transform;
 
             GameObject shadow = Instantiate(shadowObj) as GameObject;
             shadowTf = shadow.transform;
@@ -37,9 +37,9 @@ namespace Village {
             constScale = shadowTf.localScale;
 
             GameObject rayObj = new GameObject();
-            rayObj.transform.position = candleTf.position;
+            rayObj.transform.position = lightTf.position;
             rayTf = rayObj.transform;
-            rayTf.parent = candleTf;
+            rayTf.parent = lightTf;
 
             shadowMat = new Material(shadowMatOrigin);
             MeshRenderer[] meshes =  shadow.GetComponentsInChildren<MeshRenderer>();
@@ -51,19 +51,27 @@ namespace Village {
         }
 
         private void Update() {
-            float aim = GetAim(candleTf.position,transform.position);
+            float aim = GetAim(lightTf.position,transform.position);
             rayTf.localEulerAngles = new Vector3(0,aim,0);
             RayHit();
             ShadowTransParent();
             ShadowSizeChenge();
             ActiveCollider();
+            ConnectRotation();
+        }
+
+        /// <summary>
+        /// 影と自分の回転は同じにする
+        /// </summary>
+        private void ConnectRotation() {
+            shadowTf.rotation = transform.rotation;
         }
 
         /// <summary>
         /// 距離に応じて色の薄さを変える
         /// </summary>
         private void ShadowTransParent() {
-            float prop = GetLength(candleTf.position,shadowTf.position,transform.position);
+            float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
 
             shadowMat.color = new Color(0,0,0,1 - prop);
         }
@@ -72,7 +80,7 @@ namespace Village {
         /// 距離に応じて大きさを変える
         /// </summary>
         private void ShadowSizeChenge() {
-            float prop = GetLength(candleTf.position,shadowTf.position,transform.position);
+            float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
             shadowTf.localScale = constScale * (1 - prop) * 2;
         }
 
@@ -80,7 +88,7 @@ namespace Village {
         /// 距離に応じてコライダーの有無を切り替える
         /// </summary>
         private void ActiveCollider() {
-            float prop = GetLength(candleTf.position,shadowTf.position,transform.position);
+            float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
             bool active = prop < 0.6f;
 
             foreach(Collider c in colliders) {

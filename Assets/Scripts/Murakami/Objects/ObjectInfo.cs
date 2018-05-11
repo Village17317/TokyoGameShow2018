@@ -15,6 +15,8 @@ namespace Village {
         [SerializeField] private GameObject shadowObj;      //影にするオブジェクト
         [SerializeField] private Material shadowMatOrigin;  //影のマテリアルの元
 
+        [SerializeField] private float offset;
+
         public bool isStatic = false;
         public bool isChoice = false;
 
@@ -90,12 +92,15 @@ namespace Village {
         /// rayを出し、影を出す位置を取得
         /// </summary>
         private void RayHit() {
-            Ray ray = new Ray(rayTf.position,rayTf.forward * 100);
-            Debug.DrawRay(rayTf.position,rayTf.forward * 100);
+            Ray ray = new Ray(rayTf.position,rayTf.forward);
+            Debug.DrawRay(rayTf.position,rayTf.forward * 100000);
             RaycastHit hit;
             if(Physics.Raycast(ray,out hit,Mathf.Infinity)) {
                 if(hit.collider.gameObject.tag == "Wall") {
                     shadowTf.position = hit.point;
+                }
+                if(hit.collider.gameObject.tag == "ShadowObj") {
+                    shadowTf.position = hit.point + rayTf.forward * offset;
                 }
             }
         }

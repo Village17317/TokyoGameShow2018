@@ -53,7 +53,7 @@ namespace INI
 
             if (Physics.Raycast(gndRay, out hit, dwRayDistance))
             {
-                if (hit.collider.tag == "ShadowObj")
+                if (hit.collider.tag == "ShadowObj" && state != State.JUMP)
                 {
                     grounded = true;
                     state = State.WALK;

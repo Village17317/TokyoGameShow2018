@@ -12,6 +12,7 @@ TagManager:
   - Light
   - ShadowObj
   - Desk
+  - Enemy
   layers:
   - Default
   - TransparentFX

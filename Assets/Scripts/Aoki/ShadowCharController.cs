@@ -2,7 +2,7 @@
 *	作成者	：青木仁志
 *	機能	：キャラクターの自動操作
 *	作成	：2018/05/11
-*	更新	：2018/05/11
+*	更新	：2018/05/14
 */
 
 using System.Collections;
@@ -13,7 +13,7 @@ namespace INI
 {
     public class ShadowCharController : Village.Inheritor
     {
-        public float walkSpeed = 0.1f, fwRayDistance = 10f, dwRayDistance = 10.8f;
+        public float walkSpeed = 0.1f, fwRayDistance = 10f, dwRayDistance = 10.8f, sfRayDistance;
 
         public Vector3 jumpForce;
 
@@ -38,6 +38,7 @@ namespace INI
             {
                 GroundRayCast();
                 ForwardRayCast();
+                SafetyRayCast();
 
                 if (state == State.WALK)
                 {
@@ -46,15 +47,16 @@ namespace INI
             }
         }
 
-        public override void Run()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Button_X"))
-            {
-                Debug.Log("Switch state (state:" + state + ")");
-                if (state == State.WALK) state = State.STOP;
-                else if (state == State.STOP) state = State.WALK;
-            }
-        }
+        //// デバッグ用
+        //public override void Run()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Button_X"))
+        //    {
+        //        Debug.Log("Switch state (state:" + state + ")");
+        //        if (state == State.WALK) state = State.STOP;
+        //        else if (state == State.STOP) state = State.WALK;
+        //    }
+        //}
 
         /// <summary>
         /// 接地判定
@@ -69,7 +71,7 @@ namespace INI
 
             if (Physics.Raycast(gndRay, out hit, dwRayDistance))
             {
-                if (hit.collider.tag == "ShadowObj" && state != State.STOP)
+                if (hit.collider.tag == "ShadowObj")
                 {
                     grounded = true;
                     state = State.WALK;
@@ -96,10 +98,38 @@ namespace INI
             {
                 if (hit.collider.tag == "ShadowObj")
                 {
-                    if (grounded　&& state != State.JUMP)
+                    if (grounded　&& state != State.JUMP && state != State.STOP)
                     {
                         state = State.JUMP;
                         Jump();
+                    }
+                }
+            }
+        }
+
+        private void SafetyRayCast()
+        {
+            Ray sfRay = new Ray(new Vector3(this.transform.position.x + 10, this.transform.position.y, this.transform.position.z), Vector3.down);
+
+            RaycastHit hit;
+
+            Debug.DrawRay(sfRay.origin, sfRay.direction * sfRayDistance, Color.blue);
+
+            if (Physics.Raycast(sfRay, out hit))
+            {
+                if (hit.collider.tag == "Desk")
+                {
+                    if (grounded && state != State.JUMP && state != State.STOP)
+                    {
+                        state = State.STOP;
+                        Debug.Log(state);
+                    }
+                }
+                if (hit.collider.tag == "ShadowObj")
+                {
+                    if (grounded && state != State.JUMP)
+                    {
+                        state = State.WALK;
                     }
                 }
             }

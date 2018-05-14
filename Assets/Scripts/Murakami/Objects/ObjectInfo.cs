@@ -17,6 +17,8 @@ namespace Village {
 
         [SerializeField] private float offset;
 
+        [SerializeField] private LayerMask mask;
+
         public bool isStatic = false;
         public bool isChoice = false;
 
@@ -48,16 +50,49 @@ namespace Village {
             }
 
             colliders = shadow.GetComponentsInChildren<Collider>();
+
+            float aim = GetAim(lightTf.position,transform.position);
+            rayTf.localEulerAngles = new Vector3(0,aim,0);
+            RayHit();
+            SetActive(true);
+            ShadowTransParent();
+            ShadowSizeChenge();
+            //ActiveCollider();
+            ConnectRotation();
         }
 
         private void Update() {
             float aim = GetAim(lightTf.position,transform.position);
             rayTf.localEulerAngles = new Vector3(0,aim,0);
             RayHit();
-            ShadowTransParent();
-            ShadowSizeChenge();
-            ActiveCollider();
-            ConnectRotation();
+            if(CheckScreenOut(shadowTf.position)) {
+                SetActive(false);
+            }
+            else {
+                SetActive(true);
+                ShadowTransParent();
+                ShadowSizeChenge();
+                //ActiveCollider();
+                ConnectRotation();
+            }
+        }
+
+        /// <summary>
+        /// カメラ外かどうかの判定
+        /// </summary>
+        private bool CheckScreenOut(Vector3 origin) {
+            Vector3 view_pos = Camera.main.WorldToViewportPoint(origin);
+            if(view_pos.x < -0.0f ||
+               view_pos.x > 1.0f ||
+               view_pos.y < -0.0f ||
+               view_pos.y > 1.0f) {
+                // 範囲外 
+                return true;
+            }
+            else {
+                // 範囲内 
+                return false;
+            }
         }
 
         /// <summary>
@@ -73,7 +108,7 @@ namespace Village {
         private void ShadowTransParent() {
             float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
 
-            shadowMat.color = new Color(0,0,0,1 - prop);
+            shadowMat.color = new Color(0,0,0,1.3f - prop);
         }
 
         /// <summary>
@@ -81,7 +116,8 @@ namespace Village {
         /// </summary>
         private void ShadowSizeChenge() {
             float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
-            shadowTf.localScale = constScale * (1 - prop) * 2;
+            shadowTf.localScale = constScale * (1.3f - prop);
+            Debug.Log(name + " : " + prop);
         }
 
         /// <summary>
@@ -123,9 +159,11 @@ namespace Village {
             return rad * Mathf.Rad2Deg;
         }
 
+
         /// <summary>
         /// （光源から自分）/（光源から影）
         /// </summary>
+        /// <returns>割合を返す０～１</returns>
         private float GetLength(Vector3 p1,Vector3 p2,Vector3 p3) {
             float maxLength = (p2 - p1).magnitude;//ろうそくから影までの長さ
             float length = (p3 - p1).magnitude;   //ろうそくからオブジェクトまでの長さ
@@ -133,6 +171,12 @@ namespace Village {
             prop = prop >= 1 ? 1 : prop;
 
             return prop;      
+        }
+
+        private void SetActive(bool flag) {
+            foreach(Collider c in colliders) {
+                c.enabled = flag;
+            }
         }
     }
 

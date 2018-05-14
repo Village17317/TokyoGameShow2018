@@ -12,10 +12,13 @@ using UnityEngine;
 namespace Village {
 
     public class GoalFlagment : MonoBehaviour {
-        private void OnTriggerEnter2D(Collider2D collision) {
-            if(collision.tag == "Player") {
+        private void OnTriggerEnter(Collider other) {
+            if(other.tag == "Player") {
                 GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameClear); //MainManagerでGameModeをEndに切り替える
             }
+        }
+        private void OnTriggerEnter2D(Collider2D collision) {
+
         }
     }
 }

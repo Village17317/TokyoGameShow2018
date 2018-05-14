@@ -12,19 +12,9 @@ using UnityEngine;
 namespace Village {
 
     public class TestGravity : MonoBehaviour {
-        public Rigidbody2D rigid;
-        public ColorJudge judge;
-
-        public void SetGravity(bool f) {
-            if(f) {
-                //rigid.gravityScale = 0;
-                rigid.simulated = false;
-
-            }
-            else {
-                rigid.simulated = true;
-                //rigid.gravityScale = 3;
-            }
+        public Vector3 fixedRigid;
+        private void FixedUpdate() {
+            GetComponent<Rigidbody>().AddForce(fixedRigid);
         }
     }
 

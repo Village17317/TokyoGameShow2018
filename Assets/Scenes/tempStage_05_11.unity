@@ -6335,7 +6335,7 @@ MonoBehaviour:
   jumpForce: {x: 250, y: 1000, z: 0}
   shadowCharRb: {fileID: 1166131404}
   grounded: 0
-  state: 0
+  state: 1
 --- !u!4 &1181910840 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4407131106571196, guid: f2fdbbad4a0d6ff46be180eca249fbda,

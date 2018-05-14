@@ -13,7 +13,7 @@ namespace Village {
 
     public class CameraController : Inheritor {
         [SerializeField] private Transform playerTf;
-
+        
         public override void Run() {
             float x = playerTf.position.x;
             float y = transform.position.y;

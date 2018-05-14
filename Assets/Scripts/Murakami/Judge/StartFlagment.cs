@@ -12,19 +12,11 @@ using UnityEngine;
 namespace Village {
 
     public class StartFlagment : MonoBehaviour {
-        private GameObject player;
-
+        [SerializeField] private GameObject player;
+        [SerializeField] private DeathArea deathArea;
         private void Awake(){
-            player = GameObject.FindWithTag("Player");
             player.transform.position = transform.position;
 		}
-
-        /// <summary>
-        /// プレイヤーの位置を再設定
-        /// </summary>
-        public void ReSpawn() {
-            player.transform.position = transform.position;
-        }
     }
 
 }

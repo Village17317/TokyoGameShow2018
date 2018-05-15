@@ -5,7 +5,6 @@
  *	最終更新日 :2018/04/15
  */
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,12 +12,6 @@ using UnityEngine;
 namespace Village {
 
     public class PlayerController3D: Inheritor {
-
-        [System.Serializable]
-        private class MoveLimit {
-            public float min = 0;
-            public float max = 0;
-        }
 
         [SerializeField] private float speed = 0.1f;
         [SerializeField] private Transform catchingTf = null;
@@ -28,6 +21,12 @@ namespace Village {
         private bool isCatch = false;
         private bool isRotateWait = false;
         private float constSpeed;
+
+        public MoveLimit GetHorizontalLimit {
+            get {
+                return horizontal;
+            }
+        }
 
         private void Awake() {
             constSpeed = speed;
@@ -104,7 +103,6 @@ namespace Village {
             }
             isRotateWait = false;
         }
-
 
         private void OnCollisionStay(Collision collision) {
 

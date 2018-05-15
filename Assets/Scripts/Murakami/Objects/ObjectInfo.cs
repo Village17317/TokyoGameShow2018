@@ -15,8 +15,6 @@ namespace Village {
         [SerializeField] private GameObject shadowObj;      //影にするオブジェクト
         [SerializeField] private Material shadowMatOrigin;  //影のマテリアルの元
 
-        [SerializeField] private float offset;
-
         private LayerMask mask = 1 << 8; //WallLayer
 
         public bool isStatic = false;
@@ -142,10 +140,6 @@ namespace Village {
             if(Physics.Raycast(ray,out hit,Mathf.Infinity,mask)) {
                 if(hit.collider.gameObject.tag == "Wall") {
                     shadowTf.position = hit.point;
-                }
-                if(hit.collider.gameObject.tag == "ShadowObj") {
-                    shadowTf.position = hit.point + rayTf.forward * offset;
-                    Debug.Log(hit.point);
                 }
             }
         }

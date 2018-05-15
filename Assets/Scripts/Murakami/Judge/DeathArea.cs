@@ -15,7 +15,7 @@ namespace Village {
         [SerializeField] private Transform player2dTf;
         [SerializeField] private Rigidbody playerRigid;
 
-        [SerializeField]private Vector3 reStartPoint = new Vector3();
+        [SerializeField] private GameObject deadEffect;
 
         public override void Run() {
             if(CheckScreenOut(player2dTf.position)) {
@@ -42,19 +42,25 @@ namespace Village {
         /// Start地点に戻す
         /// </summary>
         private void BackToStartPoint() {
-            //playerRigid.velocity = Vector3.zero;
-            //player2dTf.position = reStartPoint;
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameOver) return;
 
-            GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameReStart);
-            GameMaster.getInstance.DeadCountUp();//MainManagerで死んだ回数をカウントする
+            PlayEffect();
+            GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameOver);
         }
 
         /// <summary>
-        /// リスタート位置の再設定
+        /// 死亡エフェクトの生成
         /// </summary>
-        public void SetReStartPoint(Vector3 point) {
-            reStartPoint = point;
+        private void PlayEffect() {
+            GameObject effect = Instantiate(deadEffect) as GameObject;
+
+            float x = player2dTf.position.x;
+            float y = effect.transform.position.y;
+            float z = effect.transform.position.z;
+
+            effect.transform.position = new Vector3(x,y,z);
         }
+
     }
 
 }

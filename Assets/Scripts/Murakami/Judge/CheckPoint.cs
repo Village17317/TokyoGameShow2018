@@ -17,7 +17,7 @@ namespace Village {
         private void OnTriggerEnter(Collider other) {
             if(other.tag != "Player") return;
 
-            deathArea.SetReStartPoint(transform.position);
+            //deathArea.SetReStartPoint(transform.position);
         }
 
 

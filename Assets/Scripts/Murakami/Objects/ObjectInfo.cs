@@ -17,7 +17,7 @@ namespace Village {
 
         [SerializeField] private float offset;
 
-        [SerializeField] private LayerMask mask;
+        private LayerMask mask = 1 << 8; //WallLayer
 
         public bool isStatic = false;
         public bool isChoice = false;
@@ -117,7 +117,7 @@ namespace Village {
         private void ShadowSizeChenge() {
             float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
             shadowTf.localScale = constScale * (1.3f - prop);
-            Debug.Log(name + " : " + prop);
+            //Debug.Log(name + " : " + constScale + " : " + shadowTf.localScale);
         }
 
         /// <summary>
@@ -139,12 +139,13 @@ namespace Village {
             Ray ray = new Ray(rayTf.position,rayTf.forward);
             Debug.DrawRay(rayTf.position,rayTf.forward * 100000);
             RaycastHit hit;
-            if(Physics.Raycast(ray,out hit,Mathf.Infinity)) {
+            if(Physics.Raycast(ray,out hit,Mathf.Infinity,mask)) {
                 if(hit.collider.gameObject.tag == "Wall") {
                     shadowTf.position = hit.point;
                 }
                 if(hit.collider.gameObject.tag == "ShadowObj") {
                     shadowTf.position = hit.point + rayTf.forward * offset;
+                    Debug.Log(hit.point);
                 }
             }
         }

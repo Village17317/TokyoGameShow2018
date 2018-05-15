@@ -28,7 +28,7 @@ namespace Village {
         /// </summary>
         private bool CheckScreenOut(Vector3 _pos) {
             Vector3 view_pos = Camera.main.WorldToViewportPoint(_pos);
-            if(view_pos.y < -0.0f || view_pos.y > 1.0f) {
+            if(view_pos.y < -0.0f) {
                 // 範囲外 
                 return true;
             }

@@ -115,7 +115,7 @@ namespace INI
 
             Debug.DrawRay(sfRay.origin, sfRay.direction * sfRayDistance, Color.blue);
 
-            if (Physics.Raycast(sfRay, out hit))
+            if (Physics.Raycast(sfRay, out hit, sfRayDistance))
             {
                 if (hit.collider.tag == "ShadowObj")
                 {

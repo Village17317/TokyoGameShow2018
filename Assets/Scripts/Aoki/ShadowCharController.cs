@@ -117,20 +117,20 @@ namespace INI
 
             if (Physics.Raycast(sfRay, out hit))
             {
-                if (hit.collider.tag == "Desk")
-                {
-                    if (grounded && state != State.JUMP && state != State.STOP)
-                    {
-                        state = State.STOP;
-                        Debug.Log(state);
-                    }
-                }
                 if (hit.collider.tag == "ShadowObj")
                 {
                     if (grounded && state != State.JUMP)
                     {
                         state = State.WALK;
                     }
+                }
+            }
+            else
+            {
+                if (grounded && state != State.JUMP && state != State.STOP)
+                {
+                    state = State.STOP;
+                    Debug.Log(state);
                 }
             }
         }

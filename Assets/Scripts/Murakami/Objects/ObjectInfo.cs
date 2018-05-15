@@ -49,8 +49,9 @@ namespace Village {
 
             colliders = shadow.GetComponentsInChildren<Collider>();
 
-            float aim = GetAim(lightTf.position,transform.position);
-            rayTf.localEulerAngles = new Vector3(0,aim,0);
+            //float aim = GetAim(lightTf.position,transform.position);
+            //rayTf.localEulerAngles = new Vector3(0,aim,0);
+            rayTf.LookAt(transform.position);
             RayHit();
             SetActive(true);
             ShadowTransParent();
@@ -60,8 +61,9 @@ namespace Village {
         }
 
         private void Update() {
-            float aim = GetAim(lightTf.position,transform.position);
-            rayTf.localEulerAngles = new Vector3(0,aim,0);
+            //float aim = GetAim(lightTf.position,transform.position);
+            //rayTf.localEulerAngles = new Vector3(0,aim,0);
+            rayTf.LookAt(transform.position);
             RayHit();
             if(CheckScreenOut(shadowTf.position)) {
                 SetActive(false);

@@ -14,9 +14,13 @@ namespace Village {
     public class PlayerController3D: Inheritor {
 
         [SerializeField] private float speed = 0.1f;
-        [SerializeField] private Transform catchingTf = null;
+        [SerializeField] private float jumpForce = 1000;
+        [SerializeField] private float checkGroundRayLength = 10;
         [SerializeField] private MoveLimit horizontal;
         [SerializeField] private MoveLimit vertical;
+
+
+        private Transform catchingTf = null;
 
         private bool isCatch = false;
         private bool isRotateWait = false;
@@ -42,8 +46,9 @@ namespace Village {
             || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
                 //メイン処理
                 Move();
-                ObjectMove();
-                ObjectRotate();
+                Jump();
+                //ObjectMove();
+                //ObjectRotate();
             }
         }
 
@@ -62,6 +67,29 @@ namespace Village {
                               Mathf.Clamp(pos.z,vertical.min,vertical.max));
             //再格納
             transform.position = pos;
+        }
+
+        private void Jump() {
+            Debug.DrawRay(transform.position,-Vector3.up * checkGroundRayLength,Color.red);
+            if(Input.GetButtonDown("Button_B") && CheckGround()) {
+                GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
+            }
+        }
+
+        private bool CheckGround() {
+            Ray ray = new Ray(transform.position,-Vector3.up);
+
+            RaycastHit hit;
+            bool returnFlag = false;
+            if(Physics.Raycast(ray,out hit,checkGroundRayLength)){
+                if(hit.collider.gameObject.tag == "Desk") {
+                    returnFlag = true;
+                }
+                else {
+                    returnFlag = false;
+                }
+            }
+            return returnFlag;
         }
 
         /// <summary>

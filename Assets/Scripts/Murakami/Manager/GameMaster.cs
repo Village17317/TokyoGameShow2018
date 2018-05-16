@@ -94,7 +94,7 @@ namespace Village {
 
             time = maxTime;
             InitializeUI();
-            StartCoroutine(WaitTime(3));
+            StartCoroutine(WaitTime(-1));
             range = roomLight.range;
             roomLight.range = 0;
 
@@ -132,11 +132,12 @@ namespace Village {
                 yield return new WaitForSeconds(1);
             }
             stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[0]; // START
-            StartCoroutine(Delay.DelayMethod(30,() => {
+            StartCoroutine(Delay.DelayMethod(60,() => {
                 stageUI.startCountDownImage.gameObject.SetActive(false);
+                StartCountDown();
+                mode = GameMode.Game;
             }));
-            StartCountDown();
-            mode = GameMode.Game;   
+
         }
 
         /// <summary>

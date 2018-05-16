@@ -14,11 +14,11 @@ namespace Village {
     public class ObjectInfo : MonoBehaviour {
         [SerializeField] private GameObject shadowObj;      //影にするオブジェクト
         [SerializeField] private Material shadowMatOrigin;  //影のマテリアルの元
-
+        [SerializeField] private Vector3 offset;
         private LayerMask mask = 1 << 8; //WallLayer
 
-        public bool isStatic = false;
-        public bool isChoice = false;
+        [System.NonSerialized]public bool isStatic = false;
+        [System.NonSerialized]public bool isChoice = false;
 
         private Transform lightTf;//光源（Player）の位置
         private Transform rayTf;//Rayを出す位置
@@ -49,9 +49,10 @@ namespace Village {
 
             colliders = shadow.GetComponentsInChildren<Collider>();
 
-            //float aim = GetAim(lightTf.position,transform.position);
-            //rayTf.localEulerAngles = new Vector3(0,aim,0);
-            rayTf.LookAt(transform.position);
+            Vector3 target = transform.position + offset;
+            target.z = Mathf.Abs(target.z);
+            rayTf.LookAt(target);
+
             RayHit();
             SetActive(true);
             ShadowTransParent();
@@ -61,9 +62,10 @@ namespace Village {
         }
 
         private void Update() {
-            //float aim = GetAim(lightTf.position,transform.position);
-            //rayTf.localEulerAngles = new Vector3(0,aim,0);
-            rayTf.LookAt(transform.position);
+            Vector3 target = transform.position + offset;
+            target.z = Mathf.Abs(target.z);
+            rayTf.LookAt(target);
+
             RayHit();
             if(CheckScreenOut(shadowTf.position)) {
                 SetActive(false);
@@ -117,7 +119,6 @@ namespace Village {
         private void ShadowSizeChenge() {
             float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
             shadowTf.localScale = constScale * (1.3f - prop);
-            //Debug.Log(name + " : " + constScale + " : " + shadowTf.localScale);
         }
 
         /// <summary>
@@ -147,17 +148,6 @@ namespace Village {
         }
 
         /// <summary>
-        /// rayを出す角度を取得
-        /// </summary>
-        private float GetAim(Vector3 p1,Vector3 p2) {
-            float dx = p2.x - p1.x;
-            float dz = p2.z - p1.z;
-            float rad = Mathf.Atan2(dx,Mathf.Abs(dz));
-            return rad * Mathf.Rad2Deg;
-        }
-
-
-        /// <summary>
         /// （光源から自分）/（光源から影）
         /// </summary>
         /// <returns>割合を返す０～１</returns>
@@ -170,6 +160,9 @@ namespace Village {
             return prop;      
         }
 
+        /// <summary>
+        /// Colliderの有無の切り替え
+        /// </summary>
         private void SetActive(bool flag) {
             foreach(Collider c in colliders) {
                 c.enabled = flag;

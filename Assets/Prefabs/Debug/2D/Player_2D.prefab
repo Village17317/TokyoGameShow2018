@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4667756617708650}
   - component: {fileID: 212888637208690028}
   - component: {fileID: 54095140924267582}
-  - component: {fileID: 114977604049649320}
   - component: {fileID: 136107286988897242}
+  - component: {fileID: 75041955297226904}
+  - component: {fileID: 114004264183949046}
   m_Layer: 10
   m_Name: Player_2D
   m_TagString: Player
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799186995179836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -391.7, y: 35.9, z: -3.52}
+  m_LocalPosition: {x: -442.1, y: 120.3, z: -3.52}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +59,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &114977604049649320
+--- !u!75 &75041955297226904
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799186995179836}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -30, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &114004264183949046
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -66,19 +78,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799186995179836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e29ac3979389c7f4b8e709d42548d633, type: 3}
+  m_Script: {fileID: 11500000, guid: bd8d1d928fa8df641a0aab072c530959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reverse: 0
-  inShadow: 0
-  isStop: 0
-  isGround: 0
-  nearJudge: 0
-  farJudge: 0
-  jump: 0
-  myCharRb: {fileID: 0}
-  mvSpd: 0.05
-  jmpSpd: {x: 0, y: 0}
+  walkSpeed: 0.3
+  fwRayDistance: 10
+  dwRayDistance: 10.8
+  sfRayDistance: 18
+  jumpForce: {x: 350, y: 2000, z: 0}
+  shadowCharRb: {fileID: 54095140924267582}
+  grounded: 0
+  state: 0
 --- !u!136 &136107286988897242
 CapsuleCollider:
   m_ObjectHideFlags: 1

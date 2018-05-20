@@ -19,12 +19,13 @@ namespace Village {
         [SerializeField] private MoveLimit horizontal;
         [SerializeField] private MoveLimit vertical;
 
+        private float constSpeed;
+        private LayerMask mask = 1 << 0;
 
         private Transform catchingTf = null;
-
         private bool isCatch = false;
         private bool isRotateWait = false;
-        private float constSpeed;
+
 
         public MoveLimit GetHorizontalLimit {
             get {
@@ -59,7 +60,7 @@ namespace Village {
             //一旦格納
             Vector3 pos = transform.position;
             //速度制限
-            speed = isCatch ? constSpeed * 0.5f : constSpeed;
+            //speed = isCatch ? constSpeed * 0.5f : constSpeed;
             //位置制限
             pos += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
             pos = new Vector3(Mathf.Clamp(pos.x,horizontal.min,horizontal.max),
@@ -81,8 +82,9 @@ namespace Village {
 
             RaycastHit hit;
             bool returnFlag = false;
-            if(Physics.Raycast(ray,out hit,checkGroundRayLength)){
-                if(hit.collider.gameObject.tag == "Desk") {
+            if(Physics.Raycast(ray,out hit,checkGroundRayLength,mask)){
+                if(hit.collider.gameObject.tag == "Desk"
+                || hit.collider.gameObject.tag == "Object3D") {
                     returnFlag = true;
                 }
                 else {

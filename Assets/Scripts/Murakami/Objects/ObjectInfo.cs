@@ -63,7 +63,7 @@ namespace Village {
 
         private void Update() {
             Vector3 target = transform.position + offset;
-            target.z = Mathf.Abs(target.z);
+            //target.z = Mathf.Abs(target.z);
             rayTf.LookAt(target);
 
             RayHit();

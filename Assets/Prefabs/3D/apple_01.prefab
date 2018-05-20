@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4027738740876058}
   - component: {fileID: 33022907066380986}
   - component: {fileID: 23103903402855690}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: nurbsToPoly1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4654066042331978}
   - component: {fileID: 33298690398069350}
   - component: {fileID: 23793041747850798}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4739942787641594}
   - component: {fileID: 135291512238683706}
   - component: {fileID: 114288951015449918}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: apple_01
   m_TagString: Object3D
   m_Icon: {fileID: 0}
@@ -198,9 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowObj: {fileID: 1555704810026050, guid: 0df99ea43633b0a4eba371e965e6ee95, type: 2}
   shadowMatOrigin: {fileID: 2100000, guid: d77dfe6d279615447a23efeef680ceb2, type: 2}
-  offset: 10
-  isStatic: 0
-  isChoice: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!135 &135291512238683706
 SphereCollider:
   m_ObjectHideFlags: 1

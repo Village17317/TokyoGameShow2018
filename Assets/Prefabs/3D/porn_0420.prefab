@@ -224,6 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44b92d1c6ec0cd4ebf33eddc1af005f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStatic: 0
-  isChoice: 0
-  outline: []
+  shadowObj: {fileID: 0}
+  shadowMatOrigin: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4407131106571196}
   - component: {fileID: 114816832978110476}
   - component: {fileID: 135374030406054818}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Cup_01
   m_TagString: Object3D
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33071191142530844}
   - component: {fileID: 23197185955846904}
   - component: {fileID: 114716957283854104}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: nurbsToPoly1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 33432917201614674}
   - component: {fileID: 23893623106705478}
   - component: {fileID: 114863697504006952}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: nurbsToPoly2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,9 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowObj: {fileID: 1619272415690204, guid: 04f95f1fedb4bec4ba6552b10a45f65d, type: 2}
   shadowMatOrigin: {fileID: 2100000, guid: d77dfe6d279615447a23efeef680ceb2, type: 2}
-  offset: 5
-  isStatic: 0
-  isChoice: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &114863697504006952
 MonoBehaviour:
   m_ObjectHideFlags: 1

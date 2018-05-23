@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33540621751385720}
   - component: {fileID: 23288143305174542}
   - component: {fileID: 135519381886048822}
-  - component: {fileID: 114336231812529412}
   m_Layer: 9
   m_Name: pSphere1
   m_TagString: ShadowObj
@@ -56,7 +55,6 @@ GameObject:
   - component: {fileID: 33702114956839754}
   - component: {fileID: 23396770700558220}
   - component: {fileID: 64685704770744968}
-  - component: {fileID: 114419272350365678}
   m_Layer: 9
   m_Name: nurbsToPoly1
   m_TagString: ShadowObj
@@ -201,30 +199,6 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 1.00000005e-20
   m_Mesh: {fileID: 4300000, guid: 8a86aab67e089b0458cfd48b3f5110a3, type: 3}
---- !u!114 &114336231812529412
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1511094123892884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0ddc85e7102db4fa0a34e400f29e1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myColl: {fileID: 135519381886048822}
---- !u!114 &114419272350365678
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766338347922482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0ddc85e7102db4fa0a34e400f29e1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myColl: {fileID: 64685704770744968}
 --- !u!135 &135519381886048822
 SphereCollider:
   m_ObjectHideFlags: 1

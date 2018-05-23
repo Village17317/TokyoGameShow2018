@@ -4873,7 +4873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29c8a70eedf15447b1b7bb07f5dca03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.7
   jumpForce: 1200
   checkGroundRayLength: 5
   horizontal:
@@ -15875,25 +15875,6 @@ Rigidbody:
   m_PrefabParentObject: {fileID: 54095140924267582, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
     type: 2}
   m_PrefabInternal: {fileID: 1166131402}
---- !u!114 &1166131405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1166131403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8d1d928fa8df641a0aab072c530959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 0.3
-  fwRayDistance: 10
-  dwRayDistance: 11
-  sfRayDistance: 30
-  jumpForce: {x: 750, y: 2000, z: 0}
-  shadowCharRb: {fileID: 1166131404}
-  grounded: 0
-  state: 1
 --- !u!114 &1166131406 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114004264183949046, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
@@ -16844,7 +16825,7 @@ Rigidbody:
   m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8
@@ -29191,7 +29172,7 @@ Rigidbody:
   m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8

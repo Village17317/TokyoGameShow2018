@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32218543, g: 0.3132522, b: 0.2673172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44949812, g: 0.49649584, b: 0.559143, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ RectTransform:
   m_GameObject: {fileID: 12225521}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 14.75}
-  m_LocalScale: {x: 0.042803448, y: 0.042803448, z: 0.042803448}
+  m_LocalScale: {x: 0.042790715, y: 0.042790715, z: 0.042790715}
   m_Children:
   - {fileID: 646302105}
   - {fileID: 48339999}
@@ -9439,7 +9439,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -155.4
+      value: -228.03
       objectReference: {fileID: 0}
     - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
       propertyPath: m_LocalPosition.y
@@ -11930,6 +11930,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114975093946894614, guid: 2e71397ec1c355a4b8a1030f107dc4a5,
+        type: 2}
+      propertyPath: speed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e71397ec1c355a4b8a1030f107dc4a5, type: 2}
   m_IsPrefabParent: 0
@@ -12137,13 +12142,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1848451491}
-  m_LocalRotation: {x: -0.02950677, y: -0.14104207, z: 0.014132319, w: 0.9894629}
+  m_LocalRotation: {x: 0.9742753, y: -0.0423064, z: 0.14255974, w: 0.16933578}
   m_LocalPosition: {x: -135.4, y: 3, z: -50.4}
   m_LocalScale: {x: 624.67596, y: 624.6761, z: 624.6761}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -3.1190002, y: -16.282001, z: 2.0830002}
+  m_LocalEulerAnglesHint: {x: 1600, y: -16.282001, z: 2.0830002}
 --- !u!1 &1855810248
 GameObject:
   m_ObjectHideFlags: 0
@@ -12852,7 +12857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1963904373}
   - component: {fileID: 1963904374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12866,7 +12871,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1963904372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 352.1, y: 206, z: -473.4}
+  m_LocalPosition: {x: 276, y: 153, z: -473.4}
   m_LocalScale: {x: 1704.2368, y: 0.099999905, z: 1160.2}
   m_Children: []
   m_Father: {fileID: 634623289}

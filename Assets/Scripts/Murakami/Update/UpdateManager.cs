@@ -19,6 +19,9 @@ namespace Village {
         [Header("Inheritorクラスを継承したクラスを格納する"),SerializeField]
         private List<Inheritor> updateList = new List<Inheritor>();
 
+        /// <summary>
+        /// 初期時
+        /// </summary>
 		private void Start(){
             int i = 0;
             while(i < updateList.Count) {
@@ -33,37 +36,45 @@ namespace Village {
             }
         }
 
-
+        /// <summary>
+        /// 更新処理
+        /// </summary>
 	    private void Update() {
             int i = 0;
             while(i < updateList.Count) {
                 if(updateList[i] == null) {
                     Delete(i);
                 }
-                else {
-                    if(updateList[i].gameObject.activeInHierarchy) {
-                        updateList[i].Run();
-                    }
+                else if(updateList[i].gameObject.activeInHierarchy) {
+                    updateList[i].Run();        
                     i++;
                 }
             }
 	    }
 
+        /// <summary>
+        /// 定期更新
+        /// </summary>
         private void FixedUpdate() {
             int i = 0;
             while(i < updateList.Count) {
                 if(updateList[i] == null) {
                     Delete(i);
                 }
-                else {
-                    if(updateList[i].gameObject.activeInHierarchy) {
-                        updateList[i].FixedRun();
-                    }
+                else if(updateList[i].gameObject.activeInHierarchy) {
+                    updateList[i].FixedRun();
                     i++;
                 }
             }
         }
 
+        public void Add(Inheritor inheritorObj) {
+            updateList.Add(inheritorObj);
+        }
+
+        /// <summary>
+        /// 削除
+        /// </summary>
         public void Delete(int deleteNumber) {
             updateList.RemoveAt(deleteNumber);
         }

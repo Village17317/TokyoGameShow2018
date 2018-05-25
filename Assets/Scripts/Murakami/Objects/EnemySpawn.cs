@@ -14,23 +14,14 @@ namespace Village {
     public class EnemySpawn : MonoBehaviour {
         [SerializeField] private GameObject enemyPrefab;
 
-        public void Spawn() {
+        /// <summary>
+        /// 敵オブジェクトの生成
+        /// </summary>
+        public Inheritor Spawn() {
             GameObject ene = Instantiate(enemyPrefab) as GameObject;
             ene.transform.position = transform.position;
+            return ene.GetComponent<INI.EnemyController>();
         }
-
-        private void Awake(){
-            
-		}
-
-        private void Start(){
-            
-        }
-
-        private void Update() {
-            
-        }
-
     }
 
 }

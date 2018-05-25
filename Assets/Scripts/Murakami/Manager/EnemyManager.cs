@@ -14,21 +14,26 @@ namespace Village {
     public class EnemyManager : MonoBehaviour {
 
         [SerializeField] private UpdateManager updateManager;
-        private List<EnemySpawn> spawns;
+        [SerializeField] private List<EnemySpawn> spawns;
+        [SerializeField] private uint spawnMax = 10;
+        [SerializeField] private int nowSpawnNumber = 0;
 
-        private void Awake(){
+        private void Awake() {
             if(spawns.Count > 0) {
-                spawns[0].Spawn();
+                for(int i=0;i<spawnMax;i++) {
+                    Spawn();
+                }
             }
 		}
 
-        private void Start(){
-            
+        /// <summary>
+        /// 敵を生成し、UpdateManagerに登録
+        /// </summary>
+        private void Spawn() {
+            var settingObj = spawns[Mathf.Max(nowSpawnNumber,0)].Spawn();
+            updateManager.Add(settingObj);
         }
-
-        private void Update() {
-            
-        }
+        
 
     }
 

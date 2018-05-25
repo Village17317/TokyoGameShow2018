@@ -27,7 +27,6 @@ namespace Village {
             velocity.y = Mathf.Min(velocity.y,maxVelocity_y);
 
             myRigid.velocity = velocity;
-            Debug.Log("velocity : " + myRigid.velocity);
         }
 
     }

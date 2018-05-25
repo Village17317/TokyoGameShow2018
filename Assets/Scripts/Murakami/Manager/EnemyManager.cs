@@ -18,13 +18,20 @@ namespace Village {
         [SerializeField] private uint spawnMax = 10;
         [SerializeField] private int nowSpawnNumber = 0;
 
-        private void Awake() {
-            if(spawns.Count > 0) {
-                for(int i=0;i<spawnMax;i++) {
-                    Spawn();
-                }
+        private uint enemyCount = 0;
+
+        private void Update() {
+            if(spawns.Count > 0 && enemyCount < spawnMax) {
+                Spawn();
             }
-		}
+        }
+
+        /// <summary>
+        /// spawnsにEnemySpawnを登録
+        /// </summary>
+        public void SetSpawnsList(EnemySpawn obj) {
+            spawns.Add(obj);
+        }
 
         /// <summary>
         /// 敵を生成し、UpdateManagerに登録
@@ -32,6 +39,7 @@ namespace Village {
         private void Spawn() {
             var settingObj = spawns[Mathf.Max(nowSpawnNumber,0)].Spawn();
             updateManager.Add(settingObj);
+            enemyCount++;
         }
         
 

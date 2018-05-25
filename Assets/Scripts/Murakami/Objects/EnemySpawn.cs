@@ -14,6 +14,11 @@ namespace Village {
     public class EnemySpawn : MonoBehaviour {
         [SerializeField] private GameObject enemyPrefab;
 
+        private void Start() {
+            var manager = GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>();
+            manager.SetSpawnsList(this);
+        }
+
         /// <summary>
         /// 敵オブジェクトの生成
         /// </summary>

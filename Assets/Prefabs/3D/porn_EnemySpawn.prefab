@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65272200436213350}
   - component: {fileID: 114360799229543188}
   - component: {fileID: 54520147088981402}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: porn_EnemySpawn
   m_TagString: Object3D
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4496190741641280}
   - component: {fileID: 33068270929681856}
   - component: {fileID: 23238717971757134}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: nurbsToPoly1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4549042752942528}
   - component: {fileID: 33274123958051418}
   - component: {fileID: 23134239985270164}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1269538506198328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -326, y: 1.9, z: 7.8}
+  m_LocalPosition: {x: -375.4, y: 1.8999996, z: 22.6}
   m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children:
   - {fileID: 4496190741641280}
@@ -224,6 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44b92d1c6ec0cd4ebf33eddc1af005f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowObj: {fileID: 1623775072732884, guid: bb50b4928b520bc41a54d40a511d8583, type: 2}
+  shadowObj: {fileID: 1229056594455522, guid: 98f5a456382b00141b048436676ce327, type: 2}
   shadowMatOrigin: {fileID: 2100000, guid: d77dfe6d279615447a23efeef680ceb2, type: 2}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 10, z: 0}

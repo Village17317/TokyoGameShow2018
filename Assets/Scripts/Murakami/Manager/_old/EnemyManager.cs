@@ -22,24 +22,34 @@ namespace Village {
 
         private void Update() {
             if(spawns.Count > 0 && enemyCount < spawnMax) {
-                Spawn();
+                StartCoroutine(Spawn(1));
             }
+        }
+
+        /// <summary>
+        /// 生成位置の設定
+        /// </summary>
+        /// <param name="number"></param>
+        public void SetNowSpawnNumber(int number) {
+            nowSpawnNumber = number;
         }
 
         /// <summary>
         /// spawnsにEnemySpawnを登録
         /// </summary>
-        public void SetSpawnsList(EnemySpawn obj) {
+        public int SetSpawnsList(EnemySpawn obj) {
             spawns.Add(obj);
+            return spawns.Count - 1;
         }
 
         /// <summary>
         /// 敵を生成し、UpdateManagerに登録
         /// </summary>
-        private void Spawn() {
-            var settingObj = spawns[Mathf.Max(nowSpawnNumber,0)].Spawn();
-            updateManager.Add(settingObj);
+        private IEnumerator Spawn(float time) {
             enemyCount++;
+            yield return new WaitForSeconds(time);
+            //var settingObj = spawns[Mathf.Max(nowSpawnNumber,0)].Spawn();
+            //updateManager.Add(settingObj);
         }
         
 

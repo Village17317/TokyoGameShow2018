@@ -22,8 +22,9 @@ GameObject:
   - component: {fileID: 212888637208690028}
   - component: {fileID: 54095140924267582}
   - component: {fileID: 136107286988897242}
-  - component: {fileID: 75041955297226904}
-  - component: {fileID: 114004264183949046}
+  - component: {fileID: 75237070236289280}
+  - component: {fileID: 114687325221840184}
+  - component: {fileID: 114339357140857050}
   m_Layer: 10
   m_Name: Player_2D
   m_TagString: Player
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799186995179836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -442.1, y: 120.3, z: -3.52}
+  m_LocalPosition: {x: -449.1, y: 28.1, z: 41.2}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +60,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!75 &75041955297226904
+--- !u!75 &75237070236289280
 ConstantForce:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -70,7 +71,19 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
---- !u!114 &114004264183949046
+--- !u!114 &114339357140857050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799186995179836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e99618654b2674bb5fa14a283aa069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxVelocity_y: 50
+--- !u!114 &114687325221840184
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -81,14 +94,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8d1d928fa8df641a0aab072c530959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0.3
+  walkSpeed: 0.5
   fwRayDistance: 10
-  dwRayDistance: 10.8
-  sfRayDistance: 18
-  jumpForce: {x: 350, y: 2000, z: 0}
+  dwRayDistance: 11
+  sfRayDistance: 30
+  jumpForce: {x: 750, y: 2000, z: 0}
   shadowCharRb: {fileID: 54095140924267582}
   grounded: 0
-  state: 0
+  state: 1
 --- !u!136 &136107286988897242
 CapsuleCollider:
   m_ObjectHideFlags: 1

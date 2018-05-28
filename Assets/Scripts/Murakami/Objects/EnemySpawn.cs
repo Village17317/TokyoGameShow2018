@@ -13,20 +13,74 @@ namespace Village {
 
     public class EnemySpawn : MonoBehaviour {
         [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private GameObject generationEffectPrefab;
+        [SerializeField] private Vector3 offset;
+        [SerializeField] private int myNumber = 0;
+
+        private UpdateManager manager;
+        private bool isSpawn = false;
+
+        private static float time = 0;
+        private static float spawnTime = 1;//〇秒置き
+        private static int spawnCount = 0;
+        private static int maxSpawnCount = 10;
+        private static int activeNumber = -1;
+        private static int numberGeneration = -1;
 
         private void Start() {
-            var manager = GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>();
-            manager.SetSpawnsList(this);
+            manager = FindObjectOfType<UpdateManager>();
+            myNumber = NumberGeneration();
+        }
+
+        private void Update() {
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game) {
+                if(activeNumber == myNumber) {
+                    time += Time.deltaTime;
+                    if(time >= spawnTime) {
+                        time = 0;
+                        if(spawnCount < maxSpawnCount) {
+                            Spawn();
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 情報をリセット
+        /// </summary>
+        private void InfoReset() {
+            activeNumber = myNumber;
+            time = 0;
+            spawnCount = 0;
+        }
+
+        /// <summary>
+        /// 初期生成時に自分のmyNumberを設定する
+        /// </summary>
+        private int NumberGeneration() {
+            numberGeneration++;
+            return numberGeneration;
         }
 
         /// <summary>
         /// 敵オブジェクトの生成
         /// </summary>
-        public Inheritor Spawn() {
+        public void Spawn() {
             GameObject ene = Instantiate(enemyPrefab) as GameObject;
-            ene.transform.position = transform.position;
-            return ene.GetComponent<INI.EnemyController>();
+            ene.transform.position = transform.position + offset;
+            GameObject effect = Instantiate(generationEffectPrefab) as GameObject;
+            effect.transform.position = transform.position + offset;
+            Destroy(effect,3);
+            manager.Add(ene.GetComponent<INI.EnemyController>());
+            spawnCount++;
         }
+
+        private void OnTriggerEnter(Collider other) {
+            if(other.tag != "Player") return;
+            InfoReset();
+        }
+
     }
 
 }

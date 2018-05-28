@@ -13,11 +13,18 @@ using UnityEngine.SceneManagement;
 
 namespace Village {
 
-    public class TitleManager : Inheritor {
+    public class TitleManager: Inheritor {
         [System.Serializable]
         private class NextTransform {
             public Vector3 pos;
             public Vector3 rot;
+        }
+
+        [System.Serializable]
+        private class NextSceneInfo {
+            public string path;
+            public GameObject numberObject;
+            public GameObject shadowObject;
         }
 
         private enum TitleStep {
@@ -28,16 +35,21 @@ namespace Village {
             DEFAULT,
         }
 
-        [SerializeField] private Camera titleCamera;
-        [SerializeField] private NextTransform cameraNtf;
-        [SerializeField] private float animationSpeed = 1;
-        [SerializeField] private Image logo;
-        [SerializeField] private Image cartain;
-        [SerializeField] private TitlePlayer player;
+        [Header("タイトルで使うカメラ"),SerializeField] private Camera titleCamera;
+        [Header("カメラの次の位置"),SerializeField]    private NextTransform cameraNtf;
+        [Header("動くスピード"),SerializeField]        private float animationSpeed = 1;
+        [Header("タイトルロゴ"),SerializeField]        private Image logo;
+        [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
+        [Header("暗幕"),SerializeField]               private Image cartain;
+
         private TitleStep step = TitleStep.STEP_1;
+        private bool isGetAxis = false;
+        private int stageNumber = 0;
 
         private void Awake() {
             cartain.color = new Color(0,0,0,0);
+            ActiveObjectVisible(0);
+            ActiveShadowObjectVisible(-1);
         }
 
         public override void Run() {
@@ -54,7 +66,8 @@ namespace Village {
         /// タイトルロゴの表示、決定ボタン入力後Step２に切り替え
         /// </summary>
         private void Step_1() {
-            if(Input.GetButtonDown("Button_Start")) {       
+            if(Input.GetButtonDown("Button_Start")) {
+                ActiveShadowObjectVisible(0);
                 step = TitleStep.STEP_2;
             }
         }
@@ -72,115 +85,76 @@ namespace Village {
         }
 
         /// <summary>
-        /// プレイヤーを数字の前まで動かし、決定ボタン入力後Step4に切り替え
+        /// 左右キーで数字を切り替え、決定ボタン入力後Step4に切り替え
         /// </summary>
         private void Step_3() {
-            if(player.PlayerUpdate()) {
-                step = TitleStep.STEP_4;
+            if(Input.GetAxisRaw("Horizontal") > 0 && !isGetAxis) {
+                stageNumber = Wrap(stageNumber + 1,0,stageNumberList.Count);
+                ActiveObjectVisible(stageNumber);
+                ActiveShadowObjectVisible(stageNumber);
+                isGetAxis = true;
+            }
+            if(Input.GetAxisRaw("Horizontal") < 0 && !isGetAxis) {
+                stageNumber = Wrap(stageNumber - 1,0,stageNumberList.Count);
+                ActiveObjectVisible(stageNumber);
+                ActiveShadowObjectVisible(stageNumber);
+                isGetAxis = true;
+            }
+            if(Input.GetAxisRaw("Horizontal") == 0 && isGetAxis) {
+                isGetAxis = false;
+            }
+            if(Input.GetButtonDown("Button_Start")) {
+                StartCoroutine(BlackOut());
+                step = TitleStep.DEFAULT;
             }
         }
 
 
         private void Step_4() {
-            StartCoroutine(LoadScene(player.NextSceneName));
+            StartCoroutine(LoadScene(stageNumberList[stageNumber].path));
             step = TitleStep.DEFAULT;
+        }
+
+        private IEnumerator BlackOut() {
+            for(int i = 0;cartain.color.a < 1;i++) {
+                cartain.color += new Color(0,0,0,0.01f);
+                yield return new WaitForEndOfFrame();
+            }
+            step = TitleStep.STEP_4;
         }
 
         private IEnumerator LoadScene(string sceneName) {
             AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
             while(!load.isDone) {
-                Debug.Log(load.progress);
-                cartain.color = new Color(0,0,0,load.progress);
                 yield return null;
             }
+        }
+
+        /// <summary>
+        /// 指定した番号だけアクティブにする
+        /// </summary>
+        private void ActiveObjectVisible(int active) {
+            for(int i = 0;i < stageNumberList.Count;i++) {
+                stageNumberList[i].numberObject.SetActive(i == active);
+            }
+        }
+        /// <summary>
+        /// 指定した番号の影だけアクティブにする
+        /// </summary>
+        private void ActiveShadowObjectVisible(int active) {
+            for(int i = 0;i < stageNumberList.Count;i++) {
+                stageNumberList[i].shadowObject.SetActive(i == active);
+            }
+        }
+
+        /// <summary>
+        /// 上限まで行ったら下限に、下限まで行ったら上限に
+        /// </summary>
+        private int Wrap(int x,int min,int max) {
+            if(min >= max) return x;
+            int n = (x - min) % (max - min);
+            return (n >= 0) ? (n + min) : (n + max);
         }
     }
 
 }
-#region
-//private enum TitleStep {
-//    STEP_1,
-//    STEP_2,
-//    STEP_3,
-//    DEFAULT,
-//}
-//[SerializeField]
-//private ParticleSystem fireEffect;
-//[SerializeField]
-//private Light pointLight;
-//[SerializeField]
-//private Light roomLight;
-//[SerializeField]
-//private string nextSceneName = "";
-//[SerializeField]
-//private TitleStep step = TitleStep.STEP_1;
-//private float spotRange = 0;
-//private bool flag = false;
-
-//private void Awake() {
-//    spotRange = roomLight.range;
-//    roomLight.range = 0;
-//    pointLight.enabled = false;
-//}
-//private void Start() {
-
-//}
-//private void Update() {
-//    switch(step) {
-//        case TitleStep.STEP_1:
-//        Step_1();
-//        break;
-//        case TitleStep.STEP_2:
-//        Step_2();
-//        break;
-//        case TitleStep.STEP_3:
-//        Step_3();
-//        break;
-//        default:
-//        break;
-//    }
-//}
-//private IEnumerator StartCol() {
-//    yield return new WaitForSeconds(2);
-//    fireEffect.Play();
-//    pointLight.enabled = true;
-//    yield return new WaitForSeconds(0.5f);
-//    step = TitleStep.STEP_2;
-//}
-//private void SpotLightAnimation() {
-//    if(flag) {
-//        roomLight.range -= Time.deltaTime * spotRange;
-//        if(roomLight.range <= spotRange * 0.98f) {
-//            roomLight.range = spotRange * 0.98f;
-//            flag = false;
-//        }
-//    }
-//    else {
-//        roomLight.range += Time.deltaTime * spotRange;
-//        if(roomLight.range >= spotRange) {
-//            roomLight.range = spotRange;
-//            flag = true;
-//        }
-//    }
-//}
-//private IEnumerator LoadScene(string sceneName) {
-//    AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
-//    while(!load.isDone) {
-//        Debug.Log(load.progress);
-//        yield return null;
-//    }
-//}
-//private void Step_1() {
-//    StartCoroutine(StartCol());
-//    step = TitleStep.DEFAULT;
-//}
-//private void Step_2() {
-//    SpotLightAnimation();
-//    if(Input.GetButtonDown("Button_Start")) {
-//        StartCoroutine(LoadScene(nextSceneName));
-//    }
-//}
-//private void Step_3() {
-
-//}
-#endregion

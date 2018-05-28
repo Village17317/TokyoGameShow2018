@@ -16,10 +16,7 @@ namespace Village {
         [SerializeField] private Material shadowMatOrigin;  //影のマテリアルの元
         [SerializeField] private Vector3 offset;
         private LayerMask mask = 1 << 8; //WallLayer
-
-        [System.NonSerialized]public bool isStatic = false;
-        [System.NonSerialized]public bool isChoice = false;
-
+        
         private Transform lightTf;//光源（Player）の位置
         private Transform rayTf;//Rayを出す位置
         private Transform shadowTf;//影の位置

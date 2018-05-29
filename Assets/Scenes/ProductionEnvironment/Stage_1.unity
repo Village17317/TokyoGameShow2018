@@ -7721,12 +7721,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageUI:
     startCountDownImage: {fileID: 1621083672}
-    startCountDownSprites:
-    - {fileID: 21300000, guid: 4c473c772572ebd449661bf0855a80cc, type: 3}
-    - {fileID: 21300000, guid: 6f45da6e7f89288468aa8e8fce2a712f, type: 3}
-    - {fileID: 21300000, guid: 330e9aee348721445be15009e11c1a7b, type: 3}
-    - {fileID: 21300000, guid: 367d1f07dcf297b45a63b37a8c00ffef, type: 3}
-    timeImage: {fileID: 0}
   mode: 0
   maxTime: 120
   roomLight: {fileID: 448903472}
@@ -12730,6 +12724,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4705844543075068, guid: 2e71397ec1c355a4b8a1030f107dc4a5, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108793963225636438, guid: 2e71397ec1c355a4b8a1030f107dc4a5,
+        type: 2}
+      propertyPath: m_Range
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 108793963225636438, guid: 2e71397ec1c355a4b8a1030f107dc4a5,
+        type: 2}
+      propertyPath: m_Shadows.m_Type
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

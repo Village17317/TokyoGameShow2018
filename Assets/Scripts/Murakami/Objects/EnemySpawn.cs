@@ -20,12 +20,25 @@ namespace Village {
         private UpdateManager manager;
         private bool isSpawn = false;
 
+        private static Vector3 generationPoint = Vector3.zero;
         private static float time = 0;
         private static float spawnTime = 1;//〇秒置き
         private static int spawnCount = 0;
         private static int maxSpawnCount = 10;
         private static int activeNumber = -1;
         private static int numberGeneration = -1;
+
+        public static Vector3 GenerationPoint {
+            get {
+                return generationPoint;
+            }
+        }
+
+        public static int ActiveNumber {
+            get {
+                return activeNumber;
+            }
+        }
 
         private void Start() {
             manager = FindObjectOfType<UpdateManager>();
@@ -49,10 +62,11 @@ namespace Village {
         /// <summary>
         /// 情報をリセット
         /// </summary>
-        private void InfoReset() {
+        private void InfoReset(Vector3 point) {
             activeNumber = myNumber;
             time = 0;
             spawnCount = 0;
+            generationPoint = point + offset;
         }
 
         /// <summary>
@@ -68,9 +82,9 @@ namespace Village {
         /// </summary>
         public void Spawn() {
             GameObject ene = Instantiate(enemyPrefab) as GameObject;
-            ene.transform.position = transform.position + offset;
+            ene.transform.position = generationPoint;
             GameObject effect = Instantiate(generationEffectPrefab) as GameObject;
-            effect.transform.position = transform.position + offset;
+            effect.transform.position = generationPoint;
             Destroy(effect,3);
             manager.Add(ene.GetComponent<INI.EnemyController>());
             spawnCount++;
@@ -78,7 +92,7 @@ namespace Village {
 
         private void OnTriggerEnter(Collider other) {
             if(other.tag != "Player") return;
-            InfoReset();
+            InfoReset(transform.position);
         }
 
     }

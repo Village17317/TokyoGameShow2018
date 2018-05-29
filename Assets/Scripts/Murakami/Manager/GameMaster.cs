@@ -18,8 +18,6 @@ namespace Village {
         [System.Serializable]
         private class StageUI {
             public Image startCountDownImage; //最初のカウントダウンの表示用
-            public Sprite[] startCountDownSprites; //最初のカウントダウンの数字のスプライト
-            public Image timeImage;     //制限時間の表示
         }
 
         [System.Serializable]
@@ -56,9 +54,9 @@ namespace Village {
         [SerializeField] private StageUI stageUI;
         [Space(8)]
         [SerializeField] private GameMode mode = GameMode.Start;
-        [SerializeField] private float maxTime = 300;//最大時間
-        [SerializeField] private Light roomLight;
-        [SerializeField] private int deadCountMax = 3;
+        [SerializeField] private float    maxTime = 300;//最大時間
+        [SerializeField] private Light    roomLight;
+        [SerializeField] private int      deadCountMax = 3;
 
         [Space(16)]
         [SerializeField] private OtherCanvas pauseMenuCanvas;
@@ -67,8 +65,10 @@ namespace Village {
         [Space(16)]
         [SerializeField] private OtherCanvas gameOverCanvas;
         [Space(16)]
+        [SerializeField] private Image       blackCurtain;
 
         [SerializeField] private string nextScene = "";
+        [SerializeField] private string titleScene = "Scene_Title";
         #endregion
 
         #region Propaty
@@ -102,7 +102,7 @@ namespace Village {
             gameClearCanvas.canvas.gameObject.SetActive(false);
             gameOverCanvas.canvas.gameObject.SetActive(false);
 
-            //SoundManager.Instance.PlayBGM("TestSound");
+            PlayBGM(SceneManager.GetActiveScene().name);
         }
 
         public override void Run() {
@@ -127,16 +127,18 @@ namespace Village {
         /// 指定した時間後にGameModeをGameにする。
         /// </summary>
         private IEnumerator WaitTime(float second) {
-            for(int i = 0;i < second;i++) {
-                stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[(int) (second - i)];// 3 2 1 
-                yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
+
+            for(int i = 0;i < 30;i++) {
+                var value = stageUI.startCountDownImage.material.GetFloat("_Threshold");
+                value = Mathf.Min(value + 0.05f,1);
+                stageUI.startCountDownImage.material.SetFloat("_Threshold",value);
+                yield return new WaitForEndOfFrame();
             }
-            stageUI.startCountDownImage.sprite = stageUI.startCountDownSprites[0]; // START
-            StartCoroutine(Delay.DelayMethod(60,() => {
-                stageUI.startCountDownImage.gameObject.SetActive(false);
-                StartCountDown();
-                mode = GameMode.Game;
-            }));
+            stageUI.startCountDownImage.gameObject.SetActive(false);
+            StartCountDown();
+            mode = GameMode.Game;
+            
 
         }
 
@@ -149,7 +151,7 @@ namespace Village {
                 if(time <= 0) {
                     mode = GameMode.GameOver;
                 }
-                stageUI.timeImage.fillAmount = time / maxTime;
+                //stageUI.timeImage.fillAmount = time / maxTime;
             }
         }
 
@@ -199,7 +201,7 @@ namespace Village {
         /// </summary>
         private void OnGame() {
             isReStart = false;
-            CountDown();
+            //CountDown();
             if(Input.GetButtonDown("Button_Start")) {
                 OnPause();
             }
@@ -209,7 +211,7 @@ namespace Village {
         /// リスタート時
         /// </summary>
         private void OnReStart() {
-            CountDown();
+            //CountDown();
             if(Input.GetButtonDown("Button_Start")) {
                 OnPause();
             }
@@ -267,10 +269,10 @@ namespace Village {
                     OffPause();
                 }
                 else if(pauseMenuCanvas.cursorNumber == 1) {
-                    SceneChenge(SceneManager.GetActiveScene().name);
+                    StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));
                 }
                 else if(pauseMenuCanvas.cursorNumber == 2) {
-                    SceneChenge("StageSelect");//ステージ選択画面に移行_debug
+                    StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行_debug
                 }
             }
             if(Input.GetButtonDown("Button_Start")) {
@@ -307,17 +309,20 @@ namespace Village {
 
             if(Input.GetButtonDown("Button_A")) {
                 if(gameClearCanvas.cursorNumber == 0) {//次のステージシーンへ
-                    SceneChenge(nextScene);
+                    StartCoroutine(SceneChenge(nextScene));
                 }
                 else if(gameClearCanvas.cursorNumber == 1) {//もう一度やりましょう
-                    SceneChenge(SceneManager.GetActiveScene().name);
+                    StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));
                 }
                 else if(gameClearCanvas.cursorNumber == 2) {
-                    SceneChenge("StageSelect");//ステージ選択画面に移行
+                    StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行
                 }
             }
         }
 
+        /// <summary>
+        /// ゲームオーバー時の処理
+        /// </summary>
         private void OnGameOver() {
             gameOverCanvas.canvas.gameObject.SetActive(true);
 
@@ -343,10 +348,10 @@ namespace Village {
 
             if(Input.GetButtonDown("Button_A")) {
                 if(gameOverCanvas.cursorNumber == 0) {//次のステージシーンへ
-                    SceneChenge(SceneManager.GetActiveScene().name);
+                    StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));
                 }
                 else if(gameOverCanvas.cursorNumber == 1) {//もう一度やりましょう
-                    SceneChenge("StageSelect");//ステージ選択画面に移行
+                    StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行
                 }
             }
         }
@@ -354,7 +359,12 @@ namespace Village {
         /// <summary>
         /// 渡したシーンの名前でシーンを切り替える
         /// </summary>
-        private void SceneChenge(string sceneName) {
+        private IEnumerator SceneChenge(string sceneName) {
+            for(int i = 0;blackCurtain.color.a <= 1;i++) {
+                blackCurtain.color += new Color(0,0,0,0.01f);
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(1);
             SceneManager.LoadScene(sceneName);
         }
 
@@ -363,7 +373,18 @@ namespace Village {
         /// </summary>
         private void InitializeUI() {
 
-            stageUI.timeImage.fillAmount = time / maxTime;
+            //stageUI.timeImage.fillAmount = time / maxTime;
+        }
+
+        /// <summary>
+        /// 指定したBGMを再生
+        /// </summary>
+        private void PlayBGM(string bgmName) {
+            SoundManager.Instance.PlayBGM(bgmName);
+        }
+
+        private void OnDisable() {
+            stageUI.startCountDownImage.material.SetFloat("_Threshold",0);
         }
     }
 

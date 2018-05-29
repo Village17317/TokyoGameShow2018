@@ -52,6 +52,10 @@ namespace Village {
             ActiveShadowObjectVisible(-1);
         }
 
+        private void Start() {
+            SoundManager.Instance.PlayBGM("Title");
+        }
+
         public override void Run() {
             switch(step) {
                 case TitleStep.STEP_1: Step_1(); break;

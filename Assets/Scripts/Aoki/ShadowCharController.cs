@@ -2,7 +2,7 @@
 *	作成者	：青木仁志
 *	機能	：キャラクターの自動操作
 *	作成	：2018/05/11
-*	更新	：2018/05/14
+*	更新	：2018/05/31
 */
 
 using System.Collections;
@@ -15,7 +15,7 @@ namespace INI
     {
         public float walkSpeed = 0.1f, fwRayDistance = 10f, dwRayDistance = 10.8f, sfRayDistance;
 
-        public Vector3 jumpForce;
+        public Vector3 jumpForce, fwRayOrigin;
 
         [SerializeField]
         private Rigidbody shadowCharRb;
@@ -88,7 +88,7 @@ namespace INI
         /// </summary>
         private void ForwardRayCast()
         {
-            Ray fwdRay = new Ray(this.transform.position, Vector3.right);
+            Ray fwdRay = new Ray(new Vector3(this.transform.position.x, this.transform.position.y - 5, this.transform.position.z), Vector3.right);
 
             RaycastHit hit;
 

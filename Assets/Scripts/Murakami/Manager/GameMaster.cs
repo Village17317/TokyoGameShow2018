@@ -32,11 +32,12 @@ namespace Village {
         public enum GameMode {
             Start,          //ゲーム開始時
             Game,           //ゲーム中
-            GameReStart,    //
+            GameReStart,    //リスタート
             GameClear,      //ゲームクリア時
             GameOver,       //ゲームオーバー時
             Pause,          //ポーズ中
         }
+
         #endregion
 
         #region private
@@ -102,6 +103,8 @@ namespace Village {
             gameClearCanvas.canvas.gameObject.SetActive(false);
             gameOverCanvas.canvas.gameObject.SetActive(false);
 
+            blackCurtain.material.SetFloat("_Threshold",0);
+
             PlayBGM(SceneManager.GetActiveScene().name);
         }
 
@@ -127,8 +130,14 @@ namespace Village {
         /// 指定した時間後にGameModeをGameにする。
         /// </summary>
         private IEnumerator WaitTime(float second) {
+            yield return new WaitForSeconds(0.1f);
+            for(int i = 0;blackCurtain.material.GetFloat("_Threshold") < 1;i++) {
+                var value = blackCurtain.material.GetFloat("_Threshold");
+                value = Mathf.Min(value + 0.05f,1);
+                blackCurtain.material.SetFloat("_Threshold",value);
+                yield return new WaitForEndOfFrame();
+            }
             yield return new WaitForSeconds(0.5f);
-
             for(int i = 0;i < 30;i++) {
                 var value = stageUI.startCountDownImage.material.GetFloat("_Threshold");
                 value = Mathf.Min(value + 0.05f,1);
@@ -173,6 +182,9 @@ namespace Village {
         /// 外部からのゲームモードの設定
         /// </summary>
         public void SetGameMode(GameMode nextMode) {
+            if(mode == GameMode.GameClear) return;
+            if(mode == GameMode.GameOver)  return;
+         
             mode = nextMode;
         }
 
@@ -360,8 +372,10 @@ namespace Village {
         /// 渡したシーンの名前でシーンを切り替える
         /// </summary>
         private IEnumerator SceneChenge(string sceneName) {
-            for(int i = 0;blackCurtain.color.a <= 1;i++) {
-                blackCurtain.color += new Color(0,0,0,0.01f);
+            for(int i = 0;blackCurtain.material.GetFloat("_Threshold") > 0;i++) {
+                var value = blackCurtain.material.GetFloat("_Threshold");
+                value = Mathf.Max(value - 0.05f,0);
+                blackCurtain.material.SetFloat("_Threshold",value);
                 yield return new WaitForEndOfFrame();
             }
             yield return new WaitForSeconds(1);
@@ -385,6 +399,7 @@ namespace Village {
 
         private void OnDisable() {
             stageUI.startCountDownImage.material.SetFloat("_Threshold",0);
+            blackCurtain.material.SetFloat("_Threshold",1);
         }
     }
 

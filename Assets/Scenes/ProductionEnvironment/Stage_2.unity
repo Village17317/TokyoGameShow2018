@@ -15409,12 +15409,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageUI:
     startCountDownImage: {fileID: 1697483506}
-    startCountDownSprites:
-    - {fileID: 21300000, guid: 4c473c772572ebd449661bf0855a80cc, type: 3}
-    - {fileID: 21300000, guid: 6f45da6e7f89288468aa8e8fce2a712f, type: 3}
-    - {fileID: 21300000, guid: 330e9aee348721445be15009e11c1a7b, type: 3}
-    - {fileID: 21300000, guid: 367d1f07dcf297b45a63b37a8c00ffef, type: 3}
-    timeImage: {fileID: 0}
   mode: 0
   maxTime: 120
   roomLight: {fileID: 448903472}
@@ -20087,12 +20081,12 @@ Prefab:
     - target: {fileID: 224617598760757784, guid: 02a2294e3c5365f4c839670c2c1954d7,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 622.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224617598760757784, guid: 02a2294e3c5365f4c839670c2c1954d7,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 156.41998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224617598760757784, guid: 02a2294e3c5365f4c839670c2c1954d7,
         type: 2}

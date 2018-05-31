@@ -243,7 +243,7 @@ MonoBehaviour:
     type: 2}
   generationEffectPrefab: {fileID: 1872661989079852, guid: 01635e6d9cfc2e9469c5d9a153d9c75c,
     type: 2}
-  offset: {x: 0, y: 40, z: 0}
+  generationPointTf: {fileID: 4205992404256368}
   myNumber: 0
 --- !u!198 &198940162249321746
 ParticleSystem:

@@ -40,14 +40,14 @@ namespace Village {
         [Header("動くスピード"),SerializeField]        private float animationSpeed = 1;
         [Header("タイトルロゴ"),SerializeField]        private Image logo;
         [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
-        [Header("暗幕"),SerializeField]               private Image cartain;
+        [Header("暗幕"),SerializeField]               private Image curtain;
 
         private TitleStep step = TitleStep.STEP_1;
         private bool isGetAxis = false;
         private int stageNumber = 0;
 
         private void Awake() {
-            cartain.color = new Color(0,0,0,0);
+            curtain.material.SetFloat("_Threshold",1);
             ActiveObjectVisible(0);
             ActiveShadowObjectVisible(-1);
         }
@@ -70,7 +70,7 @@ namespace Village {
         /// タイトルロゴの表示、決定ボタン入力後Step２に切り替え
         /// </summary>
         private void Step_1() {
-            if(Input.GetButtonDown("Button_Start")) {
+            if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
                 ActiveShadowObjectVisible(0);
                 step = TitleStep.STEP_2;
             }
@@ -107,7 +107,7 @@ namespace Village {
             if(Input.GetAxisRaw("Horizontal") == 0 && isGetAxis) {
                 isGetAxis = false;
             }
-            if(Input.GetButtonDown("Button_Start")) {
+            if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
                 StartCoroutine(BlackOut());
                 step = TitleStep.DEFAULT;
             }
@@ -120,8 +120,10 @@ namespace Village {
         }
 
         private IEnumerator BlackOut() {
-            for(int i = 0;cartain.color.a < 1;i++) {
-                cartain.color += new Color(0,0,0,0.01f);
+            for(int i = 0;curtain.material.GetFloat("_Threshold") > 0;i++) {
+                var value = curtain.material.GetFloat("_Threshold");
+                value = Mathf.Max(value - 0.05f,0);
+                curtain.material.SetFloat("_Threshold",value);
                 yield return new WaitForEndOfFrame();
             }
             step = TitleStep.STEP_4;
@@ -158,6 +160,10 @@ namespace Village {
             if(min >= max) return x;
             int n = (x - min) % (max - min);
             return (n >= 0) ? (n + min) : (n + max);
+        }
+
+        private void OnDisable() {
+            curtain.material.SetFloat("_Threshold",0);
         }
     }
 

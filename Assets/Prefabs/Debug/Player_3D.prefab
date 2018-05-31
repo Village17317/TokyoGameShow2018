@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 75493536567790218}
   m_Layer: 0
   m_Name: Player_3D
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ Light:
   m_SpotAngle: 92
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: 3
     m_CustomResolution: -1
     m_Strength: 1
@@ -192,10 +192,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   jumpForce: 1500
-  checkGroundRayLength: 5
+  checkGroundRayLength: 6
   horizontal:
     min: -340
-    max: 600
+    max: 400
   vertical:
     min: -15
     max: 45
@@ -220,6 +220,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

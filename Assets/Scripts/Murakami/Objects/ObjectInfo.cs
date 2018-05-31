@@ -48,7 +48,6 @@ namespace Village {
             colliders = shadow.GetComponentsInChildren<Collider>();
 
             Vector3 target = transform.position + offset;
-            target.z = Mathf.Abs(target.z);
             rayTf.LookAt(target);
 
             RayHit();
@@ -61,7 +60,6 @@ namespace Village {
 
         private void Update() {
             Vector3 target = transform.position + offset;
-            //target.z = Mathf.Abs(target.z);
             rayTf.LookAt(target);
 
             RayHit();
@@ -106,17 +104,19 @@ namespace Village {
         /// 距離に応じて色の薄さを変える
         /// </summary>
         private void ShadowTransParent() {
-            float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
+            var min = new Vector3(lightTf.position.x,lightTf.position.y,-15);
+            float prop = GetLength(min,transform.position,lightTf.position);
 
-            shadowMat.color = new Color(0,0,0,1.3f - prop);
+            shadowMat.color = new Color(0,0,0, 0.7f + prop);
         }
 
         /// <summary>
         /// 距離に応じて大きさを変える
         /// </summary>
         private void ShadowSizeChenge() {
-            float prop = GetLength(lightTf.position,shadowTf.position,transform.position);
-            shadowTf.localScale = constScale * (1.3f - prop);
+            var min = new Vector3(lightTf.position.x,lightTf.position.y,-15);
+            float prop = GetLength(min,transform.position,lightTf.position);
+            shadowTf.localScale = constScale * (1 + prop);
         }
 
         /// <summary>

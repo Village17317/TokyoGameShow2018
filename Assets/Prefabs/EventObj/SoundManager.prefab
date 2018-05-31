@@ -158,6 +158,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     isLoop: 1
+  - soundKey: Stage_Tutorial
+    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
+    volume: 1
+    pitch: 1
+    isLoop: 1
   seClass: []
   bgmAudio: {fileID: 82791481031507516}
   seAudio: {fileID: 0}

@@ -14,7 +14,7 @@ namespace Village {
     public class EnemySpawn : MonoBehaviour {
         [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private GameObject generationEffectPrefab;
-        [SerializeField] private Vector3 offset;
+        [SerializeField] private Transform generationPointTf;
         [SerializeField] private int myNumber = 0;
 
         private UpdateManager manager;
@@ -66,7 +66,8 @@ namespace Village {
             activeNumber = myNumber;
             time = 0;
             spawnCount = 0;
-            generationPoint = point + offset;
+
+            generationPoint = generationPointTf.position;
         }
 
         /// <summary>

@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4762305113028438}
   - component: {fileID: 65393507253521582}
   - component: {fileID: 114923891262096986}
-  - component: {fileID: 54887753857248372}
   m_Layer: 0
   m_Name: porn_0420
   m_TagString: Object3D
@@ -186,21 +185,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1791079945919246}
   m_Mesh: {fileID: 4300000, guid: 8a86aab67e089b0458cfd48b3f5110a3, type: 3}
---- !u!54 &54887753857248372
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1845795923381498}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!65 &65393507253521582
 BoxCollider:
   m_ObjectHideFlags: 1

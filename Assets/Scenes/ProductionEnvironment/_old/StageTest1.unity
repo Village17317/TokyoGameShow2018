@@ -7215,6 +7215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowObj: {fileID: 1783182505438154, guid: d9e8d21213210d941a624f5ae25af8e4, type: 2}
   shadowMatOrigin: {fileID: 2100000, guid: d77dfe6d279615447a23efeef680ceb2, type: 2}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1060009904
 GameObject:
   m_ObjectHideFlags: 0
@@ -8495,12 +8496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageUI:
     startCountDownImage: {fileID: 1621083672}
-    startCountDownSprites:
-    - {fileID: 21300000, guid: 4c473c772572ebd449661bf0855a80cc, type: 3}
-    - {fileID: 21300000, guid: 6f45da6e7f89288468aa8e8fce2a712f, type: 3}
-    - {fileID: 21300000, guid: 330e9aee348721445be15009e11c1a7b, type: 3}
-    - {fileID: 21300000, guid: 367d1f07dcf297b45a63b37a8c00ffef, type: 3}
-    timeImage: {fileID: 1468674320}
   mode: 0
   maxTime: 120
   roomLight: {fileID: 448903472}
@@ -8525,7 +8520,9 @@ MonoBehaviour:
     cursorPositions:
     - {fileID: 530818138}
     - {fileID: 1240362982}
+  blackCurtain: {fileID: 0}
   nextScene: DemoStage_2
+  titleScene: Scene_Title
 --- !u!4 &1276226489
 Transform:
   m_ObjectHideFlags: 0
@@ -9441,26 +9438,6 @@ Prefab:
     - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 145
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 145
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 145
-      objectReference: {fileID: 0}
-    - target: {fileID: 1726112602645924, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739942787641594, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c95a2698f6c69f4aab5780ac250dfbd, type: 2}

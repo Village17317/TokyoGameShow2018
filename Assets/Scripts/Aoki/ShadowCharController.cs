@@ -15,7 +15,7 @@ namespace INI
     {
         public float walkSpeed = 0.1f, fwRayDistance = 10f, dwRayDistance = 10.8f, sfRayDistance;
 
-        public Vector3 jumpForce, fwRayOrigin;
+        public Vector3 jumpForce, fwRayOrigin, sfRayOrigin;
 
         [SerializeField]
         private Rigidbody shadowCharRb;
@@ -88,7 +88,7 @@ namespace INI
         /// </summary>
         private void ForwardRayCast()
         {
-            Ray fwdRay = new Ray(new Vector3(this.transform.position.x, this.transform.position.y - 5, this.transform.position.z), Vector3.right);
+            Ray fwdRay = new Ray(this.transform.position + fwRayOrigin, Vector3.right);
 
             RaycastHit hit;
 
@@ -109,10 +109,10 @@ namespace INI
 
         private void SafetyRayCast()
         {
-            Ray sfRay = new Ray(new Vector3(this.transform.position.x + 10, this.transform.position.y, this.transform.position.z), Vector3.down);
+            Ray sfRay = new Ray(this.transform.position + sfRayOrigin, Vector3.down);
 
             RaycastHit hit;
-
+            
             Debug.DrawRay(sfRay.origin, sfRay.direction * sfRayDistance, Color.blue);
 
             if (Physics.Raycast(sfRay, out hit, sfRayDistance))

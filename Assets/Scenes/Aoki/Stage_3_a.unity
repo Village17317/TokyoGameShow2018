@@ -15108,8 +15108,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114977604049649320, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c22caf1b6376db4085c8bf517f4dd8c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1166131403 stripped
@@ -15124,21 +15123,10 @@ Rigidbody:
   m_PrefabInternal: {fileID: 1166131402}
 --- !u!114 &1166131406 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114004264183949046, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
+  m_PrefabParentObject: {fileID: 114687325221840184, guid: 9c22caf1b6376db4085c8bf517f4dd8c,
     type: 2}
   m_PrefabInternal: {fileID: 1166131402}
   m_Script: {fileID: 11500000, guid: bd8d1d928fa8df641a0aab072c530959, type: 3}
---- !u!75 &1166131408
-ConstantForce:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1166131403}
-  m_Enabled: 1
-  m_Force: {x: 0, y: -30, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &1168853125
 GameObject:
   m_ObjectHideFlags: 0
@@ -16147,12 +16135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageUI:
     startCountDownImage: {fileID: 1621083672}
-    startCountDownSprites:
-    - {fileID: 21300000, guid: 4c473c772572ebd449661bf0855a80cc, type: 3}
-    - {fileID: 21300000, guid: 6f45da6e7f89288468aa8e8fce2a712f, type: 3}
-    - {fileID: 21300000, guid: 330e9aee348721445be15009e11c1a7b, type: 3}
-    - {fileID: 21300000, guid: 367d1f07dcf297b45a63b37a8c00ffef, type: 3}
-    timeImage: {fileID: 1468674320}
   mode: 0
   maxTime: 120
   roomLight: {fileID: 448903472}
@@ -16177,7 +16159,9 @@ MonoBehaviour:
     cursorPositions:
     - {fileID: 530818138}
     - {fileID: 1240362982}
+  blackCurtain: {fileID: 0}
   nextScene: Stage_1
+  titleScene: Scene_Title
 --- !u!4 &1276226489
 Transform:
   m_ObjectHideFlags: 0
@@ -27420,10 +27404,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateList:
+  - {fileID: 1166131406}
   - {fileID: 349809233}
   - {fileID: 373847634}
   - {fileID: 728428695}
-  - {fileID: 1166131406}
   - {fileID: 1276226488}
 --- !u!4 &1939471046
 Transform:

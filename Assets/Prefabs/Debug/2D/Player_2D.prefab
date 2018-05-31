@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212888637208690028}
   - component: {fileID: 54095140924267582}
   - component: {fileID: 136107286988897242}
-  - component: {fileID: 75237070236289280}
   - component: {fileID: 114687325221840184}
   - component: {fileID: 114339357140857050}
+  - component: {fileID: 75759270640289870}
   m_Layer: 10
   m_Name: Player_2D
   m_TagString: Player
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799186995179836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -449.1, y: 28.1, z: 41.2}
+  m_LocalPosition: {x: -449.1, y: 94.8, z: 41.2}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,7 +60,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!75 &75237070236289280
+--- !u!75 &75759270640289870
 ConstantForce:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,6 +99,8 @@ MonoBehaviour:
   dwRayDistance: 11
   sfRayDistance: 30
   jumpForce: {x: 750, y: 2000, z: 0}
+  fwRayOrigin: {x: 0, y: -5, z: 0}
+  sfRayOrigin: {x: 10, y: 0, z: 0}
   shadowCharRb: {fileID: 54095140924267582}
   grounded: 0
   state: 1

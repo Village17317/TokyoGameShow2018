@@ -106,6 +106,8 @@ namespace Village {
             blackCurtain.material.SetFloat("_Threshold",0);
 
             PlayBGM(SceneManager.GetActiveScene().name);
+
+
         }
 
         public override void Run() {
@@ -144,6 +146,7 @@ namespace Village {
                 stageUI.startCountDownImage.material.SetFloat("_Threshold",value);
                 yield return new WaitForEndOfFrame();
             }
+
             stageUI.startCountDownImage.gameObject.SetActive(false);
             StartCountDown();
             mode = GameMode.Game;

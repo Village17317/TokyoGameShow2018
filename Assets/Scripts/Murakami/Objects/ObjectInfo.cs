@@ -2,7 +2,7 @@
  *	作成者     :村上和樹
  *	機能説明   :オブジェクトの情報
  * 	初回作成日 :2018/04/15
- *	最終更新日 :2018/05/07
+ *	最終更新日 :2018/06/01
  */
 
 using System.Collections;
@@ -104,9 +104,8 @@ namespace Village {
         /// 距離に応じて色の薄さを変える
         /// </summary>
         private void ShadowTransParent() {
-            var min = new Vector3(lightTf.position.x,lightTf.position.y,-15);
+            var min = new Vector3(lightTf.position.x,lightTf.position.y,-18);
             float prop = GetLength(min,transform.position,lightTf.position);
-
             shadowMat.color = new Color(0,0,0, 0.7f + prop);
         }
 
@@ -114,7 +113,7 @@ namespace Village {
         /// 距離に応じて大きさを変える
         /// </summary>
         private void ShadowSizeChenge() {
-            var min = new Vector3(lightTf.position.x,lightTf.position.y,-15);
+            var min = new Vector3(lightTf.position.x,lightTf.position.y,-18);
             float prop = GetLength(min,transform.position,lightTf.position);
             shadowTf.localScale = constScale * (1 + prop);
         }

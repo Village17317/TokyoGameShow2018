@@ -96,9 +96,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 0.4
   fwRayDistance: 10
-  dwRayDistance: 10.8
+  dwRayDistance: 11
   sfRayDistance: 30
   jumpForce: {x: 750, y: 2000, z: 0}
+  fwRayOrigin: {x: 0, y: 0, z: 0}
+  sfRayOrigin: {x: 10, y: 0, z: 0}
   shadowCharRb: {fileID: 54393138472035302}
   grounded: 0
   state: 0

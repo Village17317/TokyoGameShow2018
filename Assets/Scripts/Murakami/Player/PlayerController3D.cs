@@ -22,11 +22,6 @@ namespace Village {
         private float constSpeed;
         private LayerMask mask = 1 << 0;
 
-        private Transform catchingTf = null;
-        private bool isCatch = false;
-        private bool isRotateWait = false;
-
-
         public MoveLimit GetHorizontalLimit {
             get {
                 return horizontal;
@@ -37,19 +32,15 @@ namespace Village {
             constSpeed = speed;
         }
 
-        private void Start() {
-
-        }
 
         public override void Run() {
-            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Start
-            || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game
+            if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game
             || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
                 //メイン処理
+                Turn();
                 Move();
                 Jump();
-                //ObjectMove();
-                //ObjectRotate();
+
             }
         }
 
@@ -59,8 +50,6 @@ namespace Village {
         private void Move() {
             //一旦格納
             Vector3 pos = transform.position;
-            //速度制限
-            //speed = isCatch ? constSpeed * 0.5f : constSpeed;
             //位置制限
             pos += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
             pos = new Vector3(Mathf.Clamp(pos.x,horizontal.min,horizontal.max),
@@ -70,6 +59,9 @@ namespace Village {
             transform.position = pos;
         }
 
+        /// <summary>
+        /// ジャンプ
+        /// </summary>
         private void Jump() {
             Debug.DrawRay(transform.position,-Vector3.up * checkGroundRayLength,Color.red);
             if(Input.GetButtonDown("Button_B") && CheckGround()) {
@@ -77,6 +69,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// 地面の接触判定
+        /// </summary>
         private bool CheckGround() {
             Ray ray = new Ray(transform.position,-Vector3.up);
 
@@ -94,55 +89,17 @@ namespace Village {
             return returnFlag;
         }
 
-        /// <summary>
-        /// 掴みながらオブジェクトを動かす
-        /// </summary>
-        private void ObjectMove() {
-            isCatch = catchingTf != null && Input.GetButton("Button_B");
-            if(isCatch) {
-                //一旦格納
-                Vector3 pos = catchingTf.position;
-                //速度制限
-                speed = constSpeed * 0.5f;
-                //位置制限
-                pos += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
-                pos = new Vector3(Mathf.Clamp(pos.x,horizontal.min,horizontal.max),
-                                  pos.y,
-                                  Mathf.Clamp(pos.z,vertical.min,vertical.max));
-                //再格納
-                catchingTf.position = pos;
-            }               
+        private void Turn() {
+            if(Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) return;
+
+            float x = Input.GetAxis("Horizontal") * 100;
+            float z = Input.GetAxis("Vertical") * 100;
+
+            Vector3 origin = transform.position;
+            Vector3 dir = origin + new Vector3(x,0,z);
+
+            transform.LookAt(dir);
         }
 
-        /// <summary>
-        /// 掴みながら回転させる
-        /// </summary>
-        private void ObjectRotate() {
-            if(catchingTf == null || !Input.GetButton("Button_B")) return;
-            if(Input.GetButtonDown("Button_LB") && !isRotateWait)
-                StartCoroutine(AsyncRotate(1));
-            else if(Input.GetButtonDown("Button_RB") && !isRotateWait)
-                StartCoroutine(AsyncRotate(-1));
-        }
-
-        private IEnumerator AsyncRotate(float r) {
-            for(float i = 0;i < 90;i++) {
-                isRotateWait = true;
-                catchingTf.Rotate(0,r,0);
-                yield return new WaitForEndOfFrame();
-            }
-            isRotateWait = false;
-        }
-
-        private void OnCollisionStay(Collision collision) {
-
-            if(collision.gameObject.tag != "Object3D") return;
-            if(catchingTf == null) catchingTf = collision.transform;   
-        }
-
-        private void OnCollisionExit(Collision collision) {
-            if(collision.gameObject.tag != "Object3D") return;
-            if(catchingTf != null) catchingTf = null;
-        }
     }
 }

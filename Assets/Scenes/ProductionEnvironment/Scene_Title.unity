@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32218543, g: 0.3132522, b: 0.2673172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4374901, g: 0.48531127, b: 0.56558615, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ RectTransform:
   m_GameObject: {fileID: 207392620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 129.6, y: 36.8, z: 7.4}
-  m_LocalScale: {x: 0.003168268, y: 0.003168268, z: 0.003168268}
+  m_LocalScale: {x: 0.0031701915, y: 0.0031701915, z: 0.0031701915}
   m_Children:
   - {fileID: 1351631422}
   m_Father: {fileID: 0}
@@ -592,7 +592,7 @@ RectTransform:
   m_GameObject: {fileID: 213256193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 129.6, y: 36.8, z: 56.4}
-  m_LocalScale: {x: 0.1584134, y: 0.1584134, z: 0.1584134}
+  m_LocalScale: {x: 0.15850957, y: 0.15850957, z: 0.15850957}
   m_Children:
   - {fileID: 1350020648}
   m_Father: {fileID: 0}
@@ -661,13 +661,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 244536099}
-  m_LocalRotation: {x: -0.02950677, y: -0.14104207, z: 0.014132319, w: 0.9894629}
-  m_LocalPosition: {x: -135.4, y: 3, z: -50.4}
-  m_LocalScale: {x: 624.67596, y: 624.6761, z: 624.6761}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
+  m_LocalPosition: {x: 0, y: 0, z: -200}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: -3.1190002, y: -16.282001, z: 2.0830002}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!1 &322916751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,10 +1272,12 @@ MonoBehaviour:
   - path: Stage_3
     numberObject: {fileID: 1846335191}
     shadowObject: {fileID: 1798852133}
-  - path: Scene_4
+  - path: Stage_4
     numberObject: {fileID: 1540490151}
     shadowObject: {fileID: 2032566760}
   curtain: {fileID: 1351631423}
+  directionalLight: {fileID: 244536100}
+  pointLight: {fileID: 2104530920}
 --- !u!4 &634540989
 Transform:
   m_ObjectHideFlags: 0
@@ -2932,7 +2934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: ca7246b1e1dcf8e4e86045ef3f2d2f81, type: 2}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4879,7 +4881,7 @@ Light:
   m_Color: {r: 0.64705884, g: 0.46514738, b: 0.34731835, a: 1}
   m_Intensity: 1.25
   m_Range: 500
-  m_SpotAngle: 92
+  m_SpotAngle: 179
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -4895,7 +4897,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967263
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1

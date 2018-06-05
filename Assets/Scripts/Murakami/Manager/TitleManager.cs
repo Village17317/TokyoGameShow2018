@@ -41,7 +41,8 @@ namespace Village {
         [Header("タイトルロゴ"),SerializeField]        private Image logo;
         [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
         [Header("暗幕"),SerializeField]               private Image curtain;
-
+        [SerializeField] private Light directionalLight;
+        [SerializeField] private Light pointLight;
         private TitleStep step = TitleStep.STEP_1;
         private bool isGetAxis = false;
         private int stageNumber = 0;

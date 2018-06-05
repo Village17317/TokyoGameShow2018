@@ -99,7 +99,7 @@ MonoBehaviour:
   dwRayDistance: 11
   sfRayDistance: 30
   jumpForce: {x: 750, y: 2000, z: 0}
-  fwRayOrigin: {x: 0, y: -5, z: 0}
+  fwRayOrigin: {x: 0, y: 0, z: 0}
   sfRayOrigin: {x: 10, y: 0, z: 0}
   shadowCharRb: {fileID: 54095140924267582}
   grounded: 0

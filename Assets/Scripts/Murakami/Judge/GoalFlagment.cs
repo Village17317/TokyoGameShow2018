@@ -17,8 +17,5 @@ namespace Village {
                 GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameClear); //MainManagerでGameModeをEndに切り替える
             }
         }
-        private void OnTriggerEnter2D(Collider2D collision) {
-
-        }
     }
 }

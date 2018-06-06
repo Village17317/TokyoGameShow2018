@@ -51,6 +51,7 @@ namespace Village {
         private int stageNumber = 0;
 
         private void Awake() {
+            FadeManager.getInstance.SetCanvasCamera(Camera.main);
             ActiveObjectVisible(0);
             ActiveShadowObjectVisible(-1);
         }
@@ -76,6 +77,7 @@ namespace Village {
         /// </summary>
         private void Step_1() {
             if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
+                SoundManager.Instance.PlaySE("select",transform);
                 ActiveShadowObjectVisible(0);
                 step = TitleStep.STEP_2;
             }
@@ -101,20 +103,21 @@ namespace Village {
                 stageNumber = Wrap(stageNumber + 1,0,stageNumberList.Count);
                 ActiveObjectVisible(stageNumber);
                 ActiveShadowObjectVisible(stageNumber);
+                SoundManager.Instance.PlaySE("choice",transform);
                 isGetAxis = true;
             }
             if(Input.GetAxisRaw("Horizontal") < 0 && !isGetAxis) {
                 stageNumber = Wrap(stageNumber - 1,0,stageNumberList.Count);
                 ActiveObjectVisible(stageNumber);
                 ActiveShadowObjectVisible(stageNumber);
+                SoundManager.Instance.PlaySE("choice",transform);
                 isGetAxis = true;
             }
             if(Input.GetAxisRaw("Horizontal") == 0 && isGetAxis) {
                 isGetAxis = false;
             }
             if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
-                //StartCoroutine(BlackOut());
-                //step = TitleStep.DEFAULT;
+                SoundManager.Instance.PlaySE("select",transform);
 
                 step = TitleStep.FadeOut;
             }

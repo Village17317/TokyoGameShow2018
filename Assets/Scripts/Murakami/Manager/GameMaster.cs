@@ -36,18 +36,15 @@ namespace Village {
             GameClear,      //ゲームクリア時
             GameOver,       //ゲームオーバー時
             Pause,          //ポーズ中
+            GameAllClear,   //全てのゲームが終了したとき
         }
 
         #endregion
 
         #region private
         private static GameMaster instance;
-        //private bool isCountDown = false;
-        //private int deadCount = 0;
-        //private bool isReStart = false;
         private float range = 0;
         private bool isStick = false;
-        //private float time = 0;
         #endregion
 
         #region Serialize
@@ -55,9 +52,7 @@ namespace Village {
         [SerializeField] private StageUI stageUI;
         [Space(8)]
         [SerializeField] private GameMode mode = GameMode.Start;
-        //[SerializeField] private float    maxTime = 300;//最大時間
         [SerializeField] private Light    roomLight;
-        //[SerializeField] private int      deadCountMax = 3;
 
         [Space(16)]
         [SerializeField] private OtherCanvas pauseMenuCanvas;
@@ -66,10 +61,11 @@ namespace Village {
         [Space(16)]
         [SerializeField] private OtherCanvas gameOverCanvas;
         [Space(16)]
-        //[SerializeField] private Image       blackCurtain;
 
         [SerializeField] private string nextScene = "";
         [SerializeField] private string titleScene = "Scene_Title";
+        [SerializeField] private bool isNextEnding = false;
+
         #endregion
 
         #region Propaty
@@ -88,7 +84,6 @@ namespace Village {
         private void Awake() {
             instance = this;
 
-            InitializeUI();
             StartCoroutine(WaitTime(-1));
             range = roomLight.range;
             roomLight.range = 0;
@@ -99,29 +94,22 @@ namespace Village {
 
             FadeManager.getInstance.SetCanvasCamera(Camera.main);
 
-            //blackCurtain.material.SetFloat("_Threshold",0);
-
             PlayBGM(SceneManager.GetActiveScene().name);
 
 
         }
 
         public override void Run() {
-            roomLight.intensity = Random.Range(1,1.08f);
             switch(mode) {
-                case GameMode.Start:        OnStart();      break;
-                case GameMode.Game:         OnGame();       break;
-                case GameMode.GameReStart:  OnReStart();    break;
-                case GameMode.GameClear:    OnGameClear();  break;
-                case GameMode.GameOver:     OnGameOver();   break;
-                case GameMode.Pause:        PauseMenu();    break;
-                default:                                    break;
+                case GameMode.Start:        OnStart();        break;
+                case GameMode.Game:         OnGame();         break;
+                case GameMode.GameReStart:  OnReStart();      break;
+                case GameMode.GameClear:    OnGameClear();    break;
+                case GameMode.GameOver:     OnGameOver();     break;
+                case GameMode.Pause:        PauseMenu();      break;
+                case GameMode.GameAllClear: OnGameAllClear(); break;
+                default:                                      break;
             }
-        }
-
-        private IEnumerator ReStartWaitTime(float second) {
-            yield return new WaitForSeconds(second);
-            mode = GameMode.Game;
         }
 
         /// <summary>
@@ -150,10 +138,16 @@ namespace Village {
         /// 外部からのゲームモードの設定
         /// </summary>
         public void SetGameMode(GameMode nextMode) {
-            if(mode == GameMode.GameClear) return;
-            if(mode == GameMode.GameOver)  return;
-         
-            mode = nextMode;
+            if(mode == GameMode.GameClear)    return;
+            if(mode == GameMode.GameOver)     return;
+            if(mode == GameMode.GameAllClear) return;
+
+            if(nextMode == GameMode.GameClear && isNextEnding) {
+                mode = GameMode.GameAllClear;
+            }
+            else {
+                mode = nextMode;
+            }
         }
 
         /// <summary>
@@ -170,6 +164,7 @@ namespace Village {
         /// ゲーム中の処理
         /// </summary>
         private void OnGame() {
+            roomLight.intensity = Random.Range(1,1.08f);
             if(Input.GetButtonDown("Button_Start")) {
                 OnPause();
             }
@@ -213,6 +208,9 @@ namespace Village {
                 if(pauseMenuCanvas.cursorNumber < 0) {
                     pauseMenuCanvas.cursorNumber = 0;
                 }
+                else {
+                    SoundManager.Instance.PlaySE("choice",transform);
+                }
                 pauseMenuCanvas.cursorTf.position = pauseMenuCanvas.cursorPositions[pauseMenuCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") < 0 && !isStick) {//下方向入力時
@@ -221,25 +219,32 @@ namespace Village {
                 if(pauseMenuCanvas.cursorNumber >= pauseMenuCanvas.cursorPositions.Length) {
                     pauseMenuCanvas.cursorNumber = pauseMenuCanvas.cursorPositions.Length - 1;
                 }
+                else {
+                    SoundManager.Instance.PlaySE("choice",transform);
+                }
                 pauseMenuCanvas.cursorTf.position = pauseMenuCanvas.cursorPositions[pauseMenuCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") == 0) {//方向未入力時
                 isStick = false;
             }
 
-            if(Input.GetButtonDown("Button_A")) {//決定時
+            if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {//決定時
                 if(pauseMenuCanvas.cursorNumber == 0) {
                     OffPause();//ポーズ画面の終了
+                    SoundManager.Instance.PlaySE("cancel",transform);
                 }
                 else if(pauseMenuCanvas.cursorNumber == 1) {
                     StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));//現在のシーンを再度読み込み
+                    SoundManager.Instance.PlaySE("select",transform);
                 }
                 else if(pauseMenuCanvas.cursorNumber == 2) {
                     StartCoroutine(SceneChenge(titleScene));//タイトル画面の読み込み
+                    SoundManager.Instance.PlaySE("select",transform);
                 }
             }
             if(Input.GetButtonDown("Button_Start")) {//スタートボタン入力時
                 OffPause();//ポーズ画面の終了
+                SoundManager.Instance.PlaySE("cancel",transform);
             }
         }
 
@@ -255,6 +260,9 @@ namespace Village {
                 if(gameClearCanvas.cursorNumber < 0) {
                     gameClearCanvas.cursorNumber = 0;
                 }
+                else {
+                    SoundManager.Instance.PlaySE("choice",transform);
+                }
                 gameClearCanvas.cursorTf.position = gameClearCanvas.cursorPositions[gameClearCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") < 0 && !isStick) {//下方向入力時
@@ -263,13 +271,16 @@ namespace Village {
                 if(gameClearCanvas.cursorNumber >= gameClearCanvas.cursorPositions.Length) {
                     gameClearCanvas.cursorNumber = gameClearCanvas.cursorPositions.Length - 1;
                 }
+                else {
+                    SoundManager.Instance.PlaySE("choice",transform);
+                }
                 gameClearCanvas.cursorTf.position = gameClearCanvas.cursorPositions[gameClearCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") == 0) {//方向未入力時
                 isStick = false;
             }
 
-            if(Input.GetButtonDown("Button_A")) {//決定時
+            if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {//決定時
                 if(gameClearCanvas.cursorNumber == 0) {//次のステージシーンへ
                     StartCoroutine(SceneChenge(nextScene));
                 }
@@ -279,6 +290,7 @@ namespace Village {
                 else if(gameClearCanvas.cursorNumber == 2) {
                     StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行
                 }
+                SoundManager.Instance.PlaySE("select",transform);
             }
         }
 
@@ -294,6 +306,9 @@ namespace Village {
                 if(gameOverCanvas.cursorNumber < 0) {
                     gameOverCanvas.cursorNumber = 0;
                 }
+                else {
+                    SoundManager.Instance.PlaySE("choice",transform);
+                }
                 gameOverCanvas.cursorTf.position = gameOverCanvas.cursorPositions[gameOverCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") < 0 && !isStick) {//下方向入力時
@@ -302,45 +317,40 @@ namespace Village {
                 if(gameOverCanvas.cursorNumber >= gameOverCanvas.cursorPositions.Length) {
                     gameOverCanvas.cursorNumber = gameOverCanvas.cursorPositions.Length - 1;
                 }
+                else {
+                    SoundManager.Instance.PlaySE("choice",transform);
+                }
                 gameOverCanvas.cursorTf.position = gameOverCanvas.cursorPositions[gameOverCanvas.cursorNumber].position;
             }
             else if(Input.GetAxis("Vertical") == 0) {//方向未入力時
                 isStick = false;
             }
 
-            if(Input.GetButtonDown("Button_A")) {
+            if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
                 if(gameOverCanvas.cursorNumber == 0) {//もう一度やりましょう
                     StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));
                 }
                 else if(gameOverCanvas.cursorNumber == 1) {
                     StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行
                 }
+                SoundManager.Instance.PlaySE("select",transform);
             }
+        }
+
+        private void OnGameAllClear() {
+            SceneManager.LoadScene(nextScene);
         }
 
         /// <summary>
         /// 渡したシーンの名前でシーンを切り替える
         /// </summary>
         private IEnumerator SceneChenge(string sceneName) {
-            //for(int i = 0;blackCurtain.material.GetFloat("_Threshold") > 0;i++) {
-            //    var value = blackCurtain.material.GetFloat("_Threshold");
-            //    value = Mathf.Max(value - 0.05f,0);
-            //    blackCurtain.material.SetFloat("_Threshold",value);
-            //    yield return new WaitForEndOfFrame();
-            //}
+            roomLight.range = 0;
             while(!FadeManager.getInstance.FadeOut()) {
                 yield return null;
             }
             yield return new WaitForSeconds(1);
             SceneManager.LoadScene(sceneName);
-        }
-
-        /// <summary>
-        /// UIの初期化処理
-        /// </summary>
-        private void InitializeUI() {
-
-            //stageUI.timeImage.fillAmount = time / maxTime;
         }
 
         /// <summary>
@@ -352,7 +362,6 @@ namespace Village {
 
         private void OnDisable() {
             stageUI.startCountDownImage.material.SetFloat("_Threshold",0);
-            //blackCurtain.material.SetFloat("_Threshold",1);
         }
     }
 

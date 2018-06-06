@@ -40,6 +40,7 @@ namespace Village {
             FadeOutComp,
             Default,
         }
+
         private FadeState myState = FadeState.Default;
 
 
@@ -50,13 +51,11 @@ namespace Village {
             }
             else {
                 DontDestroyOnLoad(gameObject);//破棄させない
+
+                curtain.material.SetFloat("_Threshold",1);//暗幕無し
+                loadingImage.color = new Color(loadingImage.color.r,loadingImage.color.g,loadingImage.color.b,0);//透明度０
+                loadingText.color =  new Color(loadingText.color.r ,loadingText.color.g ,loadingText.color.b,0 );//透明度０
             }
-
-            curtain.material.SetFloat("_Threshold",0);//暗幕無し
-            loadingImage.color = new Color(1,1,1,1);//透明度０
-            loadingText.color = new Color(1,1,1,1);//透明度０
-
-
         }
 
         public void SetCanvasCamera(Camera cam) {
@@ -93,17 +92,18 @@ namespace Village {
             return false;
         }
 
+
         private IEnumerator FadeInCoroutine() {
             for(int i = 0;curtain.material.GetFloat("_Threshold") < 1;i++) {
                 var value = curtain.material.GetFloat("_Threshold");
                 value = Mathf.Min(value + 0.05f,1);
                 curtain.material.SetFloat("_Threshold",value);
-                loadingImage.color -= new Color(0,0,0,value);
-                loadingText.color -= new Color(0,0,0,value);
+                loadingImage.color -= new Color(0,0,0,0.1f);
+                loadingText.color -=  new Color(0,0,0,0.1f);
                 yield return new WaitForEndOfFrame();
             }
-            loadingImage.color = new Color(1,1,1,0);
-            loadingText.color = new Color(1,1,1,0);
+            loadingImage.color = new Color(loadingImage.color.r,loadingImage.color.g,loadingImage.color.b,0);//透明度０
+            loadingText.color = new Color(loadingText.color.r,loadingText.color.g,loadingText.color.b,0);//透明度０
             yield return new WaitForSeconds(0.5f);
             myState = FadeState.FadeInComp;
         }
@@ -113,22 +113,16 @@ namespace Village {
                 var value = curtain.material.GetFloat("_Threshold");
                 value = Mathf.Max(value - 0.05f,0);
                 curtain.material.SetFloat("_Threshold",value);
-                loadingImage.color += new Color(0,0,0,value);
-                loadingText.color += new Color(0,0,0,value);
+                loadingImage.color += new Color(0,0,0,0.1f);
+                loadingText.color += new Color(0,0,0, 0.1f);
                 yield return new WaitForEndOfFrame();
             }
-            loadingImage.color = new Color(1,1,1,1);
-            loadingText.color = new Color(1,1,1,1);
+            loadingImage.color = new Color(loadingImage.color.r,loadingImage.color.g,loadingImage.color.b,1);//透明度０
+            loadingText.color = new Color(loadingText.color.r,loadingText.color.g,loadingText.color.b,1);//透明度０
             yield return new WaitForSeconds(1);
             myState = FadeState.FadeOutComp;
         }
 
-        private void OnGUI() {
-            GUI.color = Color.white;
-
-            GUILayout.Label("image : " + loadingImage.color);
-            GUILayout.Label("text  : " + loadingText.color);
-        }
 
     }
 

@@ -17,7 +17,7 @@ namespace Village {
 
         [System.Serializable]
         private class StageUI {
-            public Image startCountDownImage; //最初のカウントダウンの表示用
+            public Image startCountDownImage; //STARTのテキストイメージ
         }
 
         [System.Serializable]
@@ -42,12 +42,12 @@ namespace Village {
 
         #region private
         private static GameMaster instance;
-        private bool isCountDown = false;
-        private int deadCount = 0;
-        private bool isReStart = false;
+        //private bool isCountDown = false;
+        //private int deadCount = 0;
+        //private bool isReStart = false;
         private float range = 0;
         private bool isStick = false;
-        private float time = 0;
+        //private float time = 0;
         #endregion
 
         #region Serialize
@@ -55,9 +55,9 @@ namespace Village {
         [SerializeField] private StageUI stageUI;
         [Space(8)]
         [SerializeField] private GameMode mode = GameMode.Start;
-        [SerializeField] private float    maxTime = 300;//最大時間
+        //[SerializeField] private float    maxTime = 300;//最大時間
         [SerializeField] private Light    roomLight;
-        [SerializeField] private int      deadCountMax = 3;
+        //[SerializeField] private int      deadCountMax = 3;
 
         [Space(16)]
         [SerializeField] private OtherCanvas pauseMenuCanvas;
@@ -66,7 +66,7 @@ namespace Village {
         [Space(16)]
         [SerializeField] private OtherCanvas gameOverCanvas;
         [Space(16)]
-        [SerializeField] private Image       blackCurtain;
+        //[SerializeField] private Image       blackCurtain;
 
         [SerializeField] private string nextScene = "";
         [SerializeField] private string titleScene = "Scene_Title";
@@ -76,11 +76,6 @@ namespace Village {
         public static GameMaster getInstance {
             get {
                 return instance;
-            }
-        }
-        public float GetTime {
-            get {
-                return time;
             }
         }
         public GameMode GetGameMode {
@@ -93,7 +88,6 @@ namespace Village {
         private void Awake() {
             instance = this;
 
-            time = maxTime;
             InitializeUI();
             StartCoroutine(WaitTime(-1));
             range = roomLight.range;
@@ -103,7 +97,9 @@ namespace Village {
             gameClearCanvas.canvas.gameObject.SetActive(false);
             gameOverCanvas.canvas.gameObject.SetActive(false);
 
-            blackCurtain.material.SetFloat("_Threshold",0);
+            FadeManager.getInstance.SetCanvasCamera(Camera.main);
+
+            //blackCurtain.material.SetFloat("_Threshold",0);
 
             PlayBGM(SceneManager.GetActiveScene().name);
 
@@ -133,12 +129,10 @@ namespace Village {
         /// </summary>
         private IEnumerator WaitTime(float second) {
             yield return new WaitForSeconds(0.1f);
-            for(int i = 0;blackCurtain.material.GetFloat("_Threshold") < 1;i++) {
-                var value = blackCurtain.material.GetFloat("_Threshold");
-                value = Mathf.Min(value + 0.05f,1);
-                blackCurtain.material.SetFloat("_Threshold",value);
-                yield return new WaitForEndOfFrame();
+            while(!FadeManager.getInstance.FadeIn()) {
+                yield return null;
             }
+
             yield return new WaitForSeconds(0.5f);
             for(int i = 0;i < 30;i++) {
                 var value = stageUI.startCountDownImage.material.GetFloat("_Threshold");
@@ -148,37 +142,8 @@ namespace Village {
             }
 
             stageUI.startCountDownImage.gameObject.SetActive(false);
-            StartCountDown();
+
             mode = GameMode.Game;
-            
-
-        }
-
-        /// <summary>
-        /// 時間の計測
-        /// </summary>
-        private void CountDown() {
-            if(isCountDown) {
-                time -= Time.deltaTime;
-                if(time <= 0) {
-                    mode = GameMode.GameOver;
-                }
-                //stageUI.timeImage.fillAmount = time / maxTime;
-            }
-        }
-
-        /// <summary>
-        /// 時間の計測の開始、再開
-        /// </summary>
-        private void StartCountDown() {
-            isCountDown = true;
-        }
-
-        /// <summary>
-        /// 時間の計測の停止
-        /// </summary>
-        private void StopCountDown() {
-            isCountDown = false;
         }
 
         /// <summary>
@@ -189,16 +154,6 @@ namespace Village {
             if(mode == GameMode.GameOver)  return;
          
             mode = nextMode;
-        }
-
-        /// <summary>
-        /// 死んだ回数をカウント 使わないかも
-        /// </summary>
-        public void DeadCountUp() {
-            deadCount++;
-            if(deadCount >= deadCountMax) {
-                mode = GameMode.GameOver;
-            }
         }
 
         /// <summary>
@@ -215,8 +170,6 @@ namespace Village {
         /// ゲーム中の処理
         /// </summary>
         private void OnGame() {
-            isReStart = false;
-            //CountDown();
             if(Input.GetButtonDown("Button_Start")) {
                 OnPause();
             }
@@ -226,13 +179,8 @@ namespace Village {
         /// リスタート時
         /// </summary>
         private void OnReStart() {
-            //CountDown();
             if(Input.GetButtonDown("Button_Start")) {
                 OnPause();
-            }
-            if(!isReStart) {
-                isReStart = true;
-                StartCoroutine(ReStartWaitTime(2));
             }
         }
 
@@ -259,7 +207,7 @@ namespace Village {
         /// ゲームに戻る
         /// </summary>
         public void PauseMenu() {
-            if(Input.GetAxis("Vertical") > 0 && !isStick) {
+            if(Input.GetAxis("Vertical") > 0 && !isStick) {//上方向入力時
                 isStick = true;
                 pauseMenuCanvas.cursorNumber--;
                 if(pauseMenuCanvas.cursorNumber < 0) {
@@ -267,7 +215,7 @@ namespace Village {
                 }
                 pauseMenuCanvas.cursorTf.position = pauseMenuCanvas.cursorPositions[pauseMenuCanvas.cursorNumber].position;
             }
-            else if(Input.GetAxis("Vertical") < 0 && !isStick) {
+            else if(Input.GetAxis("Vertical") < 0 && !isStick) {//下方向入力時
                 isStick = true;
                 pauseMenuCanvas.cursorNumber++;
                 if(pauseMenuCanvas.cursorNumber >= pauseMenuCanvas.cursorPositions.Length) {
@@ -275,25 +223,24 @@ namespace Village {
                 }
                 pauseMenuCanvas.cursorTf.position = pauseMenuCanvas.cursorPositions[pauseMenuCanvas.cursorNumber].position;
             }
-            else if(Input.GetAxis("Vertical") == 0) {
+            else if(Input.GetAxis("Vertical") == 0) {//方向未入力時
                 isStick = false;
             }
 
-            if(Input.GetButtonDown("Button_A")) {
+            if(Input.GetButtonDown("Button_A")) {//決定時
                 if(pauseMenuCanvas.cursorNumber == 0) {
-                    OffPause();
+                    OffPause();//ポーズ画面の終了
                 }
                 else if(pauseMenuCanvas.cursorNumber == 1) {
-                    StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));
+                    StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));//現在のシーンを再度読み込み
                 }
                 else if(pauseMenuCanvas.cursorNumber == 2) {
-                    StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行_debug
+                    StartCoroutine(SceneChenge(titleScene));//タイトル画面の読み込み
                 }
             }
-            if(Input.GetButtonDown("Button_Start")) {
-                OffPause();
+            if(Input.GetButtonDown("Button_Start")) {//スタートボタン入力時
+                OffPause();//ポーズ画面の終了
             }
-
         }
 
         /// <summary>
@@ -302,7 +249,7 @@ namespace Village {
         public void OnGameClear() {
             gameClearCanvas.canvas.gameObject.SetActive(true);
 
-            if(Input.GetAxis("Vertical") > 0 && !isStick) {
+            if(Input.GetAxis("Vertical") > 0 && !isStick) {//上方向入力時
                 isStick = true;
                 gameClearCanvas.cursorNumber--;
                 if(gameClearCanvas.cursorNumber < 0) {
@@ -310,7 +257,7 @@ namespace Village {
                 }
                 gameClearCanvas.cursorTf.position = gameClearCanvas.cursorPositions[gameClearCanvas.cursorNumber].position;
             }
-            else if(Input.GetAxis("Vertical") < 0 && !isStick) {
+            else if(Input.GetAxis("Vertical") < 0 && !isStick) {//下方向入力時
                 isStick = true;
                 gameClearCanvas.cursorNumber++;
                 if(gameClearCanvas.cursorNumber >= gameClearCanvas.cursorPositions.Length) {
@@ -318,11 +265,11 @@ namespace Village {
                 }
                 gameClearCanvas.cursorTf.position = gameClearCanvas.cursorPositions[gameClearCanvas.cursorNumber].position;
             }
-            else if(Input.GetAxis("Vertical") == 0) {
+            else if(Input.GetAxis("Vertical") == 0) {//方向未入力時
                 isStick = false;
             }
 
-            if(Input.GetButtonDown("Button_A")) {
+            if(Input.GetButtonDown("Button_A")) {//決定時
                 if(gameClearCanvas.cursorNumber == 0) {//次のステージシーンへ
                     StartCoroutine(SceneChenge(nextScene));
                 }
@@ -341,7 +288,7 @@ namespace Village {
         private void OnGameOver() {
             gameOverCanvas.canvas.gameObject.SetActive(true);
 
-            if(Input.GetAxis("Vertical") > 0 && !isStick) {
+            if(Input.GetAxis("Vertical") > 0 && !isStick) {//上方向入力時
                 isStick = true;
                 gameOverCanvas.cursorNumber--;
                 if(gameOverCanvas.cursorNumber < 0) {
@@ -349,7 +296,7 @@ namespace Village {
                 }
                 gameOverCanvas.cursorTf.position = gameOverCanvas.cursorPositions[gameOverCanvas.cursorNumber].position;
             }
-            else if(Input.GetAxis("Vertical") < 0 && !isStick) {
+            else if(Input.GetAxis("Vertical") < 0 && !isStick) {//下方向入力時
                 isStick = true;
                 gameOverCanvas.cursorNumber++;
                 if(gameOverCanvas.cursorNumber >= gameOverCanvas.cursorPositions.Length) {
@@ -357,15 +304,15 @@ namespace Village {
                 }
                 gameOverCanvas.cursorTf.position = gameOverCanvas.cursorPositions[gameOverCanvas.cursorNumber].position;
             }
-            else if(Input.GetAxis("Vertical") == 0) {
+            else if(Input.GetAxis("Vertical") == 0) {//方向未入力時
                 isStick = false;
             }
 
             if(Input.GetButtonDown("Button_A")) {
-                if(gameOverCanvas.cursorNumber == 0) {//次のステージシーンへ
+                if(gameOverCanvas.cursorNumber == 0) {//もう一度やりましょう
                     StartCoroutine(SceneChenge(SceneManager.GetActiveScene().name));
                 }
-                else if(gameOverCanvas.cursorNumber == 1) {//もう一度やりましょう
+                else if(gameOverCanvas.cursorNumber == 1) {
                     StartCoroutine(SceneChenge(titleScene));//ステージ選択画面に移行
                 }
             }
@@ -375,11 +322,14 @@ namespace Village {
         /// 渡したシーンの名前でシーンを切り替える
         /// </summary>
         private IEnumerator SceneChenge(string sceneName) {
-            for(int i = 0;blackCurtain.material.GetFloat("_Threshold") > 0;i++) {
-                var value = blackCurtain.material.GetFloat("_Threshold");
-                value = Mathf.Max(value - 0.05f,0);
-                blackCurtain.material.SetFloat("_Threshold",value);
-                yield return new WaitForEndOfFrame();
+            //for(int i = 0;blackCurtain.material.GetFloat("_Threshold") > 0;i++) {
+            //    var value = blackCurtain.material.GetFloat("_Threshold");
+            //    value = Mathf.Max(value - 0.05f,0);
+            //    blackCurtain.material.SetFloat("_Threshold",value);
+            //    yield return new WaitForEndOfFrame();
+            //}
+            while(!FadeManager.getInstance.FadeOut()) {
+                yield return null;
             }
             yield return new WaitForSeconds(1);
             SceneManager.LoadScene(sceneName);
@@ -402,7 +352,7 @@ namespace Village {
 
         private void OnDisable() {
             stageUI.startCountDownImage.material.SetFloat("_Threshold",0);
-            blackCurtain.material.SetFloat("_Threshold",1);
+            //blackCurtain.material.SetFloat("_Threshold",1);
         }
     }
 

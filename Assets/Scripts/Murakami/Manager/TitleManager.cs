@@ -32,6 +32,8 @@ namespace Village {
             STEP_2,
             STEP_3,
             STEP_4,
+            FadeIn,
+            FadeOut,
             DEFAULT,
         }
 
@@ -40,15 +42,15 @@ namespace Village {
         [Header("動くスピード"),SerializeField]        private float animationSpeed = 1;
         [Header("タイトルロゴ"),SerializeField]        private Image logo;
         [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
-        [Header("暗幕"),SerializeField]               private Image curtain;
-        [SerializeField] private Light directionalLight;
-        [SerializeField] private Light pointLight;
-        private TitleStep step = TitleStep.STEP_1;
+
+        [Header("環境光"), SerializeField] private Light directionalLight;
+        [Header("ポイントライト"), SerializeField] private Light pointLight;
+
+        private TitleStep step = TitleStep.FadeIn;
         private bool isGetAxis = false;
         private int stageNumber = 0;
 
         private void Awake() {
-            curtain.material.SetFloat("_Threshold",1);
             ActiveObjectVisible(0);
             ActiveShadowObjectVisible(-1);
         }
@@ -59,11 +61,13 @@ namespace Village {
 
         public override void Run() {
             switch(step) {
-                case TitleStep.STEP_1: Step_1(); break;
-                case TitleStep.STEP_2: Step_2(); break;
-                case TitleStep.STEP_3: Step_3(); break;
-                case TitleStep.STEP_4: Step_4(); break;
-                default:                         break;
+                case TitleStep.STEP_1:  Step_1();  break;
+                case TitleStep.STEP_2:  Step_2();  break;
+                case TitleStep.STEP_3:  Step_3();  break;
+                case TitleStep.STEP_4:  Step_4();  break;
+                case TitleStep.FadeIn:  FadeIn();  break;
+                case TitleStep.FadeOut: FadeOut(); break;
+                default:                           break;
             }
         }
 
@@ -109,26 +113,45 @@ namespace Village {
                 isGetAxis = false;
             }
             if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
-                StartCoroutine(BlackOut());
-                step = TitleStep.DEFAULT;
+                //StartCoroutine(BlackOut());
+                //step = TitleStep.DEFAULT;
+
+                step = TitleStep.FadeOut;
             }
         }
 
-
+        /// <summary>
+        /// シーン読み込み
+        /// </summary>
         private void Step_4() {
             StartCoroutine(LoadScene(stageNumberList[stageNumber].path));
             step = TitleStep.DEFAULT;
         }
 
-        private IEnumerator BlackOut() {
-            for(int i = 0;curtain.material.GetFloat("_Threshold") > 0;i++) {
-                var value = curtain.material.GetFloat("_Threshold");
-                value = Mathf.Max(value - 0.05f,0);
-                curtain.material.SetFloat("_Threshold",value);
-                yield return new WaitForEndOfFrame();
+        private void FadeIn() {
+            if(FadeManager.getInstance.FadeIn()) {
+                step = TitleStep.STEP_1;
             }
-            step = TitleStep.STEP_4;
         }
+
+        private void FadeOut() {
+            if(FadeManager.getInstance.FadeOut()) {
+                step = TitleStep.STEP_4;
+            }
+        }
+
+        //private IEnumerator BlackOut() {
+        //    for(int i = 0;curtain.material.GetFloat("_Threshold") > 0;i++) {
+        //        var value = curtain.material.GetFloat("_Threshold");
+        //        value = Mathf.Max(value - 0.05f,0);
+        //        curtain.material.SetFloat("_Threshold",value);
+        //        loadingImage.color += new Color(0,0,0,value);
+        //        loadingText.color += new Color(0,0,0,value);
+        //        yield return new WaitForEndOfFrame();
+        //    }
+        //    yield return new WaitForSeconds(1);
+        //    step = TitleStep.STEP_4;
+        //}
 
         private IEnumerator LoadScene(string sceneName) {
             AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
@@ -163,9 +186,6 @@ namespace Village {
             return (n >= 0) ? (n + min) : (n + max);
         }
 
-        private void OnDisable() {
-            curtain.material.SetFloat("_Threshold",0);
-        }
     }
 
 }

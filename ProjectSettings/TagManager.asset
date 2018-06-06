@@ -14,6 +14,7 @@ TagManager:
   - Desk
   - Enemy
   - EnemyManager
+  - FadeManager
   layers:
   - Default
   - TransparentFX

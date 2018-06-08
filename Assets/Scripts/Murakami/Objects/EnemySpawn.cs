@@ -40,6 +40,10 @@ namespace Village {
             }
         }
 
+        private void Awake() {
+            activeNumber = -1;
+        }
+
         private void Start() {
             manager = FindObjectOfType<UpdateManager>();
             myNumber = NumberGeneration();

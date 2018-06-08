@@ -41,6 +41,7 @@ namespace Village {
         [Header("カメラの次の位置"),SerializeField]    private NextTransform cameraNtf;
         [Header("動くスピード"),SerializeField]        private float animationSpeed = 1;
         [Header("タイトルロゴ"),SerializeField]        private Image logo;
+        [Header("文字"), SerializeField]              private Image logoTextImage;
         [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
 
         [Header("環境光"), SerializeField] private Light directionalLight;
@@ -88,6 +89,7 @@ namespace Village {
         /// </summary>
         private void Step_2() {
             logo.color -= new Color(0,0,0,Time.deltaTime * animationSpeed);
+            logoTextImage.color -= new Color(0,0,0,Time.deltaTime * animationSpeed);
             titleCamera.transform.position =         Vector3.LerpUnclamped(titleCamera.transform.position,cameraNtf.pos,Time.deltaTime * animationSpeed);
             titleCamera.transform.localEulerAngles = Vector3.LerpUnclamped(titleCamera.transform.localEulerAngles,cameraNtf.rot,Time.deltaTime * animationSpeed);
             if(titleCamera.transform.position.z <= cameraNtf.pos.z + 5) {

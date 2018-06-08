@@ -13,14 +13,17 @@ namespace Village {
 
     public class EnemyGenerationGate : MonoBehaviour {
         [SerializeField] private Vector3 rotate;
-
+        [SerializeField] private SpriteRenderer sprite;
 
         private void Update() {
             if(EnemySpawn.ActiveNumber != -1) {
+                if(!sprite.enabled) sprite.enabled = true;
                 transform.position = EnemySpawn.GenerationPoint;
                 transform.Rotate(rotate);
             }
-
+            else {
+                if(sprite.enabled) sprite.enabled = false;
+            }
         }
 
     }

@@ -16,10 +16,10 @@ namespace Village {
         [SerializeField] private float speed = 0.1f;
         [SerializeField] private float jumpForce = 1000;
         [SerializeField] private float checkGroundRayLength = 10;
+        [SerializeField] private float checkWallRayLength = 10;
         [SerializeField] private MoveLimit horizontal;
         [SerializeField] private MoveLimit vertical;
 
-        private float constSpeed;
         private LayerMask mask = 1 << 0;
 
         public MoveLimit GetHorizontalLimit {
@@ -28,11 +28,6 @@ namespace Village {
             }
         }
 
-        private void Awake() {
-            constSpeed = speed;
-        }
-
-
         public override void Run() {
             if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.Game
             || GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameReStart) {
@@ -40,7 +35,6 @@ namespace Village {
                 Turn();
                 Move();
                 Jump();
-
             }
         }
 
@@ -48,6 +42,8 @@ namespace Village {
         /// 移動
         /// </summary>
         private void Move() {
+            if(CheckWall()) return; 
+
             //一旦格納
             Vector3 pos = transform.position;
             //位置制限
@@ -63,7 +59,6 @@ namespace Village {
         /// ジャンプ
         /// </summary>
         private void Jump() {
-            Debug.DrawRay(transform.position,-Vector3.up * checkGroundRayLength,Color.red);
             if(Input.GetButtonDown("Button_B") && CheckGround()) {
                 GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
             }
@@ -74,19 +69,15 @@ namespace Village {
         /// </summary>
         private bool CheckGround() {
             Ray ray = new Ray(transform.position,-Vector3.up);
-
+            Debug.DrawRay(transform.position,-Vector3.up * checkGroundRayLength,Color.red);
             RaycastHit hit;
-            bool returnFlag = false;
             if(Physics.Raycast(ray,out hit,checkGroundRayLength,mask)){
                 if(hit.collider.gameObject.tag == "Desk"
                 || hit.collider.gameObject.tag == "Object3D") {
-                    returnFlag = true;
-                }
-                else {
-                    returnFlag = false;
+                    return true;
                 }
             }
-            return returnFlag;
+            return false;
         }
 
         private void Turn() {
@@ -101,5 +92,15 @@ namespace Village {
             transform.LookAt(dir);
         }
 
+        private bool CheckWall() {
+            Ray ray = new Ray(transform.position,transform.forward);
+            Debug.DrawRay(transform.position,transform.forward * checkWallRayLength,Color.red);
+            RaycastHit hit;
+            if(Physics.Raycast(ray,out hit,checkWallRayLength)) {
+                if(hit.collider.gameObject.tag == "Object3D")
+                return true;
+            }
+            return false;
+        }
     }
 }

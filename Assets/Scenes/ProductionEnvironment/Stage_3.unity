@@ -779,6 +779,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114669957301735868, guid: 9a48eec4da0e3bb43a7728264338b917,
+        type: 2}
+      propertyPath: horizontal.max
+      value: 670
+      objectReference: {fileID: 0}
+    - target: {fileID: 114669957301735868, guid: 9a48eec4da0e3bb43a7728264338b917,
+        type: 2}
+      propertyPath: checkWallRayLength
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a48eec4da0e3bb43a7728264338b917, type: 2}
   m_IsPrefabParent: 0
@@ -4670,6 +4680,7 @@ MonoBehaviour:
     - {fileID: 1240362982}
   nextScene: Stage_4
   titleScene: Scene_Title
+  isNextEnding: 0
 --- !u!4 &1276226489
 Transform:
   m_ObjectHideFlags: 0

@@ -363,6 +363,7 @@ namespace Village {
         private void OnDisable() {
             stageUI.startCountDownImage.material.SetFloat("_Threshold",0);
         }
+
     }
 
 }

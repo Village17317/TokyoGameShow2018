@@ -789,6 +789,21 @@ Prefab:
       propertyPath: checkWallRayLength
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 136580050681677916, guid: 9a48eec4da0e3bb43a7728264338b917,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 136580050681677916, guid: 9a48eec4da0e3bb43a7728264338b917,
+        type: 2}
+      propertyPath: m_Height
+      value: 0.22973374
+      objectReference: {fileID: 0}
+    - target: {fileID: 136580050681677916, guid: 9a48eec4da0e3bb43a7728264338b917,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.039866593
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a48eec4da0e3bb43a7728264338b917, type: 2}
   m_IsPrefabParent: 0
@@ -7186,7 +7201,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1947128894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 676.1, y: 60, z: 41.6}
+  m_LocalPosition: {x: 670, y: 60, z: 41.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 227445060}

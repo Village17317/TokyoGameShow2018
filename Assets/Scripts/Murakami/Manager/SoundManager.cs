@@ -72,7 +72,7 @@ namespace Village {
         public void PlayBGM(string soundKey) {
             AudioClip tmp = nullBgmClip;
             if(soundData.TryGetValue(soundKey,out nullBgmClip)) {
-                if(tmp != nullBgmClip) {
+                if(tmp != nullBgmClip || !bgmAudio.isPlaying) {
                     bgmAudio.clip = nullBgmClip;
                     bgmAudio.volume = GetBgmVolume(soundKey);
                     bgmAudio.pitch = GetBgmPitch(soundKey);
@@ -83,6 +83,9 @@ namespace Village {
             else {
                 Debug.Log(soundKey + "に対応したBGMはありません");
             }
+        }
+        public void StopBGM() {
+            bgmAudio.Stop();
         }
 
         public void PlaySE(string soundKey,Transform tf) {

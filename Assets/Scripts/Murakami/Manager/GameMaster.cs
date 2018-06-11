@@ -45,6 +45,7 @@ namespace Village {
         private static GameMaster instance;
         private float range = 0;
         private bool isStick = false;
+        private bool isOneShotSE = false;
         #endregion
 
         #region Serialize
@@ -252,6 +253,12 @@ namespace Village {
         /// ゲームクリア時
         /// </summary>
         public void OnGameClear() {
+            if(!isOneShotSE) {
+                isOneShotSE = true;
+                SoundManager.Instance.StopBGM();
+                SoundManager.Instance.PlaySE("clear",transform);
+            }
+
             gameClearCanvas.canvas.gameObject.SetActive(true);
 
             if(Input.GetAxis("Vertical") > 0 && !isStick) {//上方向入力時
@@ -299,7 +306,11 @@ namespace Village {
         /// </summary>
         private void OnGameOver() {
             gameOverCanvas.canvas.gameObject.SetActive(true);
-
+            if(!isOneShotSE) {
+                isOneShotSE = true;
+                SoundManager.Instance.StopBGM();
+                SoundManager.Instance.PlaySE("over",transform);
+            }
             if(Input.GetAxis("Vertical") > 0 && !isStick) {//上方向入力時
                 isStick = true;
                 gameOverCanvas.cursorNumber--;
@@ -337,6 +348,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// 最後のゲームシーンがクリアされたとき
+        /// </summary>
         private void OnGameAllClear() {
             SceneManager.LoadScene(nextScene);
         }

@@ -62,6 +62,8 @@ namespace Village {
         }
 
         public override void Run() {
+            ExitGame();
+
             switch(step) {
                 case TitleStep.STEP_1:  Step_1();  break;
                 case TitleStep.STEP_2:  Step_2();  break;
@@ -119,6 +121,9 @@ namespace Village {
                 isGetAxis = false;
             }
             if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
+                directionalLight.gameObject.SetActive(false);
+                pointLight.gameObject.SetActive(false);
+
                 SoundManager.Instance.PlaySE("select",transform);
 
                 step = TitleStep.FadeOut;
@@ -191,6 +196,11 @@ namespace Village {
             return (n >= 0) ? (n + min) : (n + max);
         }
 
+        private void ExitGame() {
+            if(Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
+        }
     }
 
 }

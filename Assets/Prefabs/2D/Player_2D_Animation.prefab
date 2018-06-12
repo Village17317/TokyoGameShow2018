@@ -109,6 +109,7 @@ MonoBehaviour:
   sfRayOrigin: {x: 10, y: 0, z: 0}
   shadowCharRb: {fileID: 54410073698854628}
   grounded: 0
+  eventAnim: 0
   state: 1
   shadowChar_Animator: {fileID: 95563481379476706}
 --- !u!114 &114730436119234452

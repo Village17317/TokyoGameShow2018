@@ -21,7 +21,7 @@ namespace INI
         private Rigidbody shadowCharRb;
 
         [SerializeField]
-        private bool grounded = false;
+        private bool grounded = false, eventAnim = false;
 
         private enum State
         {
@@ -161,6 +161,24 @@ namespace INI
 
         private void PlayerAnimator()
         {
+            if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.GameClear)
+            {
+                if (!eventAnim)
+                {
+                    eventAnim = true;
+                }
+                return;
+            }
+
+            if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.GameOver)
+            {
+                if (!eventAnim)
+                {
+                    eventAnim = true;
+                    shadowChar_Animator.Play("Down");
+                }
+                return;
+            }
             switch (state)
             {
                 case State.STOP:

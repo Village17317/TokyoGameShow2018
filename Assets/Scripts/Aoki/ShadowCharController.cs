@@ -32,6 +32,8 @@ namespace INI
         [SerializeField]
         private State state = State.STOP;
 
+        public Animator shadowChar_Animator;
+
         public override void FixedRun()
         {
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.Game)
@@ -39,11 +41,16 @@ namespace INI
                 GroundRayCast();
                 ForwardRayCast();
                 SafetyRayCast();
-
+                
                 if (state == State.WALK)
                 {
                     Walk();
                 }
+            }
+
+            if (shadowChar_Animator != null)
+            {
+                PlayerAnimator();
             }
         }
 
@@ -152,5 +159,22 @@ namespace INI
             Debug.Log("Jump called");
         }
 
+        private void PlayerAnimator()
+        {
+            switch (state)
+            {
+                case State.STOP:
+                    shadowChar_Animator.Play("Wait");
+                    break;
+                case State.WALK:
+                    shadowChar_Animator.Play("Walk");
+                    break;
+                case State.JUMP:
+                    shadowChar_Animator.Play("Jump");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

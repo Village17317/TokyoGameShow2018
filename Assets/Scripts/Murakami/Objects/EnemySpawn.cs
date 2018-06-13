@@ -22,7 +22,7 @@ namespace Village {
 
         private static Vector3 generationPoint = Vector3.zero;
         private static float time = 0;
-        private static float spawnTime = 1;//〇秒置き
+        private static float spawnTime = 2;//〇秒置き
         private static int spawnCount = 0;
         private static int maxSpawnCount = 10;
         private static int activeNumber = -1;
@@ -66,7 +66,7 @@ namespace Village {
         /// <summary>
         /// 情報をリセット
         /// </summary>
-        private void InfoReset(Vector3 point) {
+        private void InfoReset() {
             activeNumber = myNumber;
             time = 0;
             spawnCount = 0;
@@ -97,7 +97,7 @@ namespace Village {
 
         private void OnTriggerEnter(Collider other) {
             if(other.tag != "Player") return;
-            InfoReset(transform.position);
+            InfoReset();
         }
 
     }

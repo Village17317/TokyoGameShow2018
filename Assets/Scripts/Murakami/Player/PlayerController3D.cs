@@ -14,6 +14,7 @@ namespace Village {
     public class PlayerController3D: Inheritor {
         [System.Serializable]
         private class Animations {
+            public Animator anim;
             public string stayAnim = "";
             public string walkAnim = "";
             public string jumpAnim = "";
@@ -32,12 +33,13 @@ namespace Village {
         [SerializeField] private float checkWallRayLength = 10;
         [SerializeField] private MoveLimit horizontal;
         [SerializeField] private MoveLimit vertical;
-        //[SerializeField] private Animations playerAnimations;
+        [SerializeField] private Animations playerAnimations;
 
 
         private LayerMask mask = 1 << 0;
         private MyState myState = MyState.Stay;
         private float walkSeCount = 0.5f;
+        private float accel = 0.1f;
 
         public MoveLimit GetHorizontalLimit {
             get {
@@ -62,17 +64,18 @@ namespace Village {
         private void Move() {
             if(CheckWall()) return;
             bool isGround = CheckGround();
-                if(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0) {
+            if(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0) {
                 if(isGround) myState = MyState.Stay;
                 walkSeCount = 0.5f;
+                accel = 0.1f;
                 return;
             }
 
-
             //一旦格納
             Vector3 pos = transform.position;
+            accel = Mathf.Min(accel + 0.01f,speed);
             //位置制限
-            pos += new Vector3(speed * Input.GetAxisRaw("Horizontal"),0,speed * Input.GetAxisRaw("Vertical"));
+            pos += new Vector3(accel * Input.GetAxisRaw("Horizontal"),0,accel * Input.GetAxisRaw("Vertical"));
             pos = new Vector3(Mathf.Clamp(pos.x,horizontal.min,horizontal.max),
                               pos.y,
                               Mathf.Clamp(pos.z,vertical.min,vertical.max));
@@ -153,9 +156,9 @@ namespace Village {
         /// </summary>
         private void PlayAnimation() {
             switch(myState) {
-                case MyState.Stay: /*anim.Play(playerAnimations.stayAnim);*/ break;
-                case MyState.Walk: /*anim.Play(playerAnimations.walkAnim);*/ break;
-                case MyState.Jump: /*anim.Play(playerAnimations.jumpAnim);*/ break;
+                case MyState.Stay: playerAnimations.anim.Play(playerAnimations.stayAnim); break;
+                case MyState.Walk: playerAnimations.anim.Play(playerAnimations.walkAnim); break;
+                case MyState.Jump: playerAnimations.anim.Play(playerAnimations.jumpAnim); break;
                 default: break;
             }
         }

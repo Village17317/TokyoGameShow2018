@@ -47,6 +47,8 @@ namespace Village {
         [Header("環境光"), SerializeField] private Light directionalLight;
         [Header("ポイントライト"), SerializeField] private Light pointLight;
 
+        private float range = 0;
+
         private TitleStep step = TitleStep.FadeIn;
         private bool isGetAxis = false;
         private int stageNumber = 0;
@@ -55,6 +57,9 @@ namespace Village {
             FadeManager.getInstance.SetCanvasCamera(Camera.main);
             ActiveObjectVisible(0);
             ActiveShadowObjectVisible(-1);
+
+            range = pointLight.range;
+            pointLight.range = 0;
         }
 
         private void Start() {
@@ -79,6 +84,7 @@ namespace Village {
         /// タイトルロゴの表示、決定ボタン入力後Step２に切り替え
         /// </summary>
         private void Step_1() {
+            LightAnimation();
             if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
                 SoundManager.Instance.PlaySE("select",transform);
                 ActiveShadowObjectVisible(0);
@@ -90,6 +96,7 @@ namespace Village {
         /// カメラを引く。いい位置まで来たらStep3に切り替え
         /// </summary>
         private void Step_2() {
+            LightAnimation();
             logo.color -= new Color(0,0,0,Time.deltaTime * animationSpeed);
             logoTextImage.color -= new Color(0,0,0,Time.deltaTime * animationSpeed);
             titleCamera.transform.position =         Vector3.LerpUnclamped(titleCamera.transform.position,cameraNtf.pos,Time.deltaTime * animationSpeed);
@@ -103,6 +110,7 @@ namespace Village {
         /// 左右キーで数字を切り替え、決定ボタン入力後Step4に切り替え
         /// </summary>
         private void Step_3() {
+            LightAnimation();
             if(Input.GetAxisRaw("Horizontal") > 0 && !isGetAxis) {
                 stageNumber = Wrap(stageNumber + 1,0,stageNumberList.Count);
                 ActiveObjectVisible(stageNumber);
@@ -150,23 +158,17 @@ namespace Village {
             }
         }
 
-        //private IEnumerator BlackOut() {
-        //    for(int i = 0;curtain.material.GetFloat("_Threshold") > 0;i++) {
-        //        var value = curtain.material.GetFloat("_Threshold");
-        //        value = Mathf.Max(value - 0.05f,0);
-        //        curtain.material.SetFloat("_Threshold",value);
-        //        loadingImage.color += new Color(0,0,0,value);
-        //        loadingText.color += new Color(0,0,0,value);
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //    yield return new WaitForSeconds(1);
-        //    step = TitleStep.STEP_4;
-        //}
-
         private IEnumerator LoadScene(string sceneName) {
             AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
             while(!load.isDone) {
                 yield return null;
+            }
+        }
+
+        private void LightAnimation() {
+            pointLight.range += Mathf.Max(range * Time.deltaTime * 5,0);
+            if(pointLight.range >= range) {
+                pointLight.intensity = Random.Range(1,1.08f);
             }
         }
 
@@ -196,6 +198,9 @@ namespace Village {
             return (n >= 0) ? (n + min) : (n + max);
         }
 
+        /// <summary>
+        /// Escapeキーでゲーム終了
+        /// </summary>
         private void ExitGame() {
             if(Input.GetKeyDown(KeyCode.Escape)) {
                 Application.Quit();

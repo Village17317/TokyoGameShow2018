@@ -27,35 +27,7 @@ namespace Village {
         private Collider[] colliders;//
 
         private void Awake() {
-            lightTf = GameObject.FindGameObjectWithTag("Light").transform;
-
-            GameObject shadow = Instantiate(shadowObj) as GameObject;
-            shadowTf = shadow.transform;
-
-            constScale = shadowTf.localScale;
-
-            GameObject rayObj = new GameObject();
-            rayObj.transform.position = lightTf.position;
-            rayTf = rayObj.transform;
-            rayTf.parent = lightTf;
-
-            shadowMat = new Material(shadowMatOrigin);
-            MeshRenderer[] meshes =  shadow.GetComponentsInChildren<MeshRenderer>();
-            foreach(MeshRenderer m in meshes) {
-                m.material = shadowMat;
-            }
-
-            colliders = shadow.GetComponentsInChildren<Collider>();
-
-            Vector3 target = transform.position + offset;
-            rayTf.LookAt(target);
-
-            RayHit();
-            SetActive(true);
-            ShadowTransParent();
-            ShadowSizeChenge();
-            //ActiveCollider();
-            ConnectRotation();
+            CreateShadow();
         }
 
         private void Update() {
@@ -165,6 +137,39 @@ namespace Village {
                 c.enabled = flag;
             }
         }
+
+        private void CreateShadow() {
+            lightTf = GameObject.FindGameObjectWithTag("Light").transform;
+
+            GameObject shadow = Instantiate(shadowObj) as GameObject;
+            shadowTf = shadow.transform;
+
+            constScale = shadowTf.localScale;
+
+            GameObject rayObj = new GameObject();
+            rayObj.transform.position = lightTf.position;
+            rayTf = rayObj.transform;
+            rayTf.parent = lightTf;
+
+            shadowMat = new Material(shadowMatOrigin);
+            MeshRenderer[] meshes = shadow.GetComponentsInChildren<MeshRenderer>();
+            foreach(MeshRenderer m in meshes) {
+                m.material = shadowMat;
+            }
+
+            colliders = shadow.GetComponentsInChildren<Collider>();
+
+            Vector3 target = transform.position + offset;
+            rayTf.LookAt(target);
+
+            RayHit();
+            SetActive(true);
+            ShadowTransParent();
+            ShadowSizeChenge();
+            //ActiveCollider();
+            ConnectRotation();
+        }
+
     }
 
 

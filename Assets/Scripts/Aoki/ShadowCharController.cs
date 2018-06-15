@@ -2,7 +2,7 @@
 *	作成者	：青木仁志
 *	機能	：キャラクターの自動操作
 *	作成	：2018/05/11
-*	更新	：2018/05/31
+*	更新	：2018/06/15
 */
 
 using System.Collections;
@@ -166,6 +166,7 @@ namespace INI
                 if (!eventAnim)
                 {
                     eventAnim = true;
+                    shadowChar_Animator.Play("Clear");
                 }
                 return;
             }

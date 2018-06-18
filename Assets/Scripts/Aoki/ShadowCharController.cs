@@ -23,14 +23,14 @@ namespace INI
         [SerializeField]
         private bool grounded = false, eventAnim = false;
 
-        private enum State
+        protected enum State
         {
             STOP,
             WALK,
             JUMP
         }
         [SerializeField]
-        private State state = State.STOP;
+        protected State state = State.STOP;
 
         public Animator shadowChar_Animator;
 
@@ -159,7 +159,7 @@ namespace INI
             Debug.Log("Jump called");
         }
 
-        private void PlayerAnimator()
+        protected virtual void PlayerAnimator()
         {
             if (Village.GameMaster.getInstance.GetGameMode == Village.GameMaster.GameMode.GameClear)
             {

@@ -28,6 +28,22 @@ namespace INI {
 			
 		}
 
+        protected override void PlayerAnimator()
+        {
+            //base.PlayerAnimator();
+            switch (state)
+            {
+                case ShadowCharController.State.STOP:
+                    shadowChar_Animator.Play("Enemy_wait");
+                    break;
+                case ShadowCharController.State.WALK:
+                    shadowChar_Animator.Play("Enemy_walk");
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == "Player")

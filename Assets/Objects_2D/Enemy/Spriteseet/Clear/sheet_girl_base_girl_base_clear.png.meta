@@ -1,0 +1,1018 @@
+fileFormatVersion: 2
+guid: bf2d80e73c6650b459cab9870aa1110f
+timeCreated: 1529045977
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sheet_girl_base_girl_base_clear_0
+    21300002: sheet_girl_base_girl_base_clear_1
+    21300004: sheet_girl_base_girl_base_clear_2
+    21300006: sheet_girl_base_girl_base_clear_3
+    21300008: sheet_girl_base_girl_base_clear_4
+    21300010: sheet_girl_base_girl_base_clear_5
+    21300012: sheet_girl_base_girl_base_clear_6
+    21300014: sheet_girl_base_girl_base_clear_7
+    21300016: sheet_girl_base_girl_base_clear_8
+    21300018: sheet_girl_base_girl_base_clear_9
+    21300020: sheet_girl_base_girl_base_clear_10
+    21300022: sheet_girl_base_girl_base_clear_11
+    21300024: sheet_girl_base_girl_base_clear_12
+    21300026: sheet_girl_base_girl_base_clear_13
+    21300028: sheet_girl_base_girl_base_clear_14
+    21300030: sheet_girl_base_girl_base_clear_15
+    21300032: sheet_girl_base_girl_base_clear_16
+    21300034: sheet_girl_base_girl_base_clear_17
+    21300036: sheet_girl_base_girl_base_clear_18
+    21300038: sheet_girl_base_girl_base_clear_19
+    21300040: sheet_girl_base_girl_base_clear_20
+    21300042: sheet_girl_base_girl_base_clear_21
+    21300044: sheet_girl_base_girl_base_clear_22
+    21300046: sheet_girl_base_girl_base_clear_23
+    21300048: sheet_girl_base_girl_base_clear_24
+    21300050: sheet_girl_base_girl_base_clear_25
+    21300052: sheet_girl_base_girl_base_clear_26
+    21300054: sheet_girl_base_girl_base_clear_27
+    21300056: sheet_girl_base_girl_base_clear_28
+    21300058: sheet_girl_base_girl_base_clear_29
+    21300060: sheet_girl_base_girl_base_clear_30
+    21300062: sheet_girl_base_girl_base_clear_31
+    21300064: sheet_girl_base_girl_base_clear_32
+    21300066: sheet_girl_base_girl_base_clear_33
+    21300068: sheet_girl_base_girl_base_clear_34
+    21300070: sheet_girl_base_girl_base_clear_35
+    21300072: sheet_girl_base_girl_base_clear_36
+    21300074: sheet_girl_base_girl_base_clear_37
+    21300076: sheet_girl_base_girl_base_clear_38
+    21300078: sheet_girl_base_girl_base_clear_39
+    21300080: sheet_girl_base_girl_base_clear_40
+    21300082: sheet_girl_base_girl_base_clear_41
+    21300084: sheet_girl_base_girl_base_clear_42
+    21300086: sheet_girl_base_girl_base_clear_43
+    21300088: sheet_girl_base_girl_base_clear_44
+    21300090: sheet_girl_base_girl_base_clear_45
+    21300092: sheet_girl_base_girl_base_clear_46
+    21300094: sheet_girl_base_girl_base_clear_47
+    21300096: sheet_girl_base_girl_base_clear_48
+    21300098: sheet_girl_base_girl_base_clear_49
+    21300100: sheet_girl_base_girl_base_clear_50
+    21300102: sheet_girl_base_girl_base_clear_51
+    21300104: sheet_girl_base_girl_base_clear_52
+    21300106: sheet_girl_base_girl_base_clear_53
+    21300108: sheet_girl_base_girl_base_clear_54
+    21300110: sheet_girl_base_girl_base_clear_55
+    21300112: sheet_girl_base_girl_base_clear_56
+    21300114: sheet_girl_base_girl_base_clear_57
+    21300116: sheet_girl_base_girl_base_clear_58
+    21300118: sheet_girl_base_girl_base_clear_59
+    21300120: sheet_girl_base_girl_base_clear_60
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_6
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_7
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_8
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_9
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_10
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_11
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_12
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 1648
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_14
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_15
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_16
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_17
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_18
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_19
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_20
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_21
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_22
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_23
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_24
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_25
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 1248
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_27
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_28
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_29
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_30
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_31
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_32
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_33
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_34
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_35
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_36
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_37
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_38
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 848
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_40
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_41
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_42
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_43
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_44
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_45
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_46
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_47
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_48
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_49
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_50
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_51
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 448
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_53
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_54
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_55
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_56
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_57
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_58
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_59
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sheet_girl_base_girl_base_clear_60
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 48
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

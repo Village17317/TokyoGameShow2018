@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa0fcd6778f04a4eacba77deee38a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1317387017150034, guid: f39cc0740642ba542a6aed6a38b00a34,
+  enemyPrefab: {fileID: 1203188319934826, guid: efcdf6bd3a703d34bb979f0a8142582f,
     type: 2}
   generationEffectPrefab: {fileID: 1872661989079852, guid: 01635e6d9cfc2e9469c5d9a153d9c75c,
     type: 2}

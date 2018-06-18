@@ -5106,7 +5106,7 @@ MonoBehaviour:
     cursorPositions:
     - {fileID: 530818138}
     - {fileID: 1240362982}
-  nextScene: Stage_3
+  nextScene: New_Stage_3
   titleScene: Scene_Title
   isNextEnding: 0
 --- !u!4 &1276226489
@@ -5517,7 +5517,7 @@ RectTransform:
   m_GameObject: {fileID: 1313569843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.30999756}
-  m_LocalScale: {x: 0.00089929654, y: 0.00089929654, z: 0.00089929654}
+  m_LocalScale: {x: 0.0008993303, y: 0.0008993303, z: 0.0008993303}
   m_Children:
   - {fileID: 1874589792}
   m_Father: {fileID: 728428694}
@@ -8931,8 +8931,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1947128894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 910, y: 136.9, z: 41.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 918.5, y: 148.5, z: 41.6}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 227445060}
   - {fileID: 293460985}

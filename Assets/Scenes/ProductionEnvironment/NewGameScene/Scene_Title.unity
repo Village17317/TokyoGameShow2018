@@ -498,7 +498,7 @@ RectTransform:
   m_GameObject: {fileID: 213256193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 129.6, y: 36.8, z: 56.4}
-  m_LocalScale: {x: 0.15855731, y: 0.15855731, z: 0.15855731}
+  m_LocalScale: {x: 0.1584134, y: 0.1584134, z: 0.1584134}
   m_Children:
   - {fileID: 1350020648}
   - {fileID: 597280949}
@@ -1236,19 +1236,19 @@ MonoBehaviour:
   logo: {fileID: 1350020649}
   logoTextImage: {fileID: 597280950}
   stageNumberList:
-  - path: Stage_Tutorial
+  - path: New_Stage_0
     numberObject: {fileID: 22896662}
     shadowObject: {fileID: 1851319302}
-  - path: Stage_1
+  - path: New_Stage_1
     numberObject: {fileID: 1560284991}
     shadowObject: {fileID: 732155877}
-  - path: Stage_2
+  - path: New_Stage_2
     numberObject: {fileID: 161203744}
     shadowObject: {fileID: 529279102}
-  - path: Stage_3
+  - path: New_Stage_3
     numberObject: {fileID: 1846335191}
     shadowObject: {fileID: 1798852133}
-  - path: Stage_4
+  - path: New_Stage_4
     numberObject: {fileID: 1540490151}
     shadowObject: {fileID: 2032566760}
   directionalLight: {fileID: 244536100}
@@ -2902,7 +2902,7 @@ Animator:
   m_GameObject: {fileID: 1314300483}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8bf93612a30ff6a4482c447876d57fa7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4b6132c4e96593a4485afe098751e73e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

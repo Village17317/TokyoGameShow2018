@@ -248,28 +248,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     isLoop: 1
-  - soundKey: Stage_1
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
-    pitch: 1
-    isLoop: 1
-  - soundKey: Stage_2
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
-    pitch: 1
-    isLoop: 1
-  - soundKey: Stage_3
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
-    pitch: 1
-    isLoop: 1
-  - soundKey: Stage_4
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
-    pitch: 1
-    isLoop: 1
   - soundKey: New_Stage_0
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
+    soundClip: {fileID: 8300000, guid: ce8ca6ef8b9426548a9b4887f4afcfb2, type: 3}
     volume: 1
     pitch: 1
     isLoop: 1
@@ -279,23 +259,18 @@ MonoBehaviour:
     pitch: 1
     isLoop: 1
   - soundKey: New_Stage_2
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
+    soundClip: {fileID: 8300000, guid: 60e93b4eb0cb5e44db3719b37ef275e0, type: 3}
     volume: 1
     pitch: 1
     isLoop: 1
   - soundKey: New_Stage_3
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
+    soundClip: {fileID: 8300000, guid: 0e2704f9219c1d045afb2e11fd5751b1, type: 3}
+    volume: 0.4
     pitch: 1
     isLoop: 1
   - soundKey: New_Stage_4
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
-    pitch: 1
-    isLoop: 1
-  - soundKey: Stage_Tutorial
-    soundClip: {fileID: 8300000, guid: 9219c81986c5588408a60d8d1d037384, type: 3}
-    volume: 1
+    soundClip: {fileID: 8300000, guid: b773cb0c601c3d94f8abaa41c07ba23c, type: 3}
+    volume: 0.4
     pitch: 1
     isLoop: 1
   - soundKey: Scene_Ending
@@ -336,7 +311,7 @@ MonoBehaviour:
     deleteTime: 2
   - soundKey: walk
     soundClip: {fileID: 8300000, guid: 8e167f4bdcfdbe5459ec3290e0709cb8, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     deleteTime: 0.5
   bgmAudio: {fileID: 82791481031507516}

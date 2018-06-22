@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ProductionEnvironment/NewGameScene/CopyrightNotice.unity
-    guid: e25804aa7a4334243a284f28ca9ad3cd
-  - enabled: 1
     path: Assets/Scenes/ProductionEnvironment/NewGameScene/Scene_Title.unity
     guid: da07b352d26bdac42b51b2c865590200
   - enabled: 1

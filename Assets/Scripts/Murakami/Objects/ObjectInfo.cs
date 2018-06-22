@@ -14,7 +14,8 @@ namespace Village {
     public class ObjectInfo : MonoBehaviour {
         [SerializeField] private GameObject shadowObj;      //影にするオブジェクト
         [SerializeField] private Material shadowMatOrigin;  //影のマテリアルの元
-        [SerializeField] private Vector3 offset;
+        [SerializeField] private Vector3 offset;            //位置調整
+        [SerializeField] private bool isChildConnect = false;
 
         private LayerMask mask = 1 << 8; //WallLayer
         
@@ -25,6 +26,9 @@ namespace Village {
         private Material shadowMat; //割り当てる影
         private Vector3 constScale; //影の最初の大きさ
         private Collider[] colliders;//
+
+        private Transform[] originChildTfs;
+        private Transform[] shadowChildTfs;
 
         private void Awake() {
             CreateShadow();
@@ -70,6 +74,12 @@ namespace Village {
         /// </summary>
         private void ConnectRotation() {
             shadowTf.rotation = transform.rotation;
+
+            if(isChildConnect) {
+                for(int i = 0;i < originChildTfs.Length && i < shadowChildTfs.Length;i++) {
+                    shadowChildTfs[i].localEulerAngles = originChildTfs[i].localEulerAngles;
+                }
+            }
         }
 
         /// <summary>
@@ -161,6 +171,10 @@ namespace Village {
 
             Vector3 target = transform.position + offset;
             rayTf.LookAt(target);
+
+            originChildTfs = transform.GetComponentsInChildren<Transform>();
+            shadowChildTfs = shadowTf.GetComponentsInChildren<Transform>();
+
 
             RayHit();
             SetActive(true);

@@ -241,14 +241,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.96345156, g: 0.7809797, b: 0.99264705, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300008, guid: 5339ee429106ab442bc1875189ac1861, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -492,7 +492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -106.9}
+  m_AnchoredPosition: {x: 0, y: -106.90001}
   m_SizeDelta: {x: 800.24, y: 441.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &445335772
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &445335773
@@ -594,7 +594,7 @@ Animator:
   m_GameObject: {fileID: 861746214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1d740153ecc0917448d70de8c4ff1bc8, type: 2}
+  m_Controller: {fileID: 9100000, guid: e7db56c5180cf1c4694854d6a7832e62, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &893561730
@@ -718,10 +718,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ccbbafe769f016d4b804daedfd9eaee9, type: 3}
-    m_FontSize: 60
+    m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 0
     m_MaxSize: 63
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -729,7 +729,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A8\u30F3\u30C7\u30A3\u30F3\u30B0\u3060\u305E\u3001\u6CE3\u3051\u3088"
+  m_Text: "\u59EB\u306F\u9042\u306B\u5F71\u306E\u4E16\u754C\u3092\u51FA\u308B\u3053\u3068\u304C\u3067\u304D\u305F\n"
 --- !u!222 &893561731
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -819,7 +819,7 @@ RectTransform:
   m_GameObject: {fileID: 1238414896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 90}
-  m_LocalScale: {x: 0.256641, y: 0.256641, z: 0.256641}
+  m_LocalScale: {x: 0.25648475, y: 0.25648475, z: 0.25648475}
   m_Children:
   - {fileID: 1945744021}
   - {fileID: 861746215}
@@ -1026,7 +1026,7 @@ Animator:
   m_GameObject: {fileID: 1945744020}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1d740153ecc0917448d70de8c4ff1bc8, type: 2}
+  m_Controller: {fileID: 9100000, guid: e7db56c5180cf1c4694854d6a7832e62, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

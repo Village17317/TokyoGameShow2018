@@ -11,6 +11,15 @@ namespace Village {
     public class MoveLimit{
         public float min = 0;
         public float max = 0;
+
+        public MoveLimit() {
+
+        }
+
+        public MoveLimit(float _min,float _max) {
+            min = _min;
+            max = _max;
+        }
     }
 
 }

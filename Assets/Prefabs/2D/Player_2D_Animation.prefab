@@ -123,6 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e99618654b2674bb5fa14a283aa069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minVelocity_x: -10
+  maxVelocity_x: 30
   maxVelocity_y: 50
 --- !u!136 &136646731996157222
 CapsuleCollider:

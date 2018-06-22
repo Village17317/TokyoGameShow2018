@@ -42,22 +42,26 @@ namespace Village {
         [Header("動くスピード"),SerializeField]        private float animationSpeed = 1;
         [Header("タイトルロゴ"),SerializeField]        private Image logo;
         [Header("文字"), SerializeField]              private Image logoTextImage;
+        [Header(""), SerializeField]                  private float addAlphaSpeed = 0.05f;
         [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
 
         [Header("環境光"), SerializeField] private Light directionalLight;
         [Header("ポイントライト"), SerializeField] private Light pointLight;
+
+        [Header(""), SerializeField] private GameObject[] objects;
 
         private float range = 0;
 
         private TitleStep step = TitleStep.FadeIn;
         private bool isGetAxis = false;
         private int stageNumber = 0;
+        private int addAlpha = -1;
 
         private void Awake() {
             FadeManager.getInstance.SetCanvasCamera(Camera.main);
-            ActiveObjectVisible(0);
+            ActiveObjectVisible(-1);
             ActiveShadowObjectVisible(-1);
-
+            ActiveOtherObjects(false);
             range = pointLight.range;
             pointLight.range = 0;
         }
@@ -85,9 +89,12 @@ namespace Village {
         /// </summary>
         private void Step_1() {
             LightAnimation();
+            LogoTextAnimation();
             if(Input.GetButtonDown("Button_Start") || Input.GetButtonDown("Button_A")) {
                 SoundManager.Instance.PlaySE("select",transform);
+                ActiveObjectVisible(0);
                 ActiveShadowObjectVisible(0);
+                ActiveOtherObjects(true);
                 step = TitleStep.STEP_2;
             }
         }
@@ -165,10 +172,13 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// ポイントライトをチカチカさせる
+        /// </summary>
         private void LightAnimation() {
             pointLight.range += Mathf.Max(range * Time.deltaTime * 5,0);
             if(pointLight.range >= range) {
-                pointLight.intensity = Random.Range(1,1.08f);
+                pointLight.intensity = Random.Range(1,1.03f);
             }
         }
 
@@ -180,6 +190,7 @@ namespace Village {
                 stageNumberList[i].numberObject.SetActive(i == active);
             }
         }
+
         /// <summary>
         /// 指定した番号の影だけアクティブにする
         /// </summary>
@@ -187,6 +198,26 @@ namespace Village {
             for(int i = 0;i < stageNumberList.Count;i++) {
                 stageNumberList[i].shadowObject.SetActive(i == active);
             }
+        }
+
+        private void ActiveOtherObjects(bool isActive) {
+            for(int i = 0;i < objects.Length;i++) {
+                objects[i].SetActive(isActive);
+            }
+        }
+
+        private void LogoTextAnimation() {
+            var color = logoTextImage.color;
+            color.a += addAlpha * addAlphaSpeed;
+            if(color.a < 0) {
+                addAlpha *= -1;
+                color.a = 0;
+            }
+            else if(1 < color.a) {
+                addAlpha *= -1;
+                color.a = 1;
+            }
+            logoTextImage.color = color;
         }
 
         /// <summary>

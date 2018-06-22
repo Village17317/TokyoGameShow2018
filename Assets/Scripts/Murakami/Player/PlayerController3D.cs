@@ -18,12 +18,14 @@ namespace Village {
             public string stayAnim = "";
             public string walkAnim = "";
             public string jumpAnim = "";
+            public string dashAnim = "";
         }
 
         private enum MyState {
             Stay,
             Walk,
             Jump,
+            Dash,
         }
 
 
@@ -73,9 +75,10 @@ namespace Village {
 
             //一旦格納
             Vector3 pos = transform.position;
-            accel = Mathf.Min(accel + 0.01f,speed);
+            float dash = Input.GetButton("Button_A") ? 1.5f : 1;
+            accel = Mathf.Min(accel + 0.01f * dash,speed * dash);
             //位置制限
-            pos += new Vector3(accel * Input.GetAxisRaw("Horizontal"),0,accel * Input.GetAxisRaw("Vertical"));
+            pos += new Vector3(accel * Input.GetAxisRaw("Horizontal"), 0, accel * Input.GetAxisRaw("Vertical"));
             pos = new Vector3(Mathf.Clamp(pos.x,horizontal.min,horizontal.max),
                               pos.y,
                               Mathf.Clamp(pos.z,vertical.min,vertical.max));
@@ -84,11 +87,22 @@ namespace Village {
 
             if(isGround) {
                 walkSeCount += Time.deltaTime;
-                if(walkSeCount >= 0.5f) {
-                    walkSeCount = 0;
-                    SoundManager.Instance.PlaySE("walk",transform);
+                if(Input.GetButton("Button_A")) {
+                    if(walkSeCount >= 0.3f) {
+                        walkSeCount = 0;
+                        SoundManager.Instance.PlaySE("walk",transform);
+                    }
+                    myState = MyState.Dash;
                 }
-                myState = MyState.Walk;
+                else {
+                    if(walkSeCount >= 0.5f) {
+                        walkSeCount = 0;
+                        SoundManager.Instance.PlaySE("walk",transform);
+                    }
+                    myState = MyState.Walk;
+                }
+
+
             }
             else {
                 walkSeCount = 0;
@@ -159,6 +173,7 @@ namespace Village {
                 case MyState.Stay: playerAnimations.anim.Play(playerAnimations.stayAnim); break;
                 case MyState.Walk: playerAnimations.anim.Play(playerAnimations.walkAnim); break;
                 case MyState.Jump: playerAnimations.anim.Play(playerAnimations.jumpAnim); break;
+                case MyState.Dash: playerAnimations.anim.Play(playerAnimations.dashAnim); break;
                 default: break;
             }
         }

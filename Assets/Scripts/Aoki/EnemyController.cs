@@ -1,8 +1,8 @@
 ﻿/*
 *	作成者	：青木仁志
-*	機能	：エネミーのスクリプト
+*	機能	：ShadowCharControllerを継承したエネミーのスクリプト
 *	作成	：2018/05/14
-*	更新	：2018/05/14
+*	更新	：2018/06/19
 */
 
 using System.Collections;
@@ -28,6 +28,9 @@ namespace INI {
 			
 		}
 
+        /// <summary>
+        /// ゲームの状態、及びState型enumの中身に応じてアニメーションを切り替える（エネミー用）
+        /// </summary>
         protected override void PlayerAnimator()
         {
             //base.PlayerAnimator();
@@ -44,6 +47,10 @@ namespace INI {
             }
         }
 
+        /// <summary>
+        /// プレイヤーと衝突時ゲームオーバーにする
+        /// </summary>
+        /// <param name="collision"></param>
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == "Player")

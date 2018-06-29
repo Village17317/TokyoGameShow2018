@@ -69,6 +69,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// BGMの再生
+        /// </summary>
         public void PlayBGM(string soundKey) {
             AudioClip tmp = nullBgmClip;
             if(soundData.TryGetValue(soundKey,out nullBgmClip)) {
@@ -84,10 +87,17 @@ namespace Village {
                 Debug.Log(soundKey + "に対応したBGMはありません");
             }
         }
+
+        /// <summary>
+        /// BGMを止める
+        /// </summary>
         public void StopBGM() {
             bgmAudio.Stop();
         }
 
+        /// <summary>
+        /// SEの再生
+        /// </summary>
         public void PlaySE(string soundKey,Transform tf) {
             if(soundData.TryGetValue(soundKey,out nullSeClip)) {
                 GameObject obj = Instantiate(seAudio,tf) as GameObject;
@@ -102,6 +112,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// 対応するキーのBGMのボリュームを取得
+        /// </summary>
         private float GetBgmVolume(string soundKey) {
             float returnQty = 0;
 
@@ -112,6 +125,10 @@ namespace Village {
             }
             return returnQty;
         }
+
+        /// <summary>
+        ///  対応するキーのBGMのピッチを取得
+        /// </summary>
         private float GetBgmPitch(string soundKey) {
             float returnQty = 0;
 
@@ -123,6 +140,9 @@ namespace Village {
             return returnQty;
         }
 
+        /// <summary>
+        ///  対応するキーのBGMのループするかどうかを取得
+        /// </summary>
         private bool GetIsLoop(string soundKey) {
             bool isloop = false;
             for(int i = 0;i < bgmClass.Length;i++) {
@@ -133,6 +153,9 @@ namespace Village {
             return isloop;
         }
 
+        /// <summary>
+        /// 対応するキーのSEのボリュームを取得
+        /// </summary>
         private float GetSeVolume(string soundKey) {
             float returnQty = 0;
             for(int i = 0;i < seClass.Length;i++) {
@@ -143,6 +166,9 @@ namespace Village {
             return returnQty;
         }
 
+        /// <summary>
+        /// 対応するキーのSEのピッチを取得
+        /// </summary>
         private float GetSePitch(string soundKey) {
             float returnQty = 0;
             for(int i = 0;i < seClass.Length;i++) {
@@ -153,6 +179,9 @@ namespace Village {
             return returnQty;
         }
 
+        /// <summary>
+        /// 対応するキーのSEの終了時間を取得
+        /// </summary>
         private float GetSeDeleteTime(string soundKey) {
             float returnQty = 0;
             for(int i = 0;i < seClass.Length;i++) {
@@ -162,10 +191,17 @@ namespace Village {
             }
             return returnQty;
         }
+
+        /// <summary>
+        /// BGMの要素数を取得
+        /// </summary>
         public int GetBGMLength() {
             return bgmClass.Length;
         }
 
+        /// <summary>
+        /// SEの要素数の取得
+        /// </summary>
         public int GetSELength() {
             return seClass.Length;
         }

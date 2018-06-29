@@ -37,6 +37,7 @@ namespace Village {
             GameOver,       //ゲームオーバー時
             Pause,          //ポーズ中
             GameAllClear,   //全てのゲームが終了したとき
+            DEFAULT,        //それ以外
         }
 
         #endregion
@@ -84,6 +85,8 @@ namespace Village {
 
         private void Awake() {
             instance = this;
+
+            Cursor.visible = false;
 
             StartCoroutine(WaitTime(-1));
             range = roomLight.range;
@@ -136,6 +139,16 @@ namespace Village {
         }
 
         /// <summary>
+        /// 全ステージクリアの状態にする
+        /// </summary>
+        private IEnumerator ChengeAllClear() {
+            while(!FadeManager.getInstance.WhiteOut()) {
+                yield return null;
+            }
+            mode = GameMode.GameAllClear;
+        }
+
+        /// <summary>
         /// 外部からのゲームモードの設定
         /// </summary>
         public void SetGameMode(GameMode nextMode) {
@@ -144,7 +157,9 @@ namespace Village {
             if(mode == GameMode.GameAllClear) return;
 
             if(nextMode == GameMode.GameClear && isNextEnding) {
-                mode = GameMode.GameAllClear;
+                //mode = GameMode.GameAllClear;
+                mode = GameMode.DEFAULT;
+                StartCoroutine(ChengeAllClear());
             }
             else {
                 mode = nextMode;

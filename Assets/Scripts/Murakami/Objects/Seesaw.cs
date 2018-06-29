@@ -1,8 +1,8 @@
 ﻿/*
- *	作成者     :
- *	機能説明   :
- * 	初回作成日 :
- *	最終更新日 :
+ *	作成者     :村上和樹
+ *	機能説明   :シーソー
+ * 	初回作成日 :2018/06/20
+ *	最終更新日 :2018/06/20
  */
 
 using System.Collections;
@@ -20,10 +20,6 @@ namespace Village {
 
         [SerializeField] private float angleValue = 0;
 
-        private void Awake(){
-            
-		}
-
         private void Update() {
             if(leftCheck.IsStay) {
                 angleValue = Mathf.Min(angleValue + speed,limit.max);
@@ -35,8 +31,6 @@ namespace Village {
             angle.z = angleValue;
             bar.localEulerAngles = angle;
         }
-
-
 
     }
 

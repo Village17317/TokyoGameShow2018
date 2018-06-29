@@ -17,9 +17,21 @@ namespace Village {
 
         [SerializeField] private GameObject deadEffect;
 
+        [Space(16)]
+        [SerializeField] private SpriteRenderer player2dRenderer;
+        [SerializeField] private GameObject deadExplosionEffect;
+        [SerializeField] private Vector3 offset;
+        [SerializeField] private float rayLength = 1.0f;
+
         public override void Run() {
             if(CheckScreenOut(player2dTf.position)) {
-                BackToStartPoint();
+                OnGameOver();
+            }
+
+            if(ForwardCheck() && BackCheck()) {
+                player2dRenderer.color = Color.clear;
+                PlayExplosion();
+                OnGameOver();
             }
         }
 
@@ -41,7 +53,7 @@ namespace Village {
         /// <summary>
         /// Start地点に戻す
         /// </summary>
-        private void BackToStartPoint() {
+        private void OnGameOver() {
             if(GameMaster.getInstance.GetGameMode == GameMaster.GameMode.GameOver) return;
 
             PlayEffect();
@@ -61,6 +73,38 @@ namespace Village {
             effect.transform.position = new Vector3(x,y,z);
         }
 
+        /// <summary>
+        /// 飛散エフェクトの生成
+        /// </summary>
+        private void PlayExplosion() {
+            GameObject effect = Instantiate(deadExplosionEffect) as GameObject;
+
+            float x = player2dTf.position.x;
+            float y = player2dTf.position.y;
+            float z = effect.transform.position.z;
+
+            effect.transform.position = new Vector3(x,y,z);
+        }
+
+        /// <summary>
+        /// 2Dプレイヤーの前方をチェック
+        /// </summary>
+        private bool ForwardCheck() {
+            Debug.DrawRay(player2dTf.position + offset,Vector3.right * rayLength,Color.cyan);
+            Ray f_ray = new Ray(player2dTf.position + offset,Vector3.right);
+            RaycastHit hit;
+            return Physics.Raycast(f_ray,out hit,rayLength);
+        }
+
+        /// <summary>
+        /// 2Dプレイヤーの後方をチェック
+        /// </summary>
+        private bool BackCheck() {
+            Debug.DrawRay(player2dTf.position + offset,-Vector3.right * rayLength,Color.magenta);
+            Ray b_ray = new Ray(player2dTf.position + offset,-Vector3.right);
+            RaycastHit hit;
+            return Physics.Raycast(b_ray,out hit,rayLength);
+        }
     }
 
 }

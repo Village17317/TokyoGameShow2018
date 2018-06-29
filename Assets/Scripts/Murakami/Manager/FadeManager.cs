@@ -18,7 +18,7 @@ namespace Village {
         [Header("暗幕"),SerializeField] private Image curtain;
         [Header("ロード中の画像"),SerializeField] private SpriteRenderer loadingImage;
         [Header("ロードのテキスト"),SerializeField] private Text loadingText;
-
+        [Header(""), SerializeField] private Image whitePlane;
 
         private static FadeManager instance;
         public static FadeManager getInstance {
@@ -38,6 +38,10 @@ namespace Village {
             FadeInComp,
             FadeOutRun,
             FadeOutComp,
+            WhiteInRun,
+            WhiteInComp,
+            WhiteOutRun,
+            WhiteOutComp,
             Default,
         }
 
@@ -51,13 +55,13 @@ namespace Village {
             }
             else {
                 DontDestroyOnLoad(gameObject);//破棄させない
-
-                curtain.material.SetFloat("_Threshold",1);//暗幕無し
-                loadingImage.color = new Color(loadingImage.color.r,loadingImage.color.g,loadingImage.color.b,0);//透明度０
-                loadingText.color =  new Color(loadingText.color.r ,loadingText.color.g ,loadingText.color.b,0 );//透明度０
+                Clear();
             }
         }
 
+        /// <summary>
+        /// キャンバスに対応するカメラを設定
+        /// </summary>
         public void SetCanvasCamera(Camera cam) {
             fadeCanvas.worldCamera = cam;
         }
@@ -92,7 +96,47 @@ namespace Village {
             return false;
         }
 
+        /// <summary>
+        /// 白さを消していく
+        /// </summary>
+        public bool WhiteIn() {
+            if(myState == FadeState.WhiteInComp) {
+                myState = FadeState.Default;
+                return true;
+            }
+            if(myState == FadeState.WhiteInRun) return false;
+            myState = FadeState.WhiteInRun;
+            StartCoroutine(WhiteFadeInColroutine());
+            return false;
+        }
 
+        /// <summary>
+        /// 白くなっていく
+        /// </summary>
+        public bool WhiteOut() {
+            if(myState == FadeState.WhiteOutComp) {
+                myState = FadeState.Default;
+                return true;
+            }
+            if(myState == FadeState.WhiteOutRun) return false;
+            myState = FadeState.WhiteOutRun;
+            StartCoroutine(WhiteFadeOutCoroutine());
+            return false;
+        }
+
+        /// <summary>
+        /// 状態をクリアにする
+        /// </summary>
+        public void Clear() {
+            curtain.material.SetFloat("_Threshold",1);//暗幕無し
+            loadingImage.color = new Color(loadingImage.color.r,loadingImage.color.g,loadingImage.color.b,0);//透明度０
+            loadingText.color = new Color(loadingText.color.r,loadingText.color.g,loadingText.color.b,0);//透明度０
+            whitePlane.color = new Color(1,1,1,0);
+        }
+
+        /// <summary>
+        /// フェードインのコルーチン
+        /// </summary>
         private IEnumerator FadeInCoroutine() {
             for(int i = 0;curtain.material.GetFloat("_Threshold") < 1;i++) {
                 var value = curtain.material.GetFloat("_Threshold");
@@ -108,6 +152,9 @@ namespace Village {
             myState = FadeState.FadeInComp;
         }
 
+        /// <summary>
+        /// フェードアウトのコルーチン
+        /// </summary>
         private IEnumerator FadeOutCoroutine() {
             for(int i = 0;curtain.material.GetFloat("_Threshold") > 0;i++) {
                 var value = curtain.material.GetFloat("_Threshold");
@@ -123,6 +170,31 @@ namespace Village {
             myState = FadeState.FadeOutComp;
         }
 
+        /// <summary>
+        /// フェードインのコルーチン（白）
+        /// </summary>
+        private IEnumerator WhiteFadeInColroutine() {
+            for(int i = 0;whitePlane.color.a >= 0;i++) {
+                var alpha = whitePlane.color;
+                alpha -= new Color(0,0,0,0.01f);
+                whitePlane.color = alpha;
+                yield return new WaitForEndOfFrame();
+            }
+            myState = FadeState.WhiteInComp;
+        }
+
+        /// <summary>
+        /// フェードアウトのコルーチン（白）
+        /// </summary>
+        private IEnumerator WhiteFadeOutCoroutine() {
+            for(int i=0;whitePlane.color.a < 1;i++) {
+                var alpha = whitePlane.color;
+                alpha += new Color(0,0,0,0.01f);
+                whitePlane.color = alpha;
+                yield return new WaitForEndOfFrame();
+            }
+            myState = FadeState.WhiteOutComp;
+        }
 
     }
 

@@ -50,6 +50,9 @@ namespace Village {
             StartCoroutine(FadeOut(0.05f));
         }
 
+        /// <summary>
+        /// フェードイン
+        /// </summary>
         private IEnumerator FadeIn(float speed) {
             while(expImage.color.a < imageAlpha || expText.color.a < textAlpha) {
                 float addImageAlpha = Mathf.Min(expImage.color.a + speed,imageAlpha);
@@ -61,6 +64,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// フェードアウト
+        /// </summary>
         private IEnumerator FadeOut(float speed) {
             while(expImage.color.a > 0 || expText.color.a > 0) {
                 float addImageAlpha = Mathf.Max(expImage.color.a - speed,0);

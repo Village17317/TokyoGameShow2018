@@ -12,9 +12,14 @@ using UnityEngine;
 namespace Village {
 
     public class GoalFlagment : MonoBehaviour {
+        [SerializeField] private Animator goalAnimator;
+
         private void OnTriggerEnter(Collider other) {
             if(other.tag == "Player") {
                 GameMaster.getInstance.SetGameMode(GameMaster.GameMode.GameClear); //MainManagerでGameModeをEndに切り替える
+                if(goalAnimator != null) {
+                    goalAnimator.Play("Clear");
+                }
             }
         }
     }

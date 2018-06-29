@@ -33,6 +33,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// スケールを大きくしていく
+        /// </summary>
         private IEnumerator ScaleUp() {
             for(int i = 0;i < 60;i++) {
                 transform.localScale += new Vector3(0.1f,0.1f,0);

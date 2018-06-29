@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 95741517085097830}
   m_Layer: 11
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,6 @@ MonoBehaviour:
   sfRayOrigin: {x: 10, y: 0, z: 0}
   shadowCharRb: {fileID: 54721914979995342}
   grounded: 0
-  eventAnim: 0
   state: 0
   shadowChar_Animator: {fileID: 95741517085097830}
 --- !u!114 &114970123418168810

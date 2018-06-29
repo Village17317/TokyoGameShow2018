@@ -148,6 +148,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// 影の生成
+        /// </summary>
         private void CreateShadow() {
             lightTf = GameObject.FindGameObjectWithTag("Light").transform;
 

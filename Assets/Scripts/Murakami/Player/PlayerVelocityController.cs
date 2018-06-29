@@ -26,6 +26,9 @@ namespace Village {
             VelocityLimiter();
         }
 
+        /// <summary>
+        /// velocityの制限
+        /// </summary>
         private void VelocityLimiter() {
             Vector3 velocity = myRigid.velocity;
 

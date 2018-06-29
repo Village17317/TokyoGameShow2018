@@ -25,6 +25,7 @@ namespace Village {
             public string path;
             public GameObject numberObject;
             public GameObject shadowObject;
+            public Material imageMat;
         }
 
         private enum TitleStep {
@@ -42,13 +43,16 @@ namespace Village {
         [Header("動くスピード"),SerializeField]        private float animationSpeed = 1;
         [Header("タイトルロゴ"),SerializeField]        private Image logo;
         [Header("文字"), SerializeField]              private Image logoTextImage;
+        [Header("ステージセレクトロゴ"),SerializeField] private Image selectLogo;
+        [Header("左矢印"), SerializeField]            private SpriteRenderer leftArrow;
+        [Header("右矢印"), SerializeField]            private SpriteRenderer rightArrow;
         [Header(""), SerializeField]                  private float addAlphaSpeed = 0.05f;
         [Header("ステージの内容"),SerializeField]      private List<NextSceneInfo> stageNumberList;
 
         [Header("環境光"), SerializeField] private Light directionalLight;
         [Header("ポイントライト"), SerializeField] private Light pointLight;
 
-        [Header(""), SerializeField] private GameObject[] objects;
+        [Header("ステージセレクト時に見えるオブジェクト"), SerializeField] private GameObject[] objects;
 
         private float range = 0;
 
@@ -61,9 +65,12 @@ namespace Village {
             FadeManager.getInstance.SetCanvasCamera(Camera.main);
             ActiveObjectVisible(-1);
             ActiveShadowObjectVisible(-1);
+            ActiveImageObject(-1);
             ActiveOtherObjects(false);
             range = pointLight.range;
             pointLight.range = 0;
+            selectLogo.color = new Color(1,1,1,0);
+            Cursor.visible = false;
         }
 
         private void Start() {
@@ -94,6 +101,7 @@ namespace Village {
                 SoundManager.Instance.PlaySE("select",transform);
                 ActiveObjectVisible(0);
                 ActiveShadowObjectVisible(0);
+                ActiveImageObject(0);
                 ActiveOtherObjects(true);
                 step = TitleStep.STEP_2;
             }
@@ -106,6 +114,7 @@ namespace Village {
             LightAnimation();
             logo.color -= new Color(0,0,0,Time.deltaTime * animationSpeed);
             logoTextImage.color -= new Color(0,0,0,Time.deltaTime * animationSpeed);
+            selectLogo.color += new Color(0,0,0,Time.deltaTime * animationSpeed);
             titleCamera.transform.position =         Vector3.LerpUnclamped(titleCamera.transform.position,cameraNtf.pos,Time.deltaTime * animationSpeed);
             titleCamera.transform.localEulerAngles = Vector3.LerpUnclamped(titleCamera.transform.localEulerAngles,cameraNtf.rot,Time.deltaTime * animationSpeed);
             if(titleCamera.transform.position.z <= cameraNtf.pos.z + 5) {
@@ -122,14 +131,18 @@ namespace Village {
                 stageNumber = Wrap(stageNumber + 1,0,stageNumberList.Count);
                 ActiveObjectVisible(stageNumber);
                 ActiveShadowObjectVisible(stageNumber);
+                ActiveImageObject(stageNumber);
                 SoundManager.Instance.PlaySE("choice",transform);
+                StartCoroutine(ArrowAnimation(rightArrow));
                 isGetAxis = true;
             }
             if(Input.GetAxisRaw("Horizontal") < 0 && !isGetAxis) {
                 stageNumber = Wrap(stageNumber - 1,0,stageNumberList.Count);
                 ActiveObjectVisible(stageNumber);
                 ActiveShadowObjectVisible(stageNumber);
+                ActiveImageObject(stageNumber);
                 SoundManager.Instance.PlaySE("choice",transform);
+                StartCoroutine(ArrowAnimation(leftArrow));
                 isGetAxis = true;
             }
             if(Input.GetAxisRaw("Horizontal") == 0 && isGetAxis) {
@@ -153,18 +166,27 @@ namespace Village {
             step = TitleStep.DEFAULT;
         }
 
+        /// <summary>
+        /// フェードイン
+        /// </summary>
         private void FadeIn() {
             if(FadeManager.getInstance.FadeIn()) {
                 step = TitleStep.STEP_1;
             }
         }
 
+        /// <summary>
+        /// フェードアウト
+        /// </summary>
         private void FadeOut() {
             if(FadeManager.getInstance.FadeOut()) {
                 step = TitleStep.STEP_4;
             }
         }
 
+        /// <summary>
+        /// 指定した名前のシーンをロード
+        /// </summary>
         private IEnumerator LoadScene(string sceneName) {
             AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
             while(!load.isDone) {
@@ -200,12 +222,28 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// 指定した番号のステージイメージだけアクティブにする
+        /// </summary>
+        /// <param name="active"></param>
+        private void ActiveImageObject(int active) {
+            for(int i = 0;i < stageNumberList.Count;i++) {
+                StartCoroutine(StageImageAlphaChenge(i,i == active));
+            }
+        }
+
+        /// <summary>
+        /// ステージセレクト時に見えるオブジェクト
+        /// </summary>
         private void ActiveOtherObjects(bool isActive) {
             for(int i = 0;i < objects.Length;i++) {
                 objects[i].SetActive(isActive);
             }
         }
 
+        /// <summary>
+        /// Press Start Buttonの点滅アニメーション
+        /// </summary>
         private void LogoTextAnimation() {
             var color = logoTextImage.color;
             color.a += addAlpha * addAlphaSpeed;
@@ -218,6 +256,43 @@ namespace Village {
                 color.a = 1;
             }
             logoTextImage.color = color;
+        }
+
+        /// <summary>
+        /// 矢印のアニメーション
+        /// </summary>
+        private IEnumerator ArrowAnimation(SpriteRenderer arrow) {
+            arrow.color = new Color(1,1,1,1);
+            for(int i = 0;arrow.color.a > 0;i++) {
+                arrow.color -= new Color(0,0,0,0.2f);
+                yield return new WaitForEndOfFrame();
+            }
+            for(int i = 0;arrow.color.a <= 1;i++) {
+                arrow.color += new Color(0,0,0,0.2f);
+                yield return new WaitForEndOfFrame();
+            }
+            arrow.color = new Color(1,1,1,1);
+        }
+
+        /// <summary>
+        /// ステージイメージの透明度の変更
+        /// </summary>
+        private IEnumerator StageImageAlphaChenge(int num,bool isFlag) {
+            var color = stageNumberList[num].imageMat.color;
+            if(isFlag) {
+                while(color.a <= 1) {
+                    color.a = Mathf.Min(color.a + 0.05f,1);
+                    stageNumberList[num].imageMat.color = color;
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            else {
+                while(color.a >= 0) {
+                    color.a = Mathf.Max(color.a - 0.05f,0);
+                    stageNumberList[num].imageMat.color = color;
+                    yield return new WaitForEndOfFrame();
+                }
+            }
         }
 
         /// <summary>

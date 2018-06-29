@@ -68,6 +68,9 @@ namespace Village {
             }
         }
 
+        /// <summary>
+        /// 追加
+        /// </summary>
         public void Add(Inheritor inheritorObj) {
             updateList.Add(inheritorObj);
         }
@@ -79,21 +82,21 @@ namespace Village {
             updateList.RemoveAt(deleteNumber);
         }
 
-        #region ExpansionClass
-        public void SetObject() {
+    #region ExpansionClass
+            public void SetObject() {
             updateList.Clear();
             foreach(Inheritor obj in FindObjectsOfType(typeof(Inheritor))) {
                 updateList.Add(obj.GetComponent<Inheritor>());
             }
         }
-
-	#if UNITY_EDITOR
-	    [CustomEditor(typeof(UpdateManager))]
-	    public class UpdateManagerEditor : Editor
-	    {
-            ReorderableList m_list;
-
-            private void OnEnable() {
+    
+    	#if UNITY_EDITOR
+    	    [CustomEditor(typeof(UpdateManager))]
+    	    public class UpdateManagerEditor : Editor
+    	    {
+                ReorderableList m_list;
+    
+                private void OnEnable() {
                 var prop = serializedObject.FindProperty("updateList");
 
                 m_list = new ReorderableList(serializedObject,prop);
@@ -109,8 +112,8 @@ namespace Village {
                     GUI.backgroundColor = Color.cyan;
                 };
             }
-
-            public override void OnInspectorGUI()
+    
+                public override void OnInspectorGUI()
 	        {
 	        	DrawDefaultInspector();
 	            UpdateManager _target = target as UpdateManager;
@@ -122,8 +125,9 @@ namespace Village {
                     _target.SetObject();
                 }
             }
-	    }
-	#endif
-	#endregion
+    	    }
+    	#endif
+    
+    #endregion
 	}
 }
